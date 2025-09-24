@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALCORTA - Lomo & Burger</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="logo-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="logo-64.png" type="image/png" sizes="64x64">
+  <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="logo">ALCORTA</h1>
+      <p class="tagline">Lomo & Burger</p>
+      <p class="subtitle">Take Away Premium • Mendoza</p>
+    </div>
+  </section>
+
+  <!-- Navegación -->
+  <div class="nav-container">
+    <div class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav id="navMenu">
+      <a href="#promociones"><i class="fas fa-fire"></i> Promociones</a>
+      <a href="#carta"><i class="fas fa-utensils"></i> Carta</a>
+      <a href="#bebidas"><i class="fas fa-wine-glass"></i> Bebidas</a>
+      <a href="#ubicacion"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+      <a href="#contacto"><i class="fas fa-phone"></i> Contacto</a>
+    </nav>
+  </div>
+
+  <!-- Promociones -->
+  <section id="promociones" class="promo-section">
+    <div class="promo-content">
+      <h2 class="promo-title">🔥 PROMOCIONES ESPECIALES</h2>
+      <div class="promo-grid">
+        <div class="promo-card">
+          <div class="promo-number">1</div>
+          <h3 class="promo-name">Promoción Alcorta</h3>
+          <p class="promo-description">2 Lomos Alcorta + Papas Clásicas</p>
+          <div class="promo-price">$14.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">2</div>
+          <h3 class="promo-name">Promoción Completa</h3>
+          <p class="promo-description">2 Lomos Completos + Papas Clásicas</p>
+          <div class="promo-price">$18.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">3</div>
+          <h3 class="promo-name">Promoción Criolla</h3>
+          <p class="promo-description">2 Lomos Criollos + Papas Clásicas</p>
+          <div class="promo-price">$19.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">4</div>
+          <h3 class="promo-name">Promoción Americana</h3>
+          <p class="promo-description">2 Lomos Americanos + Papas Clásicas</p>
+          <div class="promo-price">$21.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">5</div>
+          <h3 class="promo-name">Burger Simple</h3>
+          <p class="promo-description">2 Hamburguesas Simples + Papas Clásicas</p>
+          <div class="promo-price">$13.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">6</div>
+          <h3 class="promo-name">Burger Doble</h3>
+          <p class="promo-description">2 Hamburguesas Dobles + Papas Clásicas</p>
+          <div class="promo-price">$16.000</div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-number">7</div>
+          <h3 class="promo-name">Burger Triple</h3>
+          <p class="promo-description">2 Hamburguesas Triples + Papas Clásicas</p>
+          <div class="promo-price">$19.000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carta -->
+  <section id="carta">
+    <div class="container">
+      <h2 class="section-title">Nuestra Carta</h2>
+      
+      <!-- BURGERS -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🍔 HAMBURGUESAS</h3>
+      <div class="menu-grid">
+        <!-- ChesseBurg -->
+        <div class="food-card">
+          <div class="food-image">🧀</div>
+          <div class="food-content">
+            <h3 class="food-title">ChesseBurg</h3>
+            <p class="food-description">Pan - Carne - Kétchup - Cebolla - Cheddar</p>
+            <div class="food-options">
+              <div class="option-selector">
+                <div class="option-button active" data-product="chesseburgh" data-option="simple" data-price="7000">
+                  <span>Simple</span>
+                  <span class="option-price">$7.000</span>
+                </div>
+                <div class="option-button" data-product="chesseburgh" data-option="doble" data-price="9000">
+                  <span>Doble</span>
+                  <span class="option-price">$9.000</span>
+                </div>
+                <div class="option-button" data-product="chesseburgh" data-option="triple" data-price="10000">
+                  <span>Triple</span>
+                  <span class="option-price">$10.000</span>
+                </div>
+              </div>
+              <div class="food-final-price">
+                <div class="current-price" id="chesseburgh-price">$7.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AndesBurg -->
+        <div class="food-card">
+          <div class="food-image">🥚</div>
+          <div class="food-content">
+            <h3 class="food-title">AndesBurg</h3>
+            <p class="food-description">Pan - Carne - Lechuga - Tomate - Mayo de Ajo - Huevo - Cheddar</p>
+            <div class="food-options">
+              <div class="option-selector">
+                <div class="option-button active" data-product="andesbург" data-option="simple" data-price="7500">
+                  <span>Simple</span>
+                  <span class="option-price">$7.500</span>
+                </div>
+                <div class="option-button" data-product="andesbург" data-option="doble" data-price="9500">
+                  <span>Doble</span>
+                  <span class="option-price">$9.500</span>
+                </div>
+                <div class="option-button" data-product="andesbург" data-option="triple" data-price="10500">
+                  <span>Triple</span>
+                  <span class="option-price">$10.500</span>
+                </div>
+              </div>
+              <div class="food-final-price">
+                <div class="current-price" id="andesbург-price">$7.500</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AmericaBurg -->
+        <div class="food-card">
+          <div class="food-image">🥓</div>
+          <div class="food-content">
+            <h3 class="food-title">AmericaBurg</h3>
+            <p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar - Salsa Thousand Island</p>
+            <div class="food-options">
+              <div class="option-selector">
+                <div class="option-button active" data-product="americabург" data-option="simple" data-price="8000">
+                  <span>Simple</span>
+                  <span class="option-price">$8.000</span>
+                </div>
+                <div class="option-button" data-product="americabург" data-option="doble" data-price="10000">
+                  <span>Doble</span>
+                  <span class="option-price">$10.000</span>
+                </div>
+                <div class="option-button" data-product="americabург" data-option="triple" data-price="11500">
+                  <span>Triple</span>
+                  <span class="option-price">$11.500</span>
+                </div>
+              </div>
+              <div class="food-final-price">
+                <div class="current-price" id="americabург-price">$8.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MexiBurg -->
+        <div class="food-card">
+          <div class="food-image">🥑</div>
+          <div class="food-content">
+            <h3 class="food-title">MexiBurg</h3>
+            <p class="food-description">Pan - Carne - Palta - Salteado de Morrones - Mayo de Ajo - Huevo - Cheddar</p>
+            <div class="food-options">
+              <div class="option-selector">
+                <div class="option-button active" data-product="mexibург" data-option="simple" data-price="8000">
+                  <span>Simple</span>
+                  <span class="option-price">$8.000</span>
+                </div>
+                <div class="option-button" data-product="mexibург" data-option="doble" data-price="10000">
+                  <span>Doble</span>
+                  <span class="option-price">$10.000</span>
+                </div>
+                <div class="option-button" data-product="mexibург" data-option="triple" data-price="11500">
+                  <span>Triple</span>
+                  <span class="option-price">$11.500</span>
+                </div>
+              </div>
+              <div class="food-final-price">
+                <div class="current-price" id="mexibург-price">$8.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOMOS -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🥖 LOMOS</h3>
+      <div class="menu-grid">
+        <!-- Lomo Alcorta -->
+        <div class="food-card simple-product">
+          <div class="food-image">🥬</div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Alcorta</h3>
+            <p class="food-description">Pan - Carne - Tomate - Lechuga - Mayonesa Alcorta</p>
+            <div class="food-final-price">
+              <div class="current-price">$8.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lomo Completo -->
+        <div class="food-card simple-product">
+          <div class="food-image">🍳</div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Completo</h3>
+            <p class="food-description">Pan - Carne - Lechuga - Tomate - Huevo - Jamón - Queso - Mayonesa Alcorta</p>
+            <div class="food-final-price">
+              <div class="current-price">$10.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lomo Americano -->
+        <div class="food-card simple-product">
+          <div class="food-image">🔥</div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Americano</h3>
+            <p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar</p>
+            <div class="food-final-price">
+              <div class="current-price">$12.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lomo Criollo -->
+        <div class="food-card simple-product">
+          <div class="food-image">🌶️</div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Criollo</h3>
+            <p class="food-description">Pan - Carne - Salsa Criolla - Provoleta - Mayonesa de Ajo - Morrones Asados</p>
+            <div class="food-final-price">
+              <div class="current-price">$11.000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAPAS -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍟 PAPAS</h3>
+      <div class="menu-grid">
+        <!-- Papas Clásicas -->
+        <div class="food-card simple-product">
+          <div class="food-image">🍟</div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Clásicas</h3>
+            <p class="food-description">Papas fritas tradicionales</p>
+            <div class="food-final-price">
+              <div class="current-price">$4.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Papas Gramajo -->
+        <div class="food-card simple-product">
+          <div class="food-image">🥚</div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Gramajo</h3>
+            <p class="food-description">Papa - Cebolla de Verdeo - Huevo</p>
+            <div class="food-final-price">
+              <div class="current-price">$5.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Papas Americanas -->
+        <div class="food-card simple-product">
+          <div class="food-image">🧀</div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Americanas</h3>
+            <p class="food-description">Papa - Cheddar - Panceta</p>
+            <div class="food-final-price">
+              <div class="current-price">$6.000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGREGADOS -->
+      <div class="extras-section">
+        <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">➕ AGREGADOS</h3>
+        <div class="extras-grid">
+          <div class="extra-card">
+            <div class="extra-icon">🥩</div>
+            <h4 class="extra-name">Carne Extra</h4>
+            <div class="extra-price">$1.500</div>
+          </div>
+          <div class="extra-card">
+            <div class="extra-icon">🧀</div>
+            <h4 class="extra-name">Cheddar x2</h4>
+            <div class="extra-price">$2.000</div>
+          </div>
+          <div class="extra-card">
+            <div class="extra-icon">🥓</div>
+            <h4 class="extra-name">Cheddar + Panceta</h4>
+            <div class="extra-price">$3.000</div>
+          </div>
+          <div class="extra-card">
+            <div class="extra-icon">🥄</div>
+            <h4 class="extra-name">Dips de Salsas</h4>
+            <div class="extra-price">$500</div>
+          </div>
+          <div class="extra-card">
+            <div class="extra-icon">🔄</div>
+            <h4 class="extra-name">Convertí tus Papas</h4>
+            <div class="extra-price">$2.000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bebidas -->
+  <section id="bebidas">
+    <div class="container">
+      <h2 class="section-title">Bebidas</h2>
+      
+      <!-- SIN ALCOHOL -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🥤 SIN ALCOHOL</h3>
+      <div class="beverages-grid">
+        <div class="beverage-card">
+          <div class="beverage-icon">🥤</div>
+          <h4 class="beverage-name">Gaseosa 500ml</h4>
+          <div class="beverage-price">$2.100</div>
+        </div>
+        <div class="beverage-card">
+          <div class="beverage-icon">🥤</div>
+          <h4 class="beverage-name">Gaseosa 1.5lts</h4>
+          <div class="beverage-price">$4.000</div>
+        </div>
+        <div class="beverage-card">
+          <div class="beverage-icon">💧</div>
+          <h4 class="beverage-name">Agua Saborizada 500ml</h4>
+          <div class="beverage-price">$2.300</div>
+        </div>
+      </div>
+
+      <!-- CON ALCOHOL -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍺 CON ALCOHOL</h3>
+      <div class="beverages-grid">
+        <div class="beverage-card">
+          <div class="beverage-icon">🍺</div>
+          <h4 class="beverage-name">Lata 475ml</h4>
+          <div class="beverage-price">$2.300</div>
+        </div>
+        <div class="beverage-card">
+          <div class="beverage-icon">🍺</div>
+          <h4 class="beverage-name">Latón 750ml</h4>
+          <div class="beverage-price">$3.500</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ubicación -->
+  <section id="ubicacion">
+    <div class="container">
+      <div class="location-section">
+        <h2 class="section-title">Nuestra Ubicación</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-secondary);">
+          📍 Alem 295, Dorrego, Mendoza
+        </p>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d287.6663825727406!2d-68.82750111546031!3d-32.89975829158157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1758664109522!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp -->
+  <section id="contacto" class="whatsapp-section">
+    <div class="container">
+      <h2 class="section-title">Realizá tu Pedido</h2>
+      <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary); font-size: 1.1rem;">
+        💬 Contactanos por WhatsApp para hacer tu pedido
+      </p>
+      <a class="whatsapp-btn" href="https://wa.me/5492612560283?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Pedir por WhatsApp</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p class="footer-text">© 2025 ALCORTA - Todos los derechos reservados</p>
+      <p class="footer-subtitle">Take Away Premium • Dorrego, Mendoza</p>
+    </div>
+  </footer>
+</body>
+  <script src="index.js"></script>
+</html>
