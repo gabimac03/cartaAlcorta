@@ -205,3 +205,22 @@
         imageObserver.observe(img);
       });
     }
+
+
+    // --- Botón WhatsApp flotante ---
+document.addEventListener('DOMContentLoaded', function() {
+  const whatsappSection = document.querySelector('.sticky-whatsapp');
+  const hero = document.querySelector('.hero');
+
+  function toggleStickyWhatsApp() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom <= 0) {
+      whatsappSection.classList.add('fixed');
+    } else {
+      whatsappSection.classList.remove('fixed');
+    }
+  }
+
+  window.addEventListener('scroll', toggleStickyWhatsApp);
+  toggleStickyWhatsApp(); // ejecutar en carga inicial
+});

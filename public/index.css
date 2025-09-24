@@ -677,3 +677,79 @@ footer {
     transform: translateY(-4px) scale(1.01);
   }
 }
+
+
+/* Estado normal (debajo del hero) */
+.sticky-whatsapp {
+  position: relative;
+  z-index: 100;
+}
+
+/* Estado flotante (cuando haces scroll) */
+.sticky-whatsapp.fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.sticky-whatsapp.fixed .whatsapp-btn {
+  border-radius: 50px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  max-width: none;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Animación de entrada flotante */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Caja destacada para el apartado WhatsApp */
+.whatsapp-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.pedido-title {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--primary-orange);
+  margin-bottom: 0.8rem;
+}
+
+.pedido-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+/* Ajuste al pasar a flotante */
+.sticky-whatsapp.fixed .whatsapp-box {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.sticky-whatsapp.fixed .pedido-title,
+.sticky-whatsapp.fixed .pedido-subtitle {
+  display: none; /* ocultar texto en modo flotante */
+}
