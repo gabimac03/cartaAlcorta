@@ -227,9 +227,7 @@
         </div>
 
         <div class="food-card simple-product">
-          <div class="food-image placeholder">
-            <span>📸 Próximamente imagen de nuestro producto</span>
-          </div>
+           <div class="food-image"><img src="imagenes/lomoAmericano.jpg" alt="Lomo Americano"></div>
           <div class="food-content"><h3 class="food-title">Lomo Americano</h3><p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar</p><div class="food-final-price"><div class="current-price">$12.000</div></div></div>
         </div>
 
@@ -305,47 +303,93 @@
     </div>
   </section>
 
-  <!-- Bebidas -->
-  <section id="bebidas">
-    <div class="container">
-      <h2 class="section-title">Bebidas</h2>
-      
-      <!-- SIN ALCOHOL -->
-      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🥤 SIN ALCOHOL</h3>
-      <div class="beverages-grid">
-        <div class="beverage-card">
-          <div class="beverage-icon">🥤</div>
-          <h4 class="beverage-name">Gaseosa 500ml</h4>
-          <div class="beverage-price">$2.100</div>
-        </div>
-        <div class="beverage-card">
-          <div class="beverage-icon">🥤</div>
-          <h4 class="beverage-name">Gaseosa 1.5lts</h4>
-          <div class="beverage-price">$4.000</div>
-        </div>
-        <div class="beverage-card">
-          <div class="beverage-icon">💧</div>
-          <h4 class="beverage-name">Agua Saborizada 500ml</h4>
-          <div class="beverage-price">$2.300</div>
-        </div>
+<!-- ===== BEBIDAS ===== -->
+<section id="bebidas">
+  <div class="container">
+    <h2 class="section-title">Bebidas</h2>
+    
+    <!-- SIN ALCOHOL -->
+    <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🥤 SIN ALCOHOL</h3>
+    <div class="beverages-grid">
+
+      <!-- Gaseosa 500ml -->
+      <div class="beverage-card">
+        <img id="img-gaseosa500" src="imagenes/sprite-500.jpg" alt="Gaseosa 500ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <h4 class="beverage-name">Gaseosa 500ml</h4>
+
+        <select id="select-gaseosa500" class="beverage-select">
+          <option value="sprite-500.jpg" selected>Sprite</option>
+          <option value="fanta-500.jpg">Fanta</option>
+          <option value="coca-500.jpg">Coca-Cola</option>
+          <option value="cocaz-500.jpg">Coca-Cola Zero</option>
+        </select>
+
+        <div class="beverage-price">$2.100</div>
       </div>
 
-      <!-- CON ALCOHOL -->
-      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍺 CON ALCOHOL</h3>
-      <div class="beverages-grid">
-        <div class="beverage-card">
-          <div class="beverage-icon">🍺</div>
-          <h4 class="beverage-name">Lata 475ml</h4>
-          <div class="beverage-price">$2.300</div>
-        </div>
-        <div class="beverage-card">
-          <div class="beverage-icon">🍺</div>
-          <h4 class="beverage-name">Latón 750ml</h4>
-          <div class="beverage-price">$3.500</div>
-        </div>
+      <!-- Gaseosa 1.5lts -->
+      <div class="beverage-card">
+        <img id="img-gaseosa15" src="imagenes/sprite-15.jpg" alt="Gaseosa 1.5lts" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <h4 class="beverage-name">Gaseosa 1.5lts</h4>
+
+        <select id="select-gaseosa15" class="beverage-select">
+          <option value="sprite-15.jpg" selected>Sprite</option>
+          <option value="fanta-15.jpg">Fanta</option>
+          <option value="coca-15.jpg">Coca-Cola</option>
+        </select>
+
+        <div class="beverage-price">$4.000</div>
+      </div>
+
+      <!-- Agua Saborizada 500ml -->
+      <div class="beverage-card">
+        <img id="img-agua500" src="imagenes/manzana-500.jpg" alt="Agua saborizada" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <h4 class="beverage-name">Agua Saborizada 500ml</h4>
+
+        <select id="select-agua500" class="beverage-select">
+          <option value="agua-500.jpg">Agua</option>
+          <option value="manzana-500.jpg" selected>Manzana</option>
+          <option value="pomelo-500.jpg">Pomelo</option>
+        </select>
+
+        <div class="beverage-price">$2.300</div>
       </div>
     </div>
-  </section>
+
+    <!-- CON ALCOHOL -->
+    <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍺 CON ALCOHOL</h3>
+    <div class="beverages-grid">
+
+      <!-- Lata 475ml -->
+      <div class="beverage-card">
+        <img id="img-lata475" src="imagenes/roja-475.jpg" alt="Lata 475ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <h4 class="beverage-name">Lata 475ml</h4>
+
+        <select id="select-lata475" class="beverage-select">
+          <option value="roja-475.jpg" selected>Roja</option>
+          <option value="negra-475.jpg">Negra</option>
+          <option value="rubia-475.jpg">Rubia</option>
+          <option value="ipa-475.jpg">IPA</option>
+        </select>
+
+        <div class="beverage-price">$2.300</div>
+      </div>
+
+      <!-- Latón 750ml -->
+      <div class="beverage-card">
+        <img id="img-laton750" src="imagenes/rubia-710.jpg" alt="Latón 750ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <h4 class="beverage-name">Latón 710ml</h4>
+
+        <select id="select-laton750" class="beverage-select">
+          <option value="rubia-710.jpg">Rubia</option>
+        </select>
+
+        <div class="beverage-price">$3.500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Ubicación -->
   <section id="ubicacion">

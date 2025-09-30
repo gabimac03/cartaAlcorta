@@ -224,3 +224,22 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', toggleStickyWhatsApp);
   toggleStickyWhatsApp(); // ejecutar en carga inicial
 });
+
+
+  function setDynamicImage(selectId, imgId, basePath) {
+    const select = document.getElementById(selectId);
+    const img = document.getElementById(imgId);
+
+    if (select && img) {
+      select.addEventListener('change', function () {
+        img.src = basePath + this.value;
+      });
+    }
+  }
+
+  const base = "imagenes/"; // ✅ en producción /public es raíz
+  setDynamicImage('select-gaseosa500', 'img-gaseosa500', base);
+  setDynamicImage('select-gaseosa15', 'img-gaseosa15', base);
+  setDynamicImage('select-agua500', 'img-agua500', base);
+  setDynamicImage('select-lata475', 'img-lata475', base);
+  setDynamicImage('select-laton750', 'img-laton750', base);
