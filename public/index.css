@@ -822,3 +822,89 @@ footer {
 .beverage-select:active {
   transform: scale(0.97);
 }
+
+
+
+/* MODAL */
+
+/* ===== MODAL OVERLAY ===== */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.4s ease;
+}
+
+/* ===== MODAL CONTENT ===== */
+.modal-content {
+  position: relative;
+  background: #1a1a1a;
+  color: #fff;
+  max-width: 400px;
+  width: 90%;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  animation: slideUp 0.4s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.8rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Body */
+.modal-body h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #f9b233; /* color dorado */
+}
+
+.modal-body p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* CTA Button */
+.cta-btn {
+  background: #f9b233;
+  color: #1a1a1a;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+.cta-btn:hover {
+  background: #e0a428;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;} to {opacity: 1;}
+}
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}

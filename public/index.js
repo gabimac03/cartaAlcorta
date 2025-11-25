@@ -243,3 +243,15 @@ document.addEventListener('DOMContentLoaded', function() {
   setDynamicImage('select-agua500', 'img-agua500', base);
   setDynamicImage('select-lata475', 'img-lata475', base);
   setDynamicImage('select-laton750', 'img-laton750', base);
+
+
+  // cerrar modal
+
+  function closeModal() {
+  document.getElementById('qrModal').style.display = 'none';
+}
+
+// Mostrar modal al cargar la página
+window.addEventListener('load', () => {
+  document.getElementById('qrModal').style.display = 'flex';
+});
