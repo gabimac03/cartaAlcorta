@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,15 +31,20 @@
       <p class="pedido-subtitle">
         Hace tu orden directamente por WhatsApp y disfrutá nuestros lomos y burgers premium 🍔🥖
       </p>
-      <a class="whatsapp-btn" id="whatsappBtn" 
-        href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA" 
+      <a class="whatsapp-btn" id="whatsappBtnDorrego"
+        href="https://wa.me/5492617094467?text=Hola Alcorta Dorrego!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
         target="_blank">
         <i class="fab fa-whatsapp"></i>
-        <span>Pedir por WhatsApp</span>
+        <span>Pedir por WhatsApp a Dorrego</span>
+      </a>
+      <a class="whatsapp-btn" id="whatsappBtnGodoyCruz"
+        href="https://wa.me/5492617094474?text=Hola Alcorta Godoy Cruz!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
+        target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Pedir por WhatsApp a Godoy Cruz</span>
       </a>
     </div>
   </section>
-
 
   <!-- Navegación -->
   <div class="nav-container">
@@ -109,7 +115,8 @@
       <h2 class="section-title">Nuestra Carta</h2>
 
       <!-- BURGERS -->
-      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🍔 HAMBURGUESAS</h3>
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🍔
+        HAMBURGUESAS</h3>
       <div class="menu-grid">
 
         <!-- ChesseBurg -->
@@ -132,7 +139,9 @@
                   <span>Triple</span><span class="option-price">$11.500</span>
                 </div>
               </div>
-              <div class="food-final-price"><div class="current-price" id="chesseburgh-price">$8.000</div></div>
+              <div class="food-final-price">
+                <div class="current-price" id="chesseburgh-price">$8.000</div>
+              </div>
             </div>
           </div>
         </div>
@@ -157,7 +166,9 @@
                   <span>Triple</span><span class="option-price">$12.500</span>
                 </div>
               </div>
-              <div class="food-final-price"><div class="current-price" id="andesburg-price">$8.500</div></div>
+              <div class="food-final-price">
+                <div class="current-price" id="andesburg-price">$8.500</div>
+              </div>
             </div>
           </div>
         </div>
@@ -169,7 +180,8 @@
           </div>
           <div class="food-content">
             <h3 class="food-title">AmericaBurg</h3>
-            <p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar - Salsa Thousand Island</p>
+            <p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar - Salsa
+              Thousand Island</p>
             <div class="food-options">
               <div class="option-selector">
                 <div class="option-button active" data-product="americaburg" data-option="simple" data-price="8000">
@@ -182,7 +194,9 @@
                   <span>Triple</span><span class="option-price">$12.500</span>
                 </div>
               </div>
-              <div class="food-final-price"><div class="current-price" id="americaburg-price">$9.000</div></div>
+              <div class="food-final-price">
+                <div class="current-price" id="americaburg-price">$9.000</div>
+              </div>
             </div>
           </div>
         </div>
@@ -207,60 +221,106 @@
                   <span>Triple</span><span class="option-price">$12.500</span>
                 </div>
               </div>
-              <div class="food-final-price"><div class="current-price" id="mexiburg-price">$9.000</div></div>
+              <div class="food-final-price">
+                <div class="current-price" id="mexiburg-price">$9.000</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- LOMOS -->
-      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🥖 LOMOS</h3>
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🥖 LOMOS
+      </h3>
       <div class="menu-grid">
 
         <div class="food-card simple-product">
           <div class="food-image"><img src="imagenes/lomoAlcorta.jpeg" alt="Lomo Alcorta"></div>
-          <div class="food-content"><h3 class="food-title">Lomo Alcorta</h3><p class="food-description">Pan - Carne - Tomate - Lechuga - Mayonesa Alcorta</p><div class="food-final-price"><div class="current-price">$9.000</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Alcorta</h3>
+            <p class="food-description">Pan - Carne - Tomate - Lechuga - Mayonesa Alcorta</p>
+            <div class="food-final-price">
+              <div class="current-price">$9.000</div>
+            </div>
+          </div>
         </div>
 
         <div class="food-card simple-product">
           <div class="food-image"><img src="imagenes/lomoCompleto.jpg" alt="Lomo Completo"></div>
-          <div class="food-content"><h3 class="food-title">Lomo Completo</h3><p class="food-description">Pan - Carne - Lechuga - Tomate - Huevo - Jamón - Queso - Mayonesa Alcorta</p><div class="food-final-price"><div class="current-price">$11.000</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Completo</h3>
+            <p class="food-description">Pan - Carne - Lechuga - Tomate - Huevo - Jamón - Queso - Mayonesa Alcorta</p>
+            <div class="food-final-price">
+              <div class="current-price">$11.000</div>
+            </div>
+          </div>
         </div>
 
         <div class="food-card simple-product">
-           <div class="food-image"><img src="imagenes/lomoAmericano.jpg" alt="Lomo Americano"></div>
-          <div class="food-content"><h3 class="food-title">Lomo Americano</h3><p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar</p><div class="food-final-price"><div class="current-price">$13.000</div></div></div>
+          <div class="food-image"><img src="imagenes/lomoAmericano.jpg" alt="Lomo Americano"></div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Americano</h3>
+            <p class="food-description">Pan - Carne - Barbacoa - Cebolla Caramelizada - Panceta - Cheddar</p>
+            <div class="food-final-price">
+              <div class="current-price">$13.000</div>
+            </div>
+          </div>
         </div>
 
         <div class="food-card simple-product">
           <div class="food-image"><img src="imagenes/lomoCriollo.jpeg" alt="Lomo Completo"></div>
-          <div class="food-content"><h3 class="food-title">Lomo Criollo</h3><p class="food-description">Pan - Carne - Salsa Criolla - Provoleta - Mayonesa de Ajo - Morrones Asados</p><div class="food-final-price"><div class="current-price">$12.000</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Lomo Criollo</h3>
+            <p class="food-description">Pan - Carne - Salsa Criolla - Provoleta - Mayonesa de Ajo - Morrones Asados</p>
+            <div class="food-final-price">
+              <div class="current-price">$12.000</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- PAPAS -->
-      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍟 PAPAS</h3>
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍟 PAPAS
+      </h3>
       <div class="menu-grid">
 
         <div class="food-card simple-product">
           <div class="food-image placeholder">
             <span>📸 Próximamente imagen de nuestro producto</span>
           </div>
-          <div class="food-content"><h3 class="food-title">Papas Clásicas</h3><p class="food-description">Papas fritas tradicionales</p><div class="food-final-price"><div class="current-price">$4.500</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Clásicas</h3>
+            <p class="food-description">Papas fritas tradicionales</p>
+            <div class="food-final-price">
+              <div class="current-price">$4.500</div>
+            </div>
+          </div>
         </div>
 
         <div class="food-card simple-product">
           <div class="food-image placeholder">
             <span>📸 Próximamente imagen de nuestro producto</span>
           </div>
-          <div class="food-content"><h3 class="food-title">Papas Gramajo</h3><p class="food-description">Papa - Cebolla de Verdeo - Huevo</p><div class="food-final-price"><div class="current-price">$5.500</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Gramajo</h3>
+            <p class="food-description">Papa - Cebolla de Verdeo - Huevo</p>
+            <div class="food-final-price">
+              <div class="current-price">$5.500</div>
+            </div>
+          </div>
         </div>
 
         <div class="food-card simple-product">
           <div class="food-image placeholder">
             <span>📸 Próximamente imagen de nuestro producto</span>
           </div>
-          <div class="food-content"><h3 class="food-title">Papas Americanas</h3><p class="food-description">Papa - Cheddar - Panceta</p><div class="food-final-price"><div class="current-price">$6.500</div></div></div>
+          <div class="food-content">
+            <h3 class="food-title">Papas Americanas</h3>
+            <p class="food-description">Papa - Cheddar - Panceta</p>
+            <div class="food-final-price">
+              <div class="current-price">$6.500</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -270,137 +330,174 @@
 
 
 
-      <!-- AGREGADOS -->
-      <div class="extras-section">
-        <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">➕ AGREGADOS</h3>
-        <div class="extras-grid">
-          <div class="extra-card">
-            <div class="extra-icon">🥩</div>
-            <h4 class="extra-name">Carne Extra</h4>
-            <div class="extra-price">$2.500</div>
-          </div>
-          <div class="extra-card">
-            <div class="extra-icon">🧀</div>
-            <h4 class="extra-name">Cheddar x2</h4>
-            <div class="extra-price">$2.000</div>
-          </div>
-          <div class="extra-card">
-            <div class="extra-icon">🥓</div>
-            <h4 class="extra-name">Cheddar + Panceta</h4>
-            <div class="extra-price">$3.000</div>
-          </div>
-          <div class="extra-card">
-            <div class="extra-icon">🥄</div>
-            <h4 class="extra-name">Dips de Salsas</h4>
-            <div class="extra-price">$500</div>
-          </div>
-          <div class="extra-card">
-            <div class="extra-icon">🔄</div>
-            <h4 class="extra-name">Convertí tus Papas</h4>
-            <div class="extra-price">$2.000</div>
-          </div>
-        </div>
+  <!-- AGREGADOS -->
+  <div class="extras-section">
+    <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">➕ AGREGADOS
+    </h3>
+    <div class="extras-grid">
+      <div class="extra-card">
+        <div class="extra-icon">🥩</div>
+        <h4 class="extra-name">Carne Extra</h4>
+        <div class="extra-price">$2.500</div>
       </div>
-    </div>
-  </section>
-
-<!-- ===== BEBIDAS ===== -->
-<section id="bebidas">
-  <div class="container">
-    <h2 class="section-title">Bebidas</h2>
-    
-    <!-- SIN ALCOHOL -->
-    <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🥤 SIN ALCOHOL</h3>
-    <div class="beverages-grid">
-
-      <!-- Gaseosa 500ml -->
-      <div class="beverage-card">
-        <img id="img-gaseosa500" src="imagenes/sprite-500.jpg" alt="Gaseosa 500ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
-        <h4 class="beverage-name">Gaseosa 500ml</h4>
-
-        <select id="select-gaseosa500" class="beverage-select">
-          <option value="sprite-500.jpg" selected>Sprite</option>
-          <option value="fanta-500.jpg">Fanta</option>
-          <option value="coca-500.jpg">Coca-Cola</option>
-          <option value="cocaz-500.jpg">Coca-Cola Zero</option>
-        </select>
-
-        <div class="beverage-price">$2.500</div>
+      <div class="extra-card">
+        <div class="extra-icon">🧀</div>
+        <h4 class="extra-name">Cheddar x2</h4>
+        <div class="extra-price">$2.000</div>
       </div>
-
-      <!-- Gaseosa 1.5lts -->
-      <div class="beverage-card">
-        <img id="img-gaseosa15" src="imagenes/sprite-15.jpg" alt="Gaseosa 1.5lts" style="width:100%;border-radius:8px;margin-bottom:8px;">
-        <h4 class="beverage-name">Gaseosa 1.5lts</h4>
-
-        <select id="select-gaseosa15" class="beverage-select">
-          <option value="sprite-15.jpg" selected>Sprite</option>
-          <option value="fanta-15.jpg">Fanta</option>
-          <option value="coca-15.jpg">Coca-Cola</option>
-        </select>
-
-        <div class="beverage-price">$4.000</div>
+      <div class="extra-card">
+        <div class="extra-icon">🥓</div>
+        <h4 class="extra-name">Cheddar + Panceta</h4>
+        <div class="extra-price">$3.000</div>
       </div>
-
-      <!-- Agua Saborizada 500ml -->
-      <div class="beverage-card">
-        <img id="img-agua500" src="imagenes/manzana-500.jpg" alt="Agua saborizada" style="width:100%;border-radius:8px;margin-bottom:8px;">
-        <h4 class="beverage-name">Agua Saborizada 500ml</h4>
-
-        <select id="select-agua500" class="beverage-select">
-          <option value="agua-500.jpg">Agua</option>
-          <option value="manzana-500.jpg" selected>Manzana</option>
-          <option value="pomelo-500.jpg">Pomelo</option>
-        </select>
-
-        <div class="beverage-price">$2.500</div>
+      <div class="extra-card">
+        <div class="extra-icon">🥄</div>
+        <h4 class="extra-name">Dips de Salsas</h4>
+        <div class="extra-price">$500</div>
       </div>
-    </div>
-
-    <!-- CON ALCOHOL -->
-    <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍺 CON ALCOHOL</h3>
-    <div class="beverages-grid">
-
-      <!-- Lata 475ml -->
-      <div class="beverage-card">
-        <img id="img-lata475" src="imagenes/roja-475.jpg" alt="Lata 475ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
-        <h4 class="beverage-name">Lata 475ml</h4>
-
-        <select id="select-lata475" class="beverage-select">
-          <option value="roja-475.jpg" selected>Roja</option>
-          <option value="negra-475.jpg">Negra</option>
-          <option value="rubia-475.jpg">Rubia</option>
-          <option value="ipa-475.jpg">IPA</option>
-        </select>
-
-        <div class="beverage-price">$2.600</div>
-      </div>
-
-      <!-- Latón 750ml -->
-      <div class="beverage-card">
-        <img id="img-laton750" src="imagenes/rubia-710.jpg" alt="Latón 750ml" style="width:100%;border-radius:8px;margin-bottom:8px;">
-        <h4 class="beverage-name">Latón 710ml</h4>
-
-        <select id="select-laton750" class="beverage-select">
-          <option value="rubia-710.jpg">Rubia</option>
-        </select>
-
-        <div class="beverage-price">$3.500</div>
+      <div class="extra-card">
+        <div class="extra-icon">🔄</div>
+        <h4 class="extra-name">Convertí tus Papas</h4>
+        <div class="extra-price">$2.000</div>
       </div>
     </div>
   </div>
-</section>
+  </div>
+  </section>
+
+  <!-- ===== BEBIDAS ===== -->
+  <section id="bebidas">
+    <div class="container">
+      <h2 class="section-title">Bebidas</h2>
+
+      <!-- SIN ALCOHOL -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🥤 SIN
+        ALCOHOL</h3>
+      <div class="beverages-grid">
+
+        <!-- Gaseosa 500ml -->
+        <div class="beverage-card">
+          <img id="img-gaseosa500" src="imagenes/sprite-500.jpg" alt="Gaseosa 500ml"
+            style="width:100%;border-radius:8px;margin-bottom:8px;">
+          <h4 class="beverage-name">Gaseosa 500ml</h4>
+
+          <select id="select-gaseosa500" class="beverage-select">
+            <option value="sprite-500.jpg" selected>Sprite</option>
+            <option value="fanta-500.jpg">Fanta</option>
+            <option value="coca-500.jpg">Coca-Cola</option>
+            <option value="cocaz-500.jpg">Coca-Cola Zero</option>
+          </select>
+
+          <div class="beverage-price">$2.500</div>
+        </div>
+
+        <!-- Gaseosa 1.5lts -->
+        <div class="beverage-card">
+          <img id="img-gaseosa15" src="imagenes/sprite-15.jpg" alt="Gaseosa 1.5lts"
+            style="width:100%;border-radius:8px;margin-bottom:8px;">
+          <h4 class="beverage-name">Gaseosa 1.5lts</h4>
+
+          <select id="select-gaseosa15" class="beverage-select">
+            <option value="sprite-15.jpg" selected>Sprite</option>
+            <option value="fanta-15.jpg">Fanta</option>
+            <option value="coca-15.jpg">Coca-Cola</option>
+          </select>
+
+          <div class="beverage-price">$4.000</div>
+        </div>
+
+        <!-- Agua Saborizada 500ml -->
+        <div class="beverage-card">
+          <img id="img-agua500" src="imagenes/manzana-500.jpg" alt="Agua saborizada"
+            style="width:100%;border-radius:8px;margin-bottom:8px;">
+          <h4 class="beverage-name">Agua Saborizada 500ml</h4>
+
+          <select id="select-agua500" class="beverage-select">
+            <option value="agua-500.jpg">Agua</option>
+            <option value="manzana-500.jpg" selected>Manzana</option>
+            <option value="pomelo-500.jpg">Pomelo</option>
+          </select>
+
+          <div class="beverage-price">$2.500</div>
+        </div>
+      </div>
+
+      <!-- CON ALCOHOL -->
+      <h3 style="color: var(--primary-orange); font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">🍺 CON
+        ALCOHOL</h3>
+      <div class="beverages-grid">
+
+        <!-- Lata 475ml -->
+        <div class="beverage-card">
+          <img id="img-lata475" src="imagenes/roja-475.jpg" alt="Lata 475ml"
+            style="width:100%;border-radius:8px;margin-bottom:8px;">
+          <h4 class="beverage-name">Lata 475ml</h4>
+
+          <select id="select-lata475" class="beverage-select">
+            <option value="roja-475.jpg" selected>Roja</option>
+            <option value="negra-475.jpg">Negra</option>
+            <option value="rubia-475.jpg">Rubia</option>
+            <option value="ipa-475.jpg">IPA</option>
+          </select>
+
+          <div class="beverage-price">$2.600</div>
+        </div>
+
+        <!-- Latón 750ml -->
+        <div class="beverage-card">
+          <img id="img-laton750" src="imagenes/rubia-710.jpg" alt="Latón 750ml"
+            style="width:100%;border-radius:8px;margin-bottom:8px;">
+          <h4 class="beverage-name">Latón 710ml</h4>
+
+          <select id="select-laton750" class="beverage-select">
+            <option value="rubia-710.jpg">Rubia</option>
+          </select>
+
+          <div class="beverage-price">$3.500</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <!-- Ubicación -->
   <section id="ubicacion">
     <div class="container">
-      <div class="location-section">
-        <h2 class="section-title">Nuestra Ubicación</h2>
-        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-secondary);">
-          📍 Alem 300, Dorrego, Mendoza
-        </p>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d704.2387493954407!2d-68.82762142663555!3d-32.89967723905695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0938bd00388d%3A0xefce7ce6dfd8ab93!2sAlem%20300%2C%20M5521EAD%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1759011965778!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <h2 class="section-title">Nuestras Ubicaciones</h2>
+      <div class="locations-grid">
+        <!-- Sucursal Dorrego -->
+        <div class="location-card">
+          <h3 class="location-name">📍 Sucursal Dorrego</h3>
+          <p class="location-address">Alem 300, Dorrego, Mendoza</p>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d704.2387493954407!2d-68.82762142663555!3d-32.89967723905695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0938bd00388d%3A0xefce7ce6dfd8ab93!2sAlem%20300%2C%20M5521EAD%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1759011965778!5m2!1ses-419!2sar"
+              width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div style="margin-top: 1rem; text-align: center;">
+            <a href="https://www.google.com/maps/search/Alem+300,+Dorrego,+Mendoza" target="_blank" class="map-link">
+              <i class="fas fa-external-link-alt"></i> Ver en Google Maps
+            </a>
+          </div>
+        </div>
+        <!-- Sucursal Godoy Cruz -->
+        <div class="location-card">
+          <h3 class="location-name">📍 Sucursal Godoy Cruz</h3>
+          <p class="location-address">Figueroa Alcorta 1304, Godoy Cruz, Mendoza</p>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3349.5262503251545!2d-68.8475877!3d-32.9105436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09062f6b86fd%3A0x8f7d9a3b6d2a1c0d!2sFigueroa%20Alcorta%201304%2C%20M5504%20Godoy%20Cruz%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1704655200000!5m2!1ses-419!2sar"
+              width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div style="margin-top: 1rem; text-align: center;">
+            <a href="https://www.google.com/maps/search/Figueroa+Alcorta+1304,+Godoy+Cruz,+Mendoza" target="_blank"
+              class="map-link">
+              <i class="fas fa-external-link-alt"></i> Ver en Google Maps
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -409,9 +506,10 @@
   <footer>
     <div class="footer-content">
       <p class="footer-text">© 2025 ALCORTA - Todos los derechos reservados</p>
-      <p class="footer-subtitle">Take Away Premium • Dorrego, Mendoza</p>
+      <p class="footer-subtitle">Take Away Premium • Dorrego, Mendoza • Godoy Cruz, Mendoza</p>
     </div>
   </footer>
 </body>
-  <script src="index.js"></script>
+<script src="index.js"></script>
+
 </html>

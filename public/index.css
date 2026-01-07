@@ -50,8 +50,17 @@ body::before {
 }
 
 @keyframes backgroundSmoke {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.6; }
-  50% { transform: translate3d(5px, -5px, 0) scale(1.05); opacity: 0.4; }
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate3d(5px, -5px, 0) scale(1.05);
+    opacity: 0.4;
+  }
 }
 
 /* Hero Section */
@@ -103,16 +112,17 @@ body::before {
 
 @keyframes neonGlow {
   0% {
-    text-shadow: 
-      0 0 2px rgba(255,255,255,0.5),
-      0 0 4px rgba(255,255,255,0.2),
-      0 0 6px rgba(255,255,255,0.1);
+    text-shadow:
+      0 0 2px rgba(255, 255, 255, 0.5),
+      0 0 4px rgba(255, 255, 255, 0.2),
+      0 0 6px rgba(255, 255, 255, 0.1);
   }
+
   100% {
-    text-shadow: 
-      0 0 3px rgba(255,255,255,0.6),
-      0 0 6px rgba(255,255,255,0.3),
-      0 0 8px rgba(255,255,255,0.15);
+    text-shadow:
+      0 0 3px rgba(255, 255, 255, 0.6),
+      0 0 6px rgba(255, 255, 255, 0.3),
+      0 0 8px rgba(255, 255, 255, 0.15);
   }
 }
 
@@ -274,7 +284,7 @@ nav a i {
   font-weight: 800;
   color: white;
   margin-bottom: clamp(1rem, 3vh, 2rem);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
 }
 
@@ -299,7 +309,7 @@ nav a i {
 
 .promo-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .promo-number {
@@ -308,7 +318,7 @@ nav a i {
   right: 1rem;
   width: 30px;
   height: 30px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -327,7 +337,7 @@ nav a i {
 }
 
 .promo-description {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: clamp(0.9rem, 2.5vw, 1rem);
   margin-bottom: 1.5rem;
   line-height: 1.4;
@@ -337,11 +347,11 @@ nav a i {
   color: white;
   font-size: clamp(1.3rem, 4vw, 1.6rem);
   font-weight: 800;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   display: inline-block;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Menú interactivo mejorado */
@@ -365,7 +375,7 @@ nav a i {
 .food-card:hover {
   transform: translateY(-8px);
   border-color: rgba(255, 140, 0, 0.4);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .food-image {
@@ -389,13 +399,22 @@ nav a i {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
   animation: shimmer 3s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  0%, 100% { opacity: 0.3; transform: rotate(0deg); }
-  50% { opacity: 0.6; transform: rotate(180deg); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: rotate(180deg);
+  }
 }
 
 .food-content {
@@ -471,7 +490,7 @@ nav a i {
   color: var(--primary-orange);
   font-size: clamp(1.3rem, 4vw, 1.5rem);
   font-weight: 800;
-  text-shadow: 0 0 10px rgba(255,140,0,0.3);
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -481,17 +500,20 @@ nav a i {
 }
 
 /* Bebidas y agregados */
-.beverages-section, .extras-section {
+.beverages-section,
+.extras-section {
   margin-top: 4rem;
 }
 
-.beverages-grid, .extras-grid {
+.beverages-grid,
+.extras-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
-.beverage-card, .extra-card {
+.beverage-card,
+.extra-card {
   background: var(--card-bg);
   border: 1px solid var(--border-light);
   border-radius: 16px;
@@ -500,26 +522,30 @@ nav a i {
   transition: all 0.3s ease;
 }
 
-.beverage-card:hover, .extra-card:hover {
+.beverage-card:hover,
+.extra-card:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 140, 0, 0.3);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.beverage-icon, .extra-icon {
+.beverage-icon,
+.extra-icon {
   font-size: 2.5rem;
   color: var(--primary-orange);
   margin-bottom: 1rem;
 }
 
-.beverage-name, .extra-name {
+.beverage-name,
+.extra-name {
   color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.beverage-price, .extra-price {
+.beverage-price,
+.extra-price {
   color: var(--primary-orange);
   font-size: 1.2rem;
   font-weight: 700;
@@ -549,10 +575,17 @@ iframe {
 }
 
 /* WhatsApp section */
-.whatsapp-section { 
-  text-align: center; 
-  margin: clamp(2rem, 5vw, 4rem) 0; 
+.whatsapp-section {
+  text-align: center;
+  margin: clamp(2rem, 5vw, 4rem) 0;
   padding: 0 1rem;
+}
+
+.whatsapp-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .whatsapp-btn {
@@ -573,7 +606,7 @@ iframe {
   touch-action: manipulation;
   min-height: 48px;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 .whatsapp-btn:hover {
@@ -581,8 +614,62 @@ iframe {
   box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
 }
 
-.whatsapp-btn i { 
-  font-size: clamp(1.1rem, 3vw, 1.3rem); 
+.whatsapp-btn i {
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+}
+
+/* Estilos para múltiples ubicaciones */
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 2rem;
+}
+
+.location-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.location-card:hover {
+  border-color: rgba(255, 140, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+.location-name {
+  color: var(--primary-orange);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.location-address {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-orange);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 140, 0, 0.1);
+}
+
+.map-link:hover {
+  background: rgba(255, 140, 0, 0.2);
+  transform: scale(1.05);
 }
 
 /* Footer */
@@ -593,9 +680,9 @@ footer {
   text-align: center;
 }
 
-.footer-content { 
-  max-width: 1200px; 
-  margin: 0 auto; 
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-text {
@@ -617,17 +704,19 @@ footer {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .promo-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
-  .food-card, .promo-card {
+
+  .food-card,
+  .promo-card {
     margin: 0 0.5rem;
   }
-  
-  .beverages-grid, .extras-grid {
+
+  .beverages-grid,
+  .extras-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
@@ -637,8 +726,9 @@ footer {
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  .beverages-grid, .extras-grid {
+
+  .beverages-grid,
+  .extras-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -647,24 +737,34 @@ footer {
   .menu-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
-  .beverages-grid, .extras-grid {
+
+  .beverages-grid,
+  .extras-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.food-card, .promo-card {
+.food-card,
+.promo-card {
   animation: fadeIn 0.6s ease-out forwards;
 }
 
 /* Hover effects only on devices that support it */
 @media (hover: hover) and (pointer: fine) {
+
   .food-card:hover,
   .promo-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -673,6 +773,7 @@ footer {
 
 /* Touch devices */
 @media (hover: none) and (pointer: coarse) {
+
   .food-card:active,
   .promo-card:active {
     transform: translateY(-4px) scale(1.01);
@@ -684,17 +785,33 @@ footer {
 .sticky-whatsapp {
   position: relative;
   z-index: 100;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Estado flotante (cuando haces scroll) */
 .sticky-whatsapp.fixed {
   position: fixed;
-  bottom: 20px;
+  bottom: 30px;
   right: 20px;
   width: auto;
   margin: 0;
   padding: 0;
-  animation: fadeInUp 0.4s ease forwards;
+  z-index: 1000;
+  animation: smoothFloatIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes smoothFloatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .sticky-whatsapp.fixed .whatsapp-btn {
@@ -707,8 +824,15 @@ footer {
 
 /* Animación de entrada flotante */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Caja destacada para el apartado WhatsApp */
@@ -719,13 +843,13 @@ footer {
   border-radius: 16px;
   padding: 2rem 1.5rem;
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
 .whatsapp-box:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .pedido-title {
@@ -752,13 +876,15 @@ footer {
 
 .sticky-whatsapp.fixed .pedido-title,
 .sticky-whatsapp.fixed .pedido-subtitle {
-  display: none; /* ocultar texto en modo flotante */
+  display: none;
+  /* ocultar texto en modo flotante */
 }
 
 
 .food-image img {
   width: 100%;
-  height: 180px; /* altura uniforme */
+  height: 180px;
+  /* altura uniforme */
   object-fit: cover;
   border-radius: 12px;
 }
@@ -789,7 +915,8 @@ footer {
   font-size: 1rem;
   font-weight: 600;
   color: var(--primary-orange);
-  background: #000; /* fondo negro */
+  background: #000;
+  /* fondo negro */
   border: 2px solid var(--primary-orange);
   border-radius: 10px;
   cursor: pointer;
@@ -816,7 +943,7 @@ footer {
 
 .beverage-select:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255,140,0,0.4);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.4);
 }
 
 .beverage-select:active {
@@ -849,7 +976,7 @@ footer {
   padding: 2rem;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   animation: slideUp 0.4s ease;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -867,6 +994,7 @@ footer {
   line-height: 1;
   transition: transform 0.2s;
 }
+
 .close-btn:hover {
   transform: scale(1.2);
 }
@@ -875,7 +1003,8 @@ footer {
 .modal-body h2 {
   font-size: 1.6rem;
   margin-bottom: 1rem;
-  color: #f9b233; /* color dorado */
+  color: #f9b233;
+  /* color dorado */
 }
 
 .modal-body p {
@@ -895,6 +1024,7 @@ footer {
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
 }
+
 .cta-btn:hover {
   background: #e0a428;
   transform: scale(1.05);
@@ -902,9 +1032,23 @@ footer {
 
 /* Animations */
 @keyframes fadeIn {
-  from {opacity: 0;} to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 @keyframes slideUp {
-  from {transform: translateY(40px); opacity: 0;}
-  to {transform: translateY(0); opacity: 1;}
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
