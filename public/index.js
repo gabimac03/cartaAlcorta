@@ -72,7 +72,7 @@ const CATALOG = [
     items: [
       { id: 'a1', name: 'Cheddar x2 (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 3000 },
       { id: 'a2', name: 'Cheddar + Panceta (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 3000 },
-      { id: 'a3', name: 'Doble Carne (debes seleccionar dos veces para los dos lomos)', price: 4000 },
+      { id: 'a3', name: 'Doble Carne (debes seleccionar dos veces para los dos lomos)', desc: 'El doble carne no entra en las promociones, solo para los lomos individuales.', price: 4000 },
       { id: 'a4', name: 'Dips de Salsas ', price: 500 },
       { id: 'a5', name: 'Medallón Extra (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 2500 },
       { id: 'a6', name: 'Convertí tus Papas (en vez de dos cubetas, se entrega bandeja convertida)', price: 2000 }
