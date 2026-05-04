@@ -122,7 +122,9 @@ const state = {
   tempPromoSelections: [], // ['Nombre Burger 1', 'Nombre Burger 2']
   selections: {}, // { itemId: 'Variante o Sabor seleccionado' }
   selectedBranch: 'dorrego',
-  orderType: 'retiro' // 'delivery' o 'retiro'
+  orderType: 'retiro',
+  isPromoPopupOpen: false,
+  hasClosedPromo: false
 };
 
 // UTILS
@@ -150,6 +152,30 @@ CATALOG.forEach(cat => {
     if (item.subproducts) state.selections[item.id] = item.subproducts[0];
   });
 });
+
+// PROMO POPUP LOGIC
+function checkPromoDay() {
+  const day = new Date().getDay();
+  // Martes (2), Miércoles (3), Jueves (4)
+  return day >= 2 && day <= 4;
+}
+
+function initPromoPopup() {
+  if (checkPromoDay() && !state.hasClosedPromo) {
+    state.isPromoPopupOpen = true;
+  }
+}
+
+function closePromoPopup() {
+  state.isPromoPopupOpen = false;
+  state.hasClosedPromo = true;
+  triggerRender();
+}
+
+function openPromoPopup() {
+  state.isPromoPopupOpen = true;
+  triggerRender();
+}
 
 // EVENT DISPATCHER
 function triggerRender() {
@@ -716,6 +742,53 @@ function renderPromoModal() {
   `;
 }
 
+function renderPromoPopup() {
+  if (!state.isPromoPopupOpen) {
+    if (checkPromoDay()) {
+      return `
+        <button onclick="openPromoPopup()" class="fixed bottom-24 right-6 z-40 bg-brand text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center animate-bounce hover:scale-110 transition-transform">
+          <i class="fas fa-percentage text-2xl"></i>
+        </button>
+      `;
+    }
+    return '';
+  }
+
+  return `
+    <div class="fixed inset-0 z-[70] flex items-center justify-center p-4">
+      <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closePromoPopup()"></div>
+      <div class="relative bg-white w-full max-w-[450px] rounded-[2rem] shadow-2xl overflow-hidden fade-in flex flex-col">
+        
+        <div class="absolute top-4 right-4 z-10">
+          <button onclick="closePromoPopup()" class="bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition-colors">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="overflow-y-auto max-h-[85vh]">
+          <div class="p-6 text-center">
+            <h2 class="font-serif text-3xl font-black text-textmain mb-1">¡PROMOS DE LA SEMANA!</h2>
+            <p class="text-brand font-bold uppercase tracking-widest text-sm mb-6">Martes a Jueves</p>
+            
+            <div class="space-y-4">
+              <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-bgmain">
+                <img src="imagenes/promo1.jpeg" alt="Promo 1" class="w-full h-auto object-cover" />
+              </div>
+              <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-bgmain">
+                <img src="imagenes/promo2.jpeg" alt="Promo 2" class="w-full h-auto object-cover" />
+              </div>
+            </div>
+
+            <button onclick="closePromoPopup()" class="w-full mt-8 bg-black text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-brand transition-colors text-lg">
+              Ver el resto del menú
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderApp() {
   const app = document.getElementById('app');
   if (!app) return;
@@ -729,8 +802,12 @@ function renderApp() {
     ${renderCartOverlay()}
     ${renderCheckoutModal()}
     ${renderPromoModal()}
+    ${renderPromoPopup()}
   `;
 }
 
 // INITIALIZATION
-window.onload = renderApp;
+window.onload = () => {
+  initPromoPopup();
+  renderApp();
+};
