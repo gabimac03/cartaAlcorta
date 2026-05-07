@@ -177,6 +177,13 @@ function openPromoPopup() {
   triggerRender();
 }
 
+function scrollPromo(dir) {
+  const container = document.getElementById('promo-carousel');
+  if (container) {
+    container.scrollBy({ left: dir * container.offsetWidth, behavior: 'smooth' });
+  }
+}
+
 // EVENT DISPATCHER
 function triggerRender() {
   renderApp();
@@ -200,7 +207,11 @@ function updateOrderType(type) {
 }
 
 function openPromoModal(itemId) {
-  state.currentPromoItem = CATALOG.find(c => c.id === 'promos').items.find(i => i.id === itemId);
+  if (itemId === 'wp2') {
+    state.currentPromoItem = { id: 'wp2', name: 'PROMO TRIPLES', price: 22000 };
+  } else {
+    state.currentPromoItem = CATALOG.find(c => c.id === 'promos').items.find(i => i.id === itemId);
+  }
   state.tempPromoSelections = [];
   state.isPromoModalOpen = true;
   triggerRender();
@@ -243,13 +254,18 @@ function confirmPromo() {
 }
 
 function addToCart(itemId, categoryId) {
-  if (['p6', 'p7', 'p8'].includes(itemId)) {
+  if (['p6', 'p7', 'p8', 'wp2'].includes(itemId)) {
     openPromoModal(itemId);
     return;
   }
 
-  const category = CATALOG.find(c => c.id === categoryId);
-  const item = category.items.find(i => i.id === itemId);
+  let item;
+  if (categoryId === 'promos_semana') {
+    item = { id: 'wp1', name: 'PROMO CHESSE', price: 15000 };
+  } else {
+    const category = CATALOG.find(c => c.id === categoryId);
+    item = category.items.find(i => i.id === itemId);
+  }
 
   const subproduct = getSubproduct(item);
   const price = getPrice(item);
@@ -469,6 +485,29 @@ function renderCategories() {
       ${cat.note ? `<p class="text-center text-sm font-bold tracking-widest text-[#B58B35] uppercase mt-6">✦ ${cat.note} ✦</p>` : ''}
     </section>
   `).join('');
+}
+
+function renderWeeklyPromos() {
+  if (!checkPromoDay() || !state.hasClosedPromo) return '';
+
+  const promosSemana = {
+    id: 'promos_semana',
+    title: 'Promociones de la semana',
+    items: [
+      { id: 'wp1', name: 'PROMO CHESSE', desc: '2 ChesseBurg iguales (solo añadir)', price: 15000, image: 'imagenes/chesseBurg.jpg' },
+      { id: 'wp2', name: 'PROMO TRIPLES', desc: '2 Burgers Triples a elección (iguales o distintas)', price: 22000, image: 'imagenes/andesBurg.jpg' }
+    ]
+  };
+
+  return `
+    <section class="mb-14 fade-in">
+      <h3 class="font-serif text-3xl font-black text-textmain mb-1">${promosSemana.title}</h3>
+      <div class="w-16 h-1 bg-brand mb-6"></div>
+      <div class="flex flex-col border-4 border-brand/20 rounded-2xl p-2 bg-brand/5 shadow-inner">
+        ${promosSemana.items.map(item => renderItemCard(item, promosSemana.id)).join('')}
+      </div>
+    </section>
+  `;
 }
 
 function renderCartOverlay() {
@@ -744,7 +783,7 @@ function renderPromoModal() {
 
 function renderPromoPopup() {
   if (!state.isPromoPopupOpen) {
-    if (checkPromoDay()) {
+    if (checkPromoDay() && !state.hasClosedPromo) {
       return `
         <button onclick="openPromoPopup()" class="fixed bottom-24 right-6 z-40 bg-brand text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center animate-bounce hover:scale-110 transition-transform">
           <i class="fas fa-percentage text-2xl"></i>
@@ -765,22 +804,34 @@ function renderPromoPopup() {
           </button>
         </div>
 
-        <div class="overflow-y-auto max-h-[85vh]">
-          <div class="p-6 text-center">
+        <div class="overflow-hidden flex flex-col">
+          <div class="p-6 pb-4 text-center">
             <h2 class="font-serif text-3xl font-black text-textmain mb-1">¡PROMOS DE LA SEMANA!</h2>
-            <p class="text-brand font-bold uppercase tracking-widest text-sm mb-6">Martes a Jueves</p>
+            <p class="text-brand font-bold uppercase tracking-widest text-sm">De Martes a Jueves</p>
+          </div>
             
-            <div class="space-y-4">
-              <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-bgmain">
-                <img src="imagenes/promo1.jpeg" alt="Promo 1" class="w-full h-auto object-cover" />
+          <div class="relative group mt-2">
+            <div id="promo-carousel" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none; -ms-overflow-style: none;">
+              <div class="snap-center shrink-0 w-full px-4 sm:px-8 flex-none flex justify-center items-center">
+                <img src="imagenes/promo1.jpeg" alt="Promo 1" class="h-[55vh] min-h-[300px] max-h-[500px] w-auto max-w-full rounded-2xl shadow-xl border-4 border-white object-contain" />
               </div>
-              <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-bgmain">
-                <img src="imagenes/promo2.jpeg" alt="Promo 2" class="w-full h-auto object-cover" />
+              <div class="snap-center shrink-0 w-full px-4 sm:px-8 flex-none flex justify-center items-center">
+                <img src="imagenes/promo2.jpeg" alt="Promo 2" class="h-[55vh] min-h-[300px] max-h-[500px] w-auto max-w-full rounded-2xl shadow-xl border-4 border-white object-contain" />
               </div>
             </div>
+            
+            <!-- Controles de navegación para PC y Móvil -->
+            <button onclick="scrollPromo(-1)" class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-black w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity z-10 focus:outline-none">
+              <i class="fas fa-chevron-left text-lg"></i>
+            </button>
+            <button onclick="scrollPromo(1)" class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-black w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity z-10 focus:outline-none">
+              <i class="fas fa-chevron-right text-lg"></i>
+            </button>
+          </div>
 
-            <button onclick="closePromoPopup()" class="w-full mt-8 bg-black text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-brand transition-colors text-lg">
-              Ver el resto del menú
+          <div class="px-6 pb-6 pt-5 text-center">
+            <button onclick="closePromoPopup()" class="w-full bg-black text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-brand transition-colors text-lg">
+              Ver Promos y Menú
             </button>
           </div>
         </div>
@@ -796,6 +847,7 @@ function renderApp() {
     ${renderNavbar()}
     ${renderHero()}
     <main class="container mx-auto px-4 max-w-4xl py-12">
+      ${renderWeeklyPromos()}
       ${renderCategories()}
     </main>
     ${renderLocations()}
