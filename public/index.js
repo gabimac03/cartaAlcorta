@@ -154,6 +154,28 @@ CATALOG.forEach(cat => {
 });
 
 // PROMO POPUP LOGIC
+function isTodayPromoActive() {
+  const now = new Date();
+  return now.getFullYear() === 2026 && now.getMonth() === 5 && now.getDate() === 6;
+}
+
+function addTodayPromoToCart() {
+  const existingCartIndex = state.cart.findIndex(c => c.itemId === 'today_promo');
+  if (existingCartIndex > -1) {
+    state.cart[existingCartIndex].qty += 1;
+  } else {
+    state.cart.push({
+      id: Math.random().toString(36).substr(2, 9),
+      itemId: 'today_promo',
+      name: 'PROMOCIÓN DE AL CHESSE',
+      subproduct: '2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS + DOS CHESSE SIMPLES GRATIS (sin papas)',
+      price: 20000,
+      qty: 1
+    });
+  }
+  triggerRender();
+}
+
 function checkPromoDay() {
   const day = new Date().getDay();
   // Martes (2), Miércoles (3), Jueves (4)
@@ -161,7 +183,7 @@ function checkPromoDay() {
 }
 
 function initPromoPopup() {
-  if (checkPromoDay() && !state.hasClosedPromo) {
+  if ((checkPromoDay() || isTodayPromoActive()) && !state.hasClosedPromo) {
     state.isPromoPopupOpen = true;
   }
 }
@@ -781,16 +803,105 @@ function renderPromoModal() {
   `;
 }
 
+function renderTodayPromo() {
+  if (!isTodayPromoActive()) return '';
+  
+  return `
+    <section class="mb-14 fade-in">
+      <h3 class="font-serif text-3xl font-black text-textmain mb-1">Promoción de Hoy</h3>
+      <div class="w-16 h-1 bg-brand mb-6"></div>
+      
+      <div class="relative rounded-2xl p-6 shadow-lg overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 border border-white/10 min-h-[160px] bg-black text-white">
+        <!-- Background Image with Blur -->
+        <div class="absolute inset-0 bg-cover bg-center filter blur-[2px] brightness-[0.3]" style="background-image: url('imagenes/promo_today.jpg');"></div>
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/40"></div>
+        
+        <div class="relative z-10 flex-1 text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+            <span class="bg-brand text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full">SÓLO POR HOY</span>
+          </div>
+          <h4 class="text-xl sm:text-2xl font-black mb-1 uppercase tracking-tight">PROMOCIÓN DE AL CHESSE</h4>
+          <p class="text-sm sm:text-base text-gray-300 font-medium mb-3">
+            2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS + <span class="text-brand font-extrabold">DOS CHESSE SIMPLES GRATIS (sin papas)</span>
+          </p>
+          <div class="text-2xl font-black text-brand">${formatCurrency(20000)}</div>
+        </div>
+        <div class="relative z-10 flex-shrink-0 w-full md:w-auto">
+          <button onclick="addTodayPromoToCart()" class="w-full md:w-auto bg-brand hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md active:scale-95">
+            Añadir al Carrito
+          </button>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderPromoPopup() {
   if (!state.isPromoPopupOpen) {
-    if (checkPromoDay() && !state.hasClosedPromo) {
+    if ((checkPromoDay() || isTodayPromoActive()) && !state.hasClosedPromo) {
       return `
-        <button onclick="openPromoPopup()" class="fixed bottom-24 right-6 z-40 bg-brand text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center animate-bounce hover:scale-110 transition-transform">
+        <button onclick="openPromoPopup()" class="fixed bottom-24 right-6 z-40 bg-brand text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
           <i class="fas fa-percentage text-2xl"></i>
         </button>
       `;
     }
     return '';
+  }
+
+  if (isTodayPromoActive()) {
+    return `
+      <div class="fixed inset-0 z-[70] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closePromoPopup()"></div>
+        <div class="relative bg-black text-white w-full max-w-[450px] rounded-[2rem] shadow-2xl overflow-hidden fade-in border border-white/10 flex flex-col min-h-[500px]">
+          
+          <!-- Background Image with Blur -->
+          <div class="absolute inset-0 bg-cover bg-center filter blur-[3px] brightness-[0.3]" style="background-image: url('imagenes/promo_today.jpg');"></div>
+          
+          <!-- Dark Overlay for Contrast -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+          <!-- Content -->
+          <div class="relative z-10 p-8 flex flex-col h-full justify-between items-center text-center">
+            <div class="absolute top-4 right-4">
+              <button onclick="closePromoPopup()" class="bg-white/10 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand transition-colors">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <div class="w-full mt-4">
+              <span class="bg-brand/20 text-brand text-xs font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-brand/30 mb-4 inline-block">SÓLO POR HOY</span>
+              <h2 class="font-serif text-3xl font-black tracking-tight text-white mb-2 uppercase">PROMOCIÓN DE AL CHESSE</h2>
+              <div class="w-20 h-1 bg-brand mx-auto my-3"></div>
+            </div>
+            
+            <div class="my-4 space-y-3.5 text-center w-full bg-black/40 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+              <div class="flex flex-col items-center justify-center">
+                <span class="text-base font-bold text-gray-200">2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS</span>
+              </div>
+              <div class="flex flex-col items-center justify-center bg-brand/10 p-2.5 rounded-lg border border-brand/20">
+                <span class="text-base font-extrabold text-brand">DOS CHESSE SIMPLES GRATIS (sin papas)</span>
+              </div>
+            </div>
+
+            <div class="w-full mb-2">
+              <div class="mb-4">
+                <span class="text-gray-400 text-xs font-bold uppercase tracking-widest block mb-1">Precio Especial</span>
+                <span class="text-4xl font-black text-white tracking-tight">${formatCurrency(20000)}</span>
+              </div>
+
+              <button onclick="addTodayPromoToCart(); closePromoPopup();" class="w-full bg-brand text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-orange-600 transition-colors text-lg flex items-center justify-center gap-2 mb-2">
+                <i class="fas fa-shopping-bag"></i> Añadir al Carrito
+              </button>
+              
+              <button onclick="closePromoPopup()" class="w-full text-xs font-black text-gray-400 uppercase tracking-widest text-center hover:text-white transition-colors py-2">
+                Ver Menú Completo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   return `
@@ -847,6 +958,7 @@ function renderApp() {
     ${renderNavbar()}
     ${renderHero()}
     <main class="container mx-auto px-4 max-w-4xl py-12">
+      ${renderTodayPromo()}
       ${renderWeeklyPromos()}
       ${renderCategories()}
     </main>
