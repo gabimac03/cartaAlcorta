@@ -455,7 +455,7 @@ function renderHero() {
   return `
     <header class="text-center pt-16 pb-8 px-4 relative flex flex-col items-center justify-center">
       ${renderStopSignLogo()}
-      <h2 class="stroke-heading text-5xl md:text-7xl mb-3 rotate-[-1deg] tracking-wider select-none">ALCORTA</h2>
+      <h2 class="stroke-heading text-5xl md:text-7xl mb-3 rotate-[-1deg] tracking-wider select-none">ALCORTA asdasdsad</h2>
       <p class="text-black font-marker uppercase tracking-widest text-lg md:text-xl bg-[#f5d033] px-5 py-2 rounded-xl border-2 border-black rotate-[1.5deg] shadow-lg">
         LOMOS & BURGERS
       </p>
