@@ -1,98 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Carta online de ALCORTA Lomos & Burgers. Armá tu pedido y envialo por WhatsApp."
+    />
+    <meta name="theme-color" content="#0b0b0b" />
+    <title>ALCORTA | Lomos & Burgers</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="logo-32.png" sizes="32x32" />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="logo-64.png" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="ALCORTA, inicio">
+        <span>ALCORTA</span>
+        <small>Lomos &amp; Burgers</small>
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#promos">Promos</a>
+        <a href="#burgers">Burgers</a>
+        <a href="#lomos">Lomos</a>
+        <a href="#papas">Papas</a>
+        <a href="#bebidas">Bebidas</a>
+      </nav>
+      <button class="cart-trigger" id="cartTrigger" type="button">
+        <span>Pedido</span>
+        <b id="headerCartCount">0</b>
+      </button>
+    </header>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALCORTA — Panel de Pedidos</title>
-  <meta name="description" content="ALCORTA Lomo & Burger. Take Away Premium en Mendoza.">
-  <link rel="icon" type="image/x-icon" href="logo.ico?v=1">
-  <link rel="icon" type="image/png" href="logo-32.png?v=1" sizes="32x32">
-  <link rel="icon" type="image/png" href="logo-64.png?v=1" sizes="64x64">
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
-  <link rel="apple-touch-icon" href="logo-64.png?v=1">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;700&family=Permanent+Marker&family=Playfair+Display:wght@700;900&display=swap"
-    rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="index.css?v=3" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: '#E65100',
-            bgmain: '#F4F4F5',
-            bgcard: '#FFFFFF',
-            textmain: '#18181B',
-            textmuted: '#52525B',
-            borderlight: '#E4E4E7'
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'serif']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    /* Transiciones suaves */
-    .fade-in {
-      animation: fadeIn 0.3s ease-in-out;
-    }
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-copy">
+          <p class="kicker">Hecho al momento · Mendoza</p>
+          <h1>El antojo empieza acá.</h1>
+          <p class="hero-text">
+            Lomos gigantes, smash burgers y promos para compartir.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#carta">Ver la carta</a>
+            <a
+              class="button button-secondary"
+              href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pedir por WhatsApp
+            </a>
+          </div>
+          <div class="hero-location"><i></i>Mendoza · Retiro y delivery</div>
+        </div>
+        <div class="hero-food" aria-label="Burger y lomo de ALCORTA">
+          <figure class="hero-burger">
+            <img src="imagenes/americanBurg.jpg" alt="AmericaBurg de ALCORTA" />
+          </figure>
+          <figure class="hero-lomo">
+            <img src="imagenes/lomoAmericano.jpg" alt="Lomo Americano de ALCORTA" />
+          </figure>
+          <span class="hero-stamp">Fuego<br />real</span>
+        </div>
+      </section>
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
+      <section class="section promos-section" id="promos">
+        <div class="section-intro">
+          <p class="kicker">Para compartir — o no</p>
+          <h2>Promos que resuelven la noche.</h2>
+        </div>
+        <div class="product-grid promo-grid" id="promosGrid"></div>
+      </section>
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+      <section class="section menu-intro-section" id="carta">
+        <div class="section-intro menu-intro">
+          <div>
+            <p class="kicker">Carta completa</p>
+            <h2>Elegí tu próximo antojo.</h2>
+          </div>
+          <p>
+            Seleccioná el tamaño o sabor, agregalo al pedido y envianos todo por
+            WhatsApp.
+          </p>
+        </div>
+      </section>
 
-    .cart-overlay {
-      backdrop-filter: blur(4px);
-      transition: opacity 0.3s;
-    }
+      <section class="full-menu" id="fullMenu" aria-label="Carta completa"></section>
 
-    .cart-sidebar {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+      <section class="locations-section" id="ubicaciones">
+        <div class="location-heading">
+          <p class="kicker">Dos puntos, el mismo fuego</p>
+          <h2>Elegí tu sucursal.</h2>
+        </div>
+        <div class="location-grid">
+          <a
+            class="location-card"
+            href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>01</span>
+            <div>
+              <small>Dorrego</small>
+              <h3>Alem 300</h3>
+              <p>Abrir en Google Maps ↗</p>
+            </div>
+          </a>
+          <a
+            class="location-card"
+            href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>02</span>
+            <div>
+              <small>Godoy Cruz</small>
+              <h3>Figueroa Alcorta 1304</h3>
+              <p>Abrir en Google Maps ↗</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
 
-    .translate-x-full {
-      transform: translateX(100%);
-    }
+    <footer>
+      <a class="brand" href="#inicio">
+        <span>ALCORTA</span>
+        <small>Lomos &amp; Burgers</small>
+      </a>
+      <p>Take Away · Mendoza</p>
+      <a
+        href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
+        target="_blank"
+        rel="noreferrer"
+      >
+        WhatsApp · 261 709 4467
+      </a>
+    </footer>
 
-    .translate-x-0 {
-      transform: translateX(0);
-    }
+    <button class="floating-cart" id="floatingCart" type="button">
+      <span>Ver pedido</span>
+      <b id="floatingCartCount">0</b>
+    </button>
 
-    /* Scrollbars invisibles o estilizados */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
+    <div class="cart-backdrop" id="cartOverlay" hidden></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Tu pedido" aria-hidden="true">
+      <div class="cart-head">
+        <div>
+          <p class="kicker">ALCORTA</p>
+          <h2>Tu pedido</h2>
+        </div>
+        <button id="closeCart" type="button" aria-label="Cerrar pedido">×</button>
+      </div>
+      <div class="cart-lines" id="cartLines"></div>
+      <div class="cart-foot">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cartTotal">$0</strong>
+        </div>
+        <button class="checkout-button" id="continueOrder" type="button" disabled>
+          Continuar pedido
+        </button>
+        <small>En el siguiente paso elegís la sucursal y modalidad.</small>
+      </div>
+    </aside>
 
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
+    <div class="checkout-backdrop" id="checkoutOverlay" hidden></div>
+    <section
+      class="checkout-modal"
+      id="checkoutModal"
+      aria-label="Finalizar pedido"
+      aria-hidden="true"
+    >
+      <button class="modal-close" id="closeCheckout" type="button" aria-label="Cerrar">×</button>
+      <form id="checkoutForm">
+        <p class="kicker">Último paso</p>
+        <h2>¿Dónde lo pedís?</h2>
 
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 10px;
-    }
-  </style>
-</head>
+        <div class="branch-options" aria-label="Elegir sucursal">
+          <label class="is-selected">
+            <input type="radio" name="branch" value="dorrego" checked />
+            <span>Alem 300, Dorrego</span>
+          </label>
+          <label>
+            <input type="radio" name="branch" value="godoyCruz" />
+            <span>F. Alcorta 1304, Godoy Cruz</span>
+          </label>
+        </div>
 
-<body class="bg-bgmain text-textmain font-sans antialiased overflow-x-hidden">
+        <div class="order-options" aria-label="Elegir modalidad">
+          <label class="is-selected">
+            <input type="radio" name="orderType" value="retiro" checked />
+            <span>Retiro en local</span>
+          </label>
+          <label id="deliveryOption">
+            <input type="radio" name="orderType" value="delivery" />
+            <span>Delivery</span>
+          </label>
+        </div>
 
-  <div id="app"></div>
+        <label class="field">
+          <span>Tu nombre *</span>
+          <input id="customerName" required placeholder="¿A nombre de quién?" />
+        </label>
 
-  <script src="index.js?v=2"></script>
-</body>
+        <div class="delivery-fields" id="deliveryFields" hidden>
+          <label class="field">
+            <span>Dirección *</span>
+            <input id="customerAddress" placeholder="Calle, número y localidad" />
+          </label>
+          <label class="field">
+            <span>Entre calles *</span>
+            <input id="streetCrossing" placeholder="Ej.: entre Colón y San Martín" />
+          </label>
+        </div>
 
+        <label class="field">
+          <span>Aclaraciones</span>
+          <textarea
+            id="orderNotes"
+            placeholder="Sin cebolla, retirar a las 22:30..."
+            rows="3"
+          ></textarea>
+        </label>
+        <div class="modal-total">
+          <span>Total estimado</span>
+          <strong id="checkoutTotal">$0</strong>
+        </div>
+        <button class="whatsapp-order" id="sendWhatsApp" type="submit">
+          Enviar pedido por WhatsApp
+        </button>
+      </form>
+    </section>
+
+    <div class="promo-backdrop" id="promoOverlay" hidden></div>
+    <section class="promo-modal" id="promoModal" aria-hidden="true">
+      <button class="modal-close" id="closePromo" type="button" aria-label="Cerrar">×</button>
+      <p class="kicker">Armá tu promo</p>
+      <h2 id="promoModalTitle">Elegí las 2 burgers</h2>
+      <p class="promo-help" id="promoModalHelp"></p>
+      <div class="promo-selection" id="promoSelection"></div>
+      <div class="promo-choice-grid" id="promoChoices"></div>
+      <button class="checkout-button" id="confirmPromo" type="button" disabled>
+        Agregar promo al pedido
+      </button>
+    </section>
+
+    <script src="index.js"></script>
+  </body>
 </html>

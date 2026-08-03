@@ -1,1065 +1,677 @@
-// ==========================================
-// ALCORTA - SPA & SISTEMA DE PEDIDOS
-// ==========================================
-
 const WHATSAPP_NUMBERS = {
-  dorrego: "2617094467",
-  godoyCruz: "2617094474"
+  dorrego: "5492617094467",
+  godoyCruz: "5492617094474",
 };
 
-const CATALOG = [
+const BRANCHES = {
+  dorrego: "Alem 300, Dorrego",
+  godoyCruz: "Figueroa Alcorta 1304, Godoy Cruz",
+};
+
+const money = (value) => `$${Number(value).toLocaleString("es-AR")}`;
+
+const promos = [
   {
-    id: 'promos',
-    title: 'Promociones Especiales',
-    items: [
-      { id: 'p1', name: 'Promoción 1', desc: '2 Lomos Alcorta + Papas Clásicas', price: 20000 },
-      { id: 'p2', name: 'Promoción 2', desc: '2 Lomos Completos + Papas Clásicas', price: 24000 },
-      { id: 'p3', name: 'Promoción 3', desc: '2 Lomos Criollos + Papas Clásicas', price: 26000 },
-      { id: 'p4', name: 'Promoción 4', desc: '2 Lomos Americanos + Papas Clásicas', price: 28000 },
-      { id: 'p5', name: 'Promoción 5', desc: '2 Lomos Alcorta XL + Papas Clásicas', price: 30000 },
-      { id: 'p6', name: 'Promoción 6', desc: '2 Hamburguesas Simples + Papas Clásicas', price: 19000 },
-      { id: 'p7', name: 'Promoción 7', desc: '2 Hamburguesas Dobles + Papas Clásicas', price: 22000 },
-      { id: 'p8', name: 'Promoción 8', desc: '2 Hamburguesas Triples + Papas Clásicas', price: 25000 },
-    ]
+    id: "promo-alcorta",
+    eyebrow: "PROMO 01",
+    name: "Promoción Alcorta",
+    description: "2 Lomos Alcorta + papas clásicas.",
+    image: "imagenes/lomoAlcorta.jpeg",
+    variants: [{ label: "Promo", price: 20000 }],
   },
   {
-    id: 'burgers',
-    title: 'Burgers',
-    items: [
-      {
-        id: 'b1', name: 'ChesseBurg', desc: 'Pan · Carne · Kétchup · Cebolla · Cheddar', image: 'imagenes/chesseBurg.jpg',
-        variants: [{ name: 'Simple', price: 10000 }, { name: 'Doble', price: 12000 }, { name: 'Triple', price: 13500 }]
-      },
-      {
-        id: 'b2', name: 'AndesBurg', desc: 'Pan · Carne · Lechuga · Tomate · Mayo de Ajo · Huevo · Cheddar', image: 'imagenes/andesBurg.jpg',
-        variants: [{ name: 'Simple', price: 10500 }, { name: 'Doble', price: 12500 }, { name: 'Triple', price: 14500 }]
-      },
-      {
-        id: 'b3', name: 'AmericaBurg', desc: 'Pan · Carne · Barbacoa · Cebolla Caramelizada · Panceta · Cheddar · Salsa Thousand Island', image: 'imagenes/americanBurg.jpg',
-        variants: [{ name: 'Simple', price: 11000 }, { name: 'Doble', price: 13000 }, { name: 'Triple', price: 14500 }]
-      },
-      {
-        id: 'b4', name: 'MexiBurg', desc: 'Pan · Carne · Palta · Salteado de Morrones · Mayo de Ajo · Huevo · Cheddar', image: 'imagenes/mexiBurg.jpg',
-        variants: [{ name: 'Simple', price: 11000 }, { name: 'Doble', price: 13000 }, { name: 'Triple', price: 14500 }]
-      }
-    ],
-    note: "Todas las burgers vienen con papas"
+    id: "promo-completa",
+    eyebrow: "PROMO 02",
+    name: "Promoción Completa",
+    description: "2 Lomos Completos + papas clásicas.",
+    image: "imagenes/lomoCompleto.jpg",
+    variants: [{ label: "Promo", price: 24000 }],
   },
   {
-    id: 'lomos',
-    title: 'Lomos',
-    items: [
-      { id: 'l1', name: 'Lomo Alcorta', desc: 'Pan · Carne · Tomate · Lechuga · Mayonesa Alcorta', image: 'imagenes/lomoAlcorta.jpeg', price: 12000 },
-      { id: 'l2', name: 'Lomo Alcorta XL', desc: 'Pan · Carne XL · Tomate · Lechuga · Mayonesa Alcorta', image: 'imagenes/lomoAlcorta.jpeg', price: 16000 },
-      { id: 'l3', name: 'Lomo Completo', desc: 'Pan · Carne · Lechuga · Tomate · Huevo · Jamón · Queso · Mayonesa Alcorta', image: 'imagenes/lomoCompleto.jpg', price: 14000 },
-      { id: 'l4', name: 'Lomo Criollo', desc: 'Pan · Carne · Salsa Criolla · Provoleta · Mayo de Ajo · Morrones', image: 'imagenes/lomoCriollo.jpeg', price: 15000 },
-      { id: 'l5', name: 'Lomo Americano', desc: 'Pan · Carne · Barbacoa · Cebolla Caramelizada · Panceta · Cheddar', image: 'imagenes/lomoAmericano.jpg', price: 16000 }
-    ],
-    note: "Todos los lomos vienen con papas"
+    id: "promo-criolla",
+    eyebrow: "PROMO 03",
+    name: "Promoción Criolla",
+    description: "2 Lomos Criollos + papas clásicas.",
+    image: "imagenes/lomoCriollo.jpeg",
+    variants: [{ label: "Promo", price: 26000 }],
   },
   {
-    id: 'papas',
-    title: 'Papas',
-    items: [
-      { id: 'pa1', name: 'Papas Clásicas', desc: 'Papas fritas tradicionales', image: 'imagenes/papasClasicas.jpeg', price: 5000 },
-      { id: 'pa2', name: 'Papas Gramajo', desc: 'Papa · Cebolla de Verdeo · Huevo', image: 'imagenes/papasGramajo.jpeg', price: 6000 },
-      { id: 'pa3', name: 'Papas Americanas', desc: 'Papa · Cheddar · Panceta', image: 'imagenes/papasAmericanas.jpeg', price: 6500 }
-    ]
+    id: "promo-americana",
+    eyebrow: "PROMO 04",
+    name: "Promoción Americana",
+    description: "2 Lomos Americanos + papas clásicas.",
+    image: "imagenes/lomoAmericano.jpg",
+    variants: [{ label: "Promo", price: 28000 }],
   },
   {
-    id: 'agregados',
-    title: 'Agregados',
-    items: [
-      { id: 'a1', name: 'Cheddar x2 (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 3000 },
-      { id: 'a2', name: 'Cheddar + Panceta (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 3000 },
-      { id: 'a3', name: 'Doble Carne (debes seleccionar dos veces para los dos lomos)', desc: 'El doble carne no entra en las promociones, solo para los lomos individuales.', price: 4000 },
-      { id: 'a4', name: 'Dips de Salsas ', price: 500 },
-      { id: 'a5', name: 'Medallón Extra (debes seleccionar dos veces para las dos burgers o dos lomos)', price: 2500 },
-      { id: 'a6', name: 'Convertí tus Papas (en vez de dos cubetas, se entrega bandeja convertida)', price: 2000 }
-    ]
+    id: "promo-alcorta-xl",
+    eyebrow: "PROMO 05",
+    name: "Promoción Alcorta XL",
+    description: "2 Lomos Alcorta XL + papas clásicas.",
+    image: "imagenes/lomoAlcorta.jpeg",
+    variants: [{ label: "Promo", price: 30000 }],
   },
   {
-    id: 'bebidas',
-    title: 'Bebidas Sin Alcohol',
-    items: [
-      {
-        id: 'be1', name: 'Gaseosa 500ml', image: 'imagenes/sprite-500.jpg', price: 3000,
-        subproducts: ['Sprite', 'Fanta', 'Coca-Cola', 'Coca-Cola Zero']
-      },
-      {
-        id: 'be2', name: 'Gaseosa 1.5lts', image: 'imagenes/sprite-15.jpg', price: 4300,
-        subproducts: ['Sprite', 'Fanta', 'Coca-Cola']
-      },
-      {
-        id: 'be3', name: 'Agua Saborizada 500ml', image: 'imagenes/manzana-500.jpg', price: 3000,
-        subproducts: ['Agua', 'Manzana', 'Pomelo']
-      }
-    ]
+    id: "promo-burger-simple",
+    eyebrow: "PROMO 06",
+    name: "Burger Simple",
+    description: "2 hamburguesas simples + papas clásicas.",
+    image: "imagenes/chesseBurg.jpg",
+    variants: [{ label: "Promo", price: 19000 }],
+    burgerChoice: "Simple",
   },
   {
-    id: 'alcohol',
-    title: 'Bebidas Con Alcohol',
-    items: [
-      {
-        id: 'al1', name: 'Lata 475ml', image: 'imagenes/roja-475.jpg', price: 3000,
-        subproducts: ['Roja', 'Negra', 'Rubia', 'IPA']
-      },
-      {
-        id: 'al2', name: 'Latón 750ml', image: 'imagenes/rubia-710.jpg', price: 3800,
-        subproducts: ['Rubia']
-      }
-    ]
-  }
+    id: "promo-burger-doble",
+    eyebrow: "PROMO 07",
+    name: "Burger Doble",
+    description: "2 hamburguesas dobles + papas clásicas.",
+    image: "imagenes/andesBurg.jpg",
+    variants: [{ label: "Promo", price: 22000 }],
+    burgerChoice: "Doble",
+  },
+  {
+    id: "promo-burger-triple",
+    eyebrow: "PROMO 08",
+    name: "Burger Triple",
+    description: "2 hamburguesas triples + papas clásicas.",
+    image: "imagenes/americanBurg.jpg",
+    variants: [{ label: "Promo", price: 25000 }],
+    burgerChoice: "Triple",
+  },
 ];
 
-// STATE MANAGEMENT
-const state = {
-  cart: [],
-  isCartOpen: false,
-  isCheckoutOpen: false,
-  isPromoModalOpen: false,
-  currentPromoItem: null,
-  tempPromoSelections: [], // ['Nombre Burger 1', 'Nombre Burger 2']
-  selections: {}, // { itemId: 'Variante o Sabor seleccionado' }
-  selectedBranch: 'dorrego',
-  orderType: 'retiro',
-  isPromoPopupOpen: false,
-  hasClosedPromo: false
+const weeklyPromos = [
+  {
+    id: "weekly-chesse",
+    eyebrow: "MAR · MIÉ · JUE",
+    name: "Promo Chesse",
+    description: "2 ChesseBurg iguales.",
+    image: "imagenes/chesseBurg.jpg",
+    variants: [{ label: "Promo", price: 15000 }],
+  },
+  {
+    id: "weekly-triples",
+    eyebrow: "MAR · MIÉ · JUE",
+    name: "Promo Triples",
+    description: "2 burgers triples a elección, iguales o distintas.",
+    image: "imagenes/andesBurg.jpg",
+    variants: [{ label: "Promo", price: 22000 }],
+    burgerChoice: "Triple",
+  },
+];
+
+const burgers = [
+  {
+    id: "chesseburg",
+    name: "ChesseBurg",
+    description: "Pan, carne, kétchup, cebolla y cheddar. Incluye papas.",
+    image: "imagenes/chesseBurg.jpg",
+    variants: [
+      { label: "Simple", price: 10000 },
+      { label: "Doble", price: 12000 },
+      { label: "Triple", price: 13500 },
+    ],
+  },
+  {
+    id: "andesburg",
+    name: "AndesBurg",
+    description: "Carne, lechuga, tomate, mayo de ajo, huevo y cheddar. Incluye papas.",
+    image: "imagenes/andesBurg.jpg",
+    variants: [
+      { label: "Simple", price: 10500 },
+      { label: "Doble", price: 12500 },
+      { label: "Triple", price: 14500 },
+    ],
+  },
+  {
+    id: "americaburg",
+    name: "AmericaBurg",
+    description: "Barbacoa, cebolla caramelizada, panceta, cheddar y salsa Thousand Island. Incluye papas.",
+    image: "imagenes/americanBurg.jpg",
+    variants: [
+      { label: "Simple", price: 11000 },
+      { label: "Doble", price: 13000 },
+      { label: "Triple", price: 14500 },
+    ],
+  },
+  {
+    id: "mexiburg",
+    name: "MexiBurg",
+    description: "Carne, palta, morrones, mayo de ajo, huevo y cheddar. Incluye papas.",
+    image: "imagenes/mexiBurg.jpg",
+    variants: [
+      { label: "Simple", price: 11000 },
+      { label: "Doble", price: 13000 },
+      { label: "Triple", price: 14500 },
+    ],
+  },
+];
+
+const lomos = [
+  {
+    id: "lomo-alcorta",
+    name: "Lomo Alcorta",
+    description: "Carne, tomate, lechuga y mayonesa Alcorta. Incluye papas.",
+    image: "imagenes/lomoAlcorta.jpeg",
+    variants: [{ label: "Unidad", price: 12000 }],
+  },
+  {
+    id: "lomo-alcorta-xl",
+    name: "Lomo Alcorta XL",
+    description: "Carne XL, tomate, lechuga y mayonesa Alcorta. Incluye papas.",
+    image: "imagenes/lomoAlcorta.jpeg",
+    variants: [{ label: "Unidad", price: 16000 }],
+  },
+  {
+    id: "lomo-completo",
+    name: "Lomo Completo",
+    description: "Carne, lechuga, tomate, huevo, jamón, queso y mayonesa Alcorta. Incluye papas.",
+    image: "imagenes/lomoCompleto.jpg",
+    variants: [{ label: "Unidad", price: 14000 }],
+  },
+  {
+    id: "lomo-criollo",
+    name: "Lomo Criollo",
+    description: "Carne, salsa criolla, provoleta, mayo de ajo y morrones. Incluye papas.",
+    image: "imagenes/lomoCriollo.jpeg",
+    variants: [{ label: "Unidad", price: 15000 }],
+  },
+  {
+    id: "lomo-americano",
+    name: "Lomo Americano",
+    description: "Carne, barbacoa, cebolla caramelizada, panceta y cheddar. Incluye papas.",
+    image: "imagenes/lomoAmericano.jpg",
+    variants: [{ label: "Unidad", price: 16000 }],
+  },
+];
+
+const papas = [
+  {
+    id: "papas-clasicas",
+    name: "Papas Clásicas",
+    description: "Papas fritas tradicionales, doradas y crocantes.",
+    image: "imagenes/papasClasicas.jpeg",
+    variants: [{ label: "Porción", price: 5000 }],
+  },
+  {
+    id: "papas-gramajo",
+    name: "Papas Gramajo",
+    description: "Papas, cebolla de verdeo y huevo.",
+    image: "imagenes/papasGramajo.jpeg",
+    variants: [{ label: "Porción", price: 6000 }],
+  },
+  {
+    id: "papas-americanas",
+    name: "Papas Americanas",
+    description: "Papas con cheddar y panceta.",
+    image: "imagenes/papasAmericanas.jpeg",
+    variants: [{ label: "Porción", price: 6500 }],
+  },
+];
+
+const extras = [
+  {
+    id: "extra-cheddar",
+    name: "Cheddar x2",
+    description: "Seleccioná dos veces si es para dos burgers o lomos.",
+    variants: [{ label: "Extra", price: 3000 }],
+  },
+  {
+    id: "extra-panceta",
+    name: "Cheddar + Panceta",
+    description: "Seleccioná dos veces si es para dos burgers o lomos.",
+    variants: [{ label: "Extra", price: 3000 }],
+  },
+  {
+    id: "extra-doble-carne",
+    name: "Doble Carne",
+    description: "Sólo para lomos individuales; no entra en promociones.",
+    variants: [{ label: "Extra", price: 4000 }],
+  },
+  {
+    id: "extra-dip",
+    name: "Dip de Salsa",
+    description: "Elegí tu salsa favorita.",
+    variants: [{ label: "Extra", price: 500 }],
+  },
+  {
+    id: "extra-medallon",
+    name: "Medallón Extra",
+    description: "Seleccioná dos veces si es para dos burgers.",
+    variants: [{ label: "Extra", price: 2500 }],
+  },
+  {
+    id: "extra-papas",
+    name: "Convertí tus Papas",
+    description: "En vez de dos cubetas, se entrega una bandeja convertida.",
+    variants: [{ label: "Extra", price: 2000 }],
+  },
+];
+
+const bebidas = [
+  {
+    id: "gaseosa-500",
+    name: "Gaseosa 500 ml",
+    description: "Sprite, Fanta, Coca-Cola o Coca-Cola Zero.",
+    image: "imagenes/coca-500.jpg",
+    variants: [
+      { label: "Coca-Cola", price: 3000 },
+      { label: "Coca-Cola Zero", price: 3000 },
+      { label: "Sprite", price: 3000 },
+      { label: "Fanta", price: 3000 },
+    ],
+  },
+  {
+    id: "gaseosa-15",
+    name: "Gaseosa 1,5 l",
+    description: "Sprite, Fanta o Coca-Cola.",
+    image: "imagenes/coca-15.jpg",
+    variants: [
+      { label: "Coca-Cola", price: 4300 },
+      { label: "Sprite", price: 4300 },
+      { label: "Fanta", price: 4300 },
+    ],
+  },
+  {
+    id: "agua-500",
+    name: "Agua saborizada 500 ml",
+    description: "Agua, manzana o pomelo.",
+    image: "imagenes/manzana-500.jpg",
+    variants: [
+      { label: "Agua", price: 3000 },
+      { label: "Manzana", price: 3000 },
+      { label: "Pomelo", price: 3000 },
+    ],
+  },
+];
+
+const alcohol = [
+  {
+    id: "cerveza-475",
+    name: "Cerveza 473 ml",
+    description: "Roja, negra, rubia o IPA.",
+    image: "imagenes/ipa-475.jpg",
+    variants: [
+      { label: "IPA", price: 3000 },
+      { label: "Rubia", price: 3000 },
+      { label: "Roja", price: 3000 },
+      { label: "Negra", price: 3000 },
+    ],
+  },
+  {
+    id: "laton-710",
+    name: "Latón 710 ml",
+    description: "Cerveza rubia bien fría.",
+    image: "imagenes/rubia-710.jpg",
+    variants: [{ label: "Rubia", price: 3800 }],
+  },
+];
+
+const menuGroups = [
+  { id: "burgers", label: "Burgers", description: "Elegí simple, doble o triple.", items: burgers },
+  { id: "lomos", label: "Lomos", description: "El clásico mendocino, bien cargado.", items: lomos },
+  { id: "papas", label: "Papas", description: "Para acompañar o compartir.", items: papas },
+  { id: "extras", label: "Agregados", description: "Hacelo exactamente como te gusta.", items: extras },
+  { id: "bebidas", label: "Bebidas", description: "Algo fresco para completar.", items: bebidas },
+  { id: "alcohol", label: "Cervezas", description: "Bien frías para acompañar.", items: alcohol },
+];
+
+const isWeeklyPromoDay = () => {
+  const day = new Date().getDay();
+  return day >= 2 && day <= 4;
 };
 
-// UTILS
-const formatCurrency = (amt) => "$" + amt.toLocaleString('es-AR');
-const getPrice = (item) => {
-  if (item.price) return item.price;
-  if (item.variants && state.selections[item.id]) {
-    const v = item.variants.find(x => x.name === state.selections[item.id]);
-    return v ? v.price : item.variants[0].price;
+const visiblePromos = isWeeklyPromoDay() ? [...weeklyPromos, ...promos] : promos;
+const products = [...visiblePromos, ...menuGroups.flatMap((group) => group.items)];
+const selectedVariants = new Map();
+let cart = [];
+let pendingPromo = null;
+let promoSelections = [];
+
+const promosGrid = document.querySelector("#promosGrid");
+const fullMenu = document.querySelector("#fullMenu");
+const cartDrawer = document.querySelector("#cartDrawer");
+const cartOverlay = document.querySelector("#cartOverlay");
+const checkoutModal = document.querySelector("#checkoutModal");
+const checkoutOverlay = document.querySelector("#checkoutOverlay");
+const promoModal = document.querySelector("#promoModal");
+const promoOverlay = document.querySelector("#promoOverlay");
+
+function renderProductCard(product) {
+  const image = product.image
+    ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
+    : '<div class="photo-placeholder">ALCORTA</div>';
+  const eyebrow = product.eyebrow ? `<span class="photo-label">${product.eyebrow}</span>` : "";
+  const variants = product.variants.length > 1
+    ? `<div class="variant-list" aria-label="Elegir opción de ${product.name}">
+        ${product.variants.map((variant, index) => `
+          <button class="${index === 0 ? "is-active" : ""}" type="button" data-action="variant" data-index="${index}">${variant.label}</button>
+        `).join("")}
+      </div>`
+    : "";
+
+  return `
+    <article class="product-card" data-product-id="${product.id}">
+      <div class="product-photo">
+        ${image}
+        ${eyebrow}
+      </div>
+      <div class="product-body">
+        <div class="product-heading">
+          <h3>${product.name}</h3>
+          <strong data-role="price">${money(product.variants[0].price)}</strong>
+        </div>
+        <p>${product.description}</p>
+        ${variants}
+        <button class="add-button" type="button" data-action="add">
+          Agregar al pedido <span>+</span>
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function renderMenu() {
+  promosGrid.innerHTML = visiblePromos.map(renderProductCard).join("");
+  fullMenu.innerHTML = menuGroups.map((group, index) => `
+    <div class="menu-group" id="${group.id}">
+      <div class="group-title">
+        <span>${String(index + 1).padStart(2, "0")}</span>
+        <h2>${group.label}</h2>
+        <p>${group.description}</p>
+      </div>
+      <div class="product-grid">
+        ${group.items.map(renderProductCard).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function getProduct(productId) {
+  return products.find((product) => product.id === productId);
+}
+
+function addLine(product, variant, customLabel = "") {
+  const label = customLabel || variant.label;
+  const key = `${product.id}-${label}`;
+  const existing = cart.find((item) => item.key === key);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ key, name: product.name, variant: label, price: variant.price, quantity: 1 });
   }
-  return item.variants ? item.variants[0].price : 0;
-};
-const getSubproduct = (item) => {
-  if (item.variants && state.selections[item.id]) return state.selections[item.id];
-  if (item.variants) return item.variants[0].name;
-  if (item.subproducts && state.selections[item.id]) return state.selections[item.id];
-  if (item.subproducts) return item.subproducts[0];
-  return null;
-};
+  renderCart();
+  openCart();
+}
 
-// INITIALIZE OFF-DEFAULTS
-CATALOG.forEach(cat => {
-  cat.items.forEach(item => {
-    if (item.variants) state.selections[item.id] = item.variants[0].name;
-    if (item.subproducts) state.selections[item.id] = item.subproducts[0];
+function addToCart(product, variant) {
+  if (product.burgerChoice) {
+    openPromoChooser(product);
+    return;
+  }
+  addLine(product, variant);
+}
+
+function changeQuantity(key, delta) {
+  cart = cart
+    .map((item) => item.key === key ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item)
+    .filter((item) => item.quantity > 0);
+  renderCart();
+}
+
+function cartTotal() {
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+function cartCount() {
+  return cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+function renderCart() {
+  const count = cartCount();
+  const total = cartTotal();
+  document.querySelector("#headerCartCount").textContent = count;
+  document.querySelector("#floatingCartCount").textContent = count;
+  document.querySelector("#cartTotal").textContent = money(total);
+  document.querySelector("#checkoutTotal").textContent = money(total);
+  document.querySelector("#continueOrder").disabled = cart.length === 0;
+
+  const lines = document.querySelector("#cartLines");
+  if (!cart.length) {
+    lines.innerHTML = `
+      <div class="empty-cart">
+        <span>01</span>
+        <h3>Tu pedido está vacío.</h3>
+        <p>Elegí un favorito y lo preparamos al momento.</p>
+      </div>
+    `;
+    return;
+  }
+
+  lines.innerHTML = cart.map((item) => `
+    <div class="cart-line">
+      <div>
+        <strong>${item.name}</strong>
+        <small>${item.variant} · ${money(item.price)}</small>
+      </div>
+      <div class="quantity">
+        <button type="button" data-cart-action="decrease" data-key="${item.key}" aria-label="Quitar uno">−</button>
+        <span>${item.quantity}</span>
+        <button type="button" data-cart-action="increase" data-key="${item.key}" aria-label="Agregar uno">+</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function lockBody() {
+  const open = [cartDrawer, checkoutModal, promoModal].some((element) => element.classList.contains("is-open"));
+  document.body.classList.toggle("is-locked", open);
+}
+
+function openLayer(element, overlay) {
+  overlay.hidden = false;
+  element.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => {
+    overlay.classList.add("is-open");
+    element.classList.add("is-open");
+    lockBody();
   });
+}
+
+function closeLayer(element, overlay) {
+  overlay.classList.remove("is-open");
+  element.classList.remove("is-open");
+  element.setAttribute("aria-hidden", "true");
+  window.setTimeout(() => {
+    overlay.hidden = true;
+    lockBody();
+  }, 240);
+}
+
+function openCart() {
+  openLayer(cartDrawer, cartOverlay);
+}
+
+function closeCart() {
+  closeLayer(cartDrawer, cartOverlay);
+}
+
+function openCheckout() {
+  closeCart();
+  window.setTimeout(() => openLayer(checkoutModal, checkoutOverlay), 160);
+}
+
+function closeCheckout() {
+  closeLayer(checkoutModal, checkoutOverlay);
+}
+
+function openPromoChooser(product) {
+  pendingPromo = product;
+  promoSelections = [];
+  renderPromoChooser();
+  openLayer(promoModal, promoOverlay);
+}
+
+function closePromoChooser() {
+  closeLayer(promoModal, promoOverlay);
+  pendingPromo = null;
+  promoSelections = [];
+}
+
+function renderPromoChooser() {
+  if (!pendingPromo) return;
+  const burgerNames = burgers.map((burger) => burger.name);
+  document.querySelector("#promoModalTitle").textContent = `Elegí las 2 burgers ${pendingPromo.burgerChoice.toLowerCase()}`;
+  document.querySelector("#promoModalHelp").textContent = "Pueden ser iguales o distintas.";
+  document.querySelector("#promoSelection").innerHTML = [0, 1].map((index) => {
+    const selected = promoSelections[index];
+    return selected
+      ? `<button type="button" data-remove-promo="${index}" aria-label="Quitar ${selected}"><strong>${selected}</strong><span>×</span></button>`
+      : `<div><span>${index + 1}</span><small>Elegí una</small></div>`;
+  }).join("");
+  document.querySelector("#promoChoices").innerHTML = burgerNames.map((name) => `
+    <button type="button" data-promo-burger="${name}" ${promoSelections.length >= 2 ? "disabled" : ""}>
+      <span>${name}</span><b>+</b>
+    </button>
+  `).join("");
+  document.querySelector("#confirmPromo").disabled = promoSelections.length !== 2;
+}
+
+function confirmPromoSelection() {
+  if (!pendingPromo || promoSelections.length !== 2) return;
+  const label = `${pendingPromo.burgerChoice}: ${promoSelections.join(" + ")}`;
+  addLine(pendingPromo, pendingPromo.variants[0], label);
+  closePromoChooser();
+}
+
+function syncCheckoutOptions() {
+  const branch = document.querySelector('input[name="branch"]:checked').value;
+  const deliveryOption = document.querySelector("#deliveryOption");
+  if (branch === "godoyCruz") {
+    deliveryOption.hidden = true;
+    document.querySelector('input[name="orderType"][value="retiro"]').checked = true;
+  } else {
+    deliveryOption.hidden = false;
+  }
+
+  const orderType = document.querySelector('input[name="orderType"]:checked').value;
+  document.querySelector("#deliveryFields").hidden = orderType !== "delivery";
+  document.querySelectorAll(".branch-options label, .order-options label").forEach((label) => {
+    const input = label.querySelector("input");
+    label.classList.toggle("is-selected", input.checked);
+  });
+}
+
+function finishOrder(event) {
+  event.preventDefault();
+  if (!cart.length) return;
+
+  const branchId = document.querySelector('input[name="branch"]:checked').value;
+  const orderType = document.querySelector('input[name="orderType"]:checked').value;
+  const customerName = document.querySelector("#customerName").value.trim();
+  const address = document.querySelector("#customerAddress").value.trim();
+  const crossing = document.querySelector("#streetCrossing").value.trim();
+  const notes = document.querySelector("#orderNotes").value.trim();
+
+  if (!customerName) {
+    alert("Por favor completá tu nombre.");
+    return;
+  }
+  if (orderType === "delivery" && (!address || !crossing)) {
+    alert("Por favor completá la dirección y las entre calles.");
+    return;
+  }
+
+  const lines = cart.map((item) =>
+    `• ${item.quantity}x ${item.name} (${item.variant}) — ${money(item.price * item.quantity)}`
+  ).join("\n");
+
+  const message = [
+    "¡Hola ALCORTA! Quiero hacer este pedido:",
+    "",
+    lines,
+    "",
+    `Total estimado: ${money(cartTotal())}`,
+    `Sucursal: ${BRANCHES[branchId]}`,
+    `Modalidad: ${orderType === "delivery" ? "Delivery" : "Retiro en local"}`,
+    `Nombre: ${customerName}`,
+    orderType === "delivery" ? `Dirección: ${address}` : "",
+    orderType === "delivery" ? `Entre calles: ${crossing}` : "",
+    notes ? `Aclaraciones: ${notes}` : "",
+  ].filter(Boolean).join("\n");
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBERS[branchId]}?text=${encodeURIComponent(message)}`,
+    "_blank",
+    "noopener,noreferrer",
+  );
+}
+
+document.addEventListener("click", (event) => {
+  const variantButton = event.target.closest('[data-action="variant"]');
+  if (variantButton) {
+    const card = variantButton.closest(".product-card");
+    const product = getProduct(card.dataset.productId);
+    const index = Number(variantButton.dataset.index);
+    selectedVariants.set(product.id, index);
+    card.querySelectorAll('[data-action="variant"]').forEach((button) => button.classList.remove("is-active"));
+    variantButton.classList.add("is-active");
+    card.querySelector('[data-role="price"]').textContent = money(product.variants[index].price);
+    return;
+  }
+
+  const addButton = event.target.closest('[data-action="add"]');
+  if (addButton) {
+    const card = addButton.closest(".product-card");
+    const product = getProduct(card.dataset.productId);
+    const index = selectedVariants.get(product.id) ?? 0;
+    addToCart(product, product.variants[index]);
+    return;
+  }
+
+  const cartButton = event.target.closest("[data-cart-action]");
+  if (cartButton) {
+    changeQuantity(cartButton.dataset.key, cartButton.dataset.cartAction === "increase" ? 1 : -1);
+    return;
+  }
+
+  const promoButton = event.target.closest("[data-promo-burger]");
+  if (promoButton && promoSelections.length < 2) {
+    promoSelections.push(promoButton.dataset.promoBurger);
+    renderPromoChooser();
+    return;
+  }
+
+  const removePromoButton = event.target.closest("[data-remove-promo]");
+  if (removePromoButton) {
+    promoSelections.splice(Number(removePromoButton.dataset.removePromo), 1);
+    renderPromoChooser();
+  }
 });
 
-// PROMO POPUP LOGIC
-function isTodayPromoActive() {
-  const now = new Date();
-  return now.getFullYear() === 2026 && now.getMonth() === 5 && now.getDate() === 6;
-}
-
-function addTodayPromoToCart() {
-  const existingCartIndex = state.cart.findIndex(c => c.itemId === 'today_promo');
-  if (existingCartIndex > -1) {
-    state.cart[existingCartIndex].qty += 1;
-  } else {
-    state.cart.push({
-      id: Math.random().toString(36).substr(2, 9),
-      itemId: 'today_promo',
-      name: 'PROMOCIÓN DE AL CHESSE',
-      subproduct: '2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS + DOS CHESSE SIMPLES GRATIS (sin papas)',
-      price: 20000,
-      qty: 1
-    });
-  }
-  triggerRender();
-}
-
-function checkPromoDay() {
-  const day = new Date().getDay();
-  // Martes (2), Miércoles (3), Jueves (4)
-  return day >= 2 && day <= 4;
-}
-
-function initPromoPopup() {
-  if ((checkPromoDay() || isTodayPromoActive()) && !state.hasClosedPromo) {
-    state.isPromoPopupOpen = true;
-  }
-}
-
-function closePromoPopup() {
-  state.isPromoPopupOpen = false;
-  state.hasClosedPromo = true;
-  triggerRender();
-}
-
-function openPromoPopup() {
-  state.isPromoPopupOpen = true;
-  triggerRender();
-}
-
-function scrollPromo(dir) {
-  const container = document.getElementById('promo-carousel');
-  if (container) {
-    container.scrollBy({ left: dir * container.offsetWidth, behavior: 'smooth' });
-  }
-}
-
-// EVENT DISPATCHER
-function triggerRender() {
-  renderApp();
-}
-
-// ACTIONS
-function updateSelection(itemId, value) {
-  state.selections[itemId] = value;
-  triggerRender();
-}
-
-function updateBranch(branchId) {
-  state.selectedBranch = branchId;
-  if (branchId === 'godoyCruz') state.orderType = 'retiro';
-  triggerRender();
-}
-
-function updateOrderType(type) {
-  state.orderType = type;
-  triggerRender();
-}
-
-function openPromoModal(itemId) {
-  if (itemId === 'wp2') {
-    state.currentPromoItem = { id: 'wp2', name: 'PROMO TRIPLES', price: 22000 };
-  } else {
-    state.currentPromoItem = CATALOG.find(c => c.id === 'promos').items.find(i => i.id === itemId);
-  }
-  state.tempPromoSelections = [];
-  state.isPromoModalOpen = true;
-  triggerRender();
-}
-
-function selectPromoBurger(name) {
-  if (state.tempPromoSelections.length < 2) {
-    state.tempPromoSelections.push(name);
-  }
-  triggerRender();
-}
-
-function removePromoBurger(index) {
-  state.tempPromoSelections.splice(index, 1);
-  triggerRender();
-}
-
-function confirmPromo() {
-  if (state.tempPromoSelections.length < 2) {
-    alert("Por favor selecciona las 2 hamburguesas de tu promo");
-    return;
-  }
-
-  const item = state.currentPromoItem;
-  const subproduct = state.tempPromoSelections.join(" + ");
-
-  state.cart.push({
-    id: Math.random().toString(36).substr(2, 9),
-    itemId: item.id,
-    name: item.name,
-    subproduct: subproduct,
-    price: item.price,
-    qty: 1
-  });
-
-  state.isPromoModalOpen = false;
-  state.currentPromoItem = null;
-  state.tempPromoSelections = [];
-  triggerRender();
-}
-
-function addToCart(itemId, categoryId) {
-  if (['p6', 'p7', 'p8', 'wp2'].includes(itemId)) {
-    openPromoModal(itemId);
-    return;
-  }
-
-  let item;
-  if (categoryId === 'promos_semana') {
-    item = { id: 'wp1', name: 'PROMO CHESSE', price: 15000 };
-  } else {
-    const category = CATALOG.find(c => c.id === categoryId);
-    item = category.items.find(i => i.id === itemId);
-  }
-
-  const subproduct = getSubproduct(item);
-  const price = getPrice(item);
-
-  const existingCartIndex = state.cart.findIndex(c => c.itemId === itemId && c.subproduct === subproduct);
-
-  if (existingCartIndex > -1) {
-    state.cart[existingCartIndex].qty += 1;
-  } else {
-    state.cart.push({
-      id: Math.random().toString(36).substr(2, 9),
-      itemId: item.id,
-      name: item.name,
-      subproduct: subproduct,
-      price: price,
-      qty: 1
-    });
-  }
-
-  // Cart animation indicator on navbar could be added, but we strictly don't open the panel.
-  triggerRender();
-}
-
-function updateCartQty(cartId, delta) {
-  const index = state.cart.findIndex(c => c.id === cartId);
-  if (index === -1) return;
-
-  state.cart[index].qty += delta;
-  if (state.cart[index].qty <= 0) {
-    state.cart.splice(index, 1);
-  }
-  triggerRender();
-}
-
-function removeFromCart(cartId) {
-  state.cart = state.cart.filter(c => c.id !== cartId);
-  triggerRender();
-}
-
-function toggleCart(force) {
-  state.isCartOpen = force !== undefined ? force : !state.isCartOpen;
-  triggerRender();
-}
-
-function toggleCheckout(force) {
-  if (state.cart.length === 0) return;
-  state.isCheckoutOpen = force !== undefined ? force : !state.isCheckoutOpen;
-  triggerRender();
-}
-
-// SUBMIT VIA WHATSAPP
-function submitOrder(e) {
-  e.preventDefault();
-  const nameElement = document.getElementById('client-name');
-  const name = nameElement ? nameElement.value.trim() : "";
-  const addressField = document.getElementById('client-address');
-  const address = addressField ? addressField.value.trim() : "";
-  const crossingField = document.getElementById('client-street-crossing');
-  const crossing = crossingField ? crossingField.value.trim() : "";
-  const notesElement = document.getElementById('client-notes');
-  const notes = notesElement ? notesElement.value.trim() : "";
-
-  if (!name) {
-    alert("Por favor completá tu Nombre.");
-    return;
-  }
-
-  if (state.orderType === 'delivery' && (!address || !crossing)) {
-    alert("Por favor ingresa tu dirección y las entre calles para el delivery.");
-    return;
-  }
-
-  // Format WHATSAPP
-  const now = new Date();
-  const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-
-  let totalMonto = 0;
-  let lines = [];
-
-  state.cart.forEach(c => {
-    let subInfo = c.subproduct ? ` (${c.subproduct})` : "";
-    let lineTotal = c.price * c.qty;
-    totalMonto += lineTotal;
-    lines.push(`${c.qty} x ${c.name}${subInfo} -> ${formatCurrency(lineTotal)}`);
-  });
-
-  let msg = `*=======================*
-*NUEVO PEDIDO ALCORTA*
-*(${state.selectedBranch === 'dorrego' ? 'DORREGO' : 'GODOY CRUZ'})*
-*=======================*
-
-*HORA:* ${timeStr}
-*CLIENTE:* ${name}
-*MODALIDAD:* ${state.orderType === 'delivery' ? 'DELIVERY' : 'RETIRO EN LOCAL'}
-${state.orderType === 'delivery' ? `*DIRECCIÓN:* ${address}\n*ENTRE CALLES:* ${crossing}` : ''}
-
-*PRODUCTOS:*
-${lines.join('\n')}
-
-*NOTAS:* ${notes || 'Ninguno'}
-*TOTAL A PAGAR:* ${formatCurrency(totalMonto)}`;
-
-  if (state.orderType === 'delivery' && !address) {
-    alert("Por favor ingresa tu dirección para el delivery");
-    return;
-  }
-
-  const num = WHATSAPP_NUMBERS[state.selectedBranch];
-  const url = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank');
-
-  // Clean up
-  state.cart = [];
-  state.isCheckoutOpen = false;
-  state.isCartOpen = false;
-  triggerRender();
-}
-
-// =======================
-// RENDERERS
-// =======================
-
-function renderStopSignLogo() {
-  return `
-    <div class="stop-sign-wrapper select-none">
-      <svg class="alcorta-stop-sign filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)]" viewBox="0 0 100 100" width="75" height="75" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="#cc0a0a" stroke="#ffffff" stroke-width="3" />
-        <polygon points="31,8 69,8 92,31 92,69 69,92 31,92 8,69 8,31" fill="none" stroke="#000000" stroke-width="2.5" />
-        <text x="50" y="55" font-family="'Permanent Marker', cursive" font-size="19" fill="#ffffff" stroke="#000000" stroke-width="1.5" text-anchor="middle" transform="rotate(-9 50 55)" letter-spacing="0.5">ALCORTA</text>
-        <text x="50" y="74" font-family="'Inter', sans-serif" font-weight="900" font-size="7.5" fill="#ffffff" stroke="#000000" stroke-width="0.75" text-anchor="middle" transform="rotate(-9 50 74)" letter-spacing="1">LOMOS & BURGERS</text>
-      </svg>
-    </div>
-  `;
-}
-
-function renderCautionTape(text) {
-  const repeatedText = `${text} &nbsp; ⚡ &nbsp; `.repeat(8);
-  return `
-    <div class="caution-tape select-none">
-      <div class="caution-tape-track">
-        <span>${repeatedText}</span>
-        <span>${repeatedText}</span>
-        <span>${repeatedText}</span>
-      </div>
-    </div>
-  `;
-}
-
-function renderNavbar() {
-  const totalItems = state.cart.reduce((acc, c) => acc + c.qty, 0);
-  return `
-    <nav class="sticky top-0 z-40 bg-black border-b-2 border-black px-4 py-3 shadow-md">
-      <div class="container mx-auto max-w-4xl flex items-center justify-between">
-        <h1 class="font-luckiest text-white text-2xl tracking-widest leading-none">ALCORTA</h1>
-        <button onclick="toggleCart(true)" class="relative flex items-center justify-center p-2 text-white hover:text-[#f5d033] transition-colors">
-          <i class="fas fa-shopping-bag text-xl"></i>
-          ${totalItems > 0 ? `<span class="absolute -top-1 -right-1 bg-[#f5d033] text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border border-black">${totalItems}</span>` : ''}
-        </button>
-      </div>
-    </nav>
-  `;
-}
-
-function renderHero() {
-  return `
-    <header class="text-center pt-16 pb-8 px-4 relative flex flex-col items-center justify-center">
-      ${renderStopSignLogo()}
-      <h2 class="stroke-heading text-5xl md:text-7xl mb-3 rotate-[-1deg] tracking-wider select-none">ALCORTA asdasdsad</h2>
-      <p class="text-black font-marker uppercase tracking-widest text-lg md:text-xl bg-[#f5d033] px-5 py-2 rounded-xl border-2 border-black rotate-[1.5deg] shadow-lg">
-        LOMOS & BURGERS
-      </p>
-      <p class="text-white font-black uppercase tracking-[0.2em] text-xs md:text-sm mt-5 select-none stroke-badge">
-        ✦ TAKE AWAY PREMIUM ✦
-      </p>
-    </header>
-  `;
-}
-
-function renderItemCard(item, catId) {
-  let imageHTML = item.image
-    ? `<div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 bg-transparent rounded-2xl border-2 border-black overflow-hidden mr-3 sm:mr-4 shadow-md">
-         <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover"/>
-       </div>`
-    : '';
-
-  let priceHTML = `<div class="stroke-price text-xl sm:text-2xl font-black text-white whitespace-nowrap">${formatCurrency(getPrice(item))}</div>`;
-
-  let selectorsHTML = '';
-
-  if (item.variants) {
-    selectorsHTML = `
-      <div class="flex flex-wrap gap-2 mt-2 w-full">
-        ${item.variants.map(v => {
-      const isSelected = state.selections[item.id] === v.name;
-      const activeClass = isSelected ? 'active' : '';
-      return `<button onclick="updateSelection('${item.id}', '${v.name}')" 
-                    class="btn-selector-variant ${activeClass}">
-                    ${v.name.toUpperCase()}
-                  </button>`;
-    }).join('')}
-      </div>
-    `;
-  }
-
-  if (item.subproducts) {
-    selectorsHTML = `
-      <div class="mt-2 w-full max-w-[200px]">
-        <select onchange="updateSelection('${item.id}', this.value)" 
-          class="select-grunge w-full">
-          ${item.subproducts.map(s => {
-      const isSelected = state.selections[item.id] === s;
-      return `<option value="${s}" ${isSelected ? 'selected' : ''}>${s.toUpperCase()}</option>`;
-    }).join('')}
-        </select>
-      </div>
-    `;
-  }
-
-  const cleanDesc = item.desc ? item.desc.replace(/ · /g, " - ").toUpperCase() : "";
-
-  return `
-    <div class="fade-in bg-transparent item-divider py-5 flex flex-row items-center justify-between">
-      <div class="flex items-center flex-1 w-full overflow-hidden">
-        ${imageHTML}
-        <div class="flex flex-col flex-1 pr-2 justify-center">
-          <h4 class="stroke-product text-lg sm:text-xl font-black mb-1.5 leading-tight">${item.name.toUpperCase()}</h4>
-          ${item.desc ? `<p class="stroke-desc text-xs sm:text-sm font-extrabold text-white/95 leading-snug mb-1 tracking-wide">${cleanDesc}</p>` : ''}
-          ${selectorsHTML}
-        </div>
-      </div>
-      
-      <div class="flex flex-col items-end justify-center ml-2 flex-shrink-0 gap-2">
-        ${priceHTML}
-        <button onclick="addToCart('${item.id}', '${catId}')" class="btn-grunge text-xs sm:text-sm">
-          AÑADIR
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function renderCategories() {
-  return CATALOG.map(cat => {
-    let prefix = '';
-    if (cat.id === 'agregados') {
-      prefix = renderCautionTape("Y ADICIONALES");
-    }
-
-    if (cat.id === 'lomos') {
-      const clasicos = cat.items.filter(i => ['l1', 'l3'].includes(i.id));
-      const xl = cat.items.filter(i => i.id === 'l2');
-      const especiales = cat.items.filter(i => ['l4', 'l5'].includes(i.id));
-
-      return `
-        <section class="mb-14">
-          <h3 class="stroke-heading text-4xl sm:text-5xl text-left mb-6">LOMOS</h3>
-          
-          <h4 class="font-luckiest text-2xl text-white stroke-badge mb-3">CLÁSICOS</h4>
-          <div class="flex flex-col">
-            ${clasicos.map(item => renderItemCard(item, cat.id)).join('')}
-          </div>
-
-          ${renderCautionTape("KEEP OUT")}
-
-          <h4 class="font-luckiest text-2xl text-white stroke-badge mb-3">XL</h4>
-          <div class="flex flex-col">
-            ${xl.map(item => renderItemCard(item, cat.id)).join('')}
-          </div>
-
-          ${renderCautionTape("KEEP OUT")}
-
-          <h4 class="font-luckiest text-2xl text-white stroke-badge mb-3">ESPECIALES</h4>
-          <div class="flex flex-col">
-            ${especiales.map(item => renderItemCard(item, cat.id)).join('')}
-          </div>
-          
-          ${cat.note ? `<p class="text-center text-sm font-bold tracking-widest text-white uppercase mt-6 stroke-badge">✦ ${cat.note.toUpperCase()} ✦</p>` : ''}
-        </section>
-      `;
-    }
-
-    let displayTitle = cat.title.toUpperCase();
-    if (cat.id === 'promos') displayTitle = "PROMOCIONES LOMOS";
-    if (cat.id === 'bebidas') displayTitle = "BEBIDAS";
-
-    return `
-      ${prefix}
-      <section class="mb-14">
-        <h3 class="stroke-heading text-4xl sm:text-5xl text-left mb-6">${displayTitle}</h3>
-        <div class="flex flex-col">
-          ${cat.items.map(item => renderItemCard(item, cat.id)).join('')}
-        </div>
-        ${cat.note ? `<p class="text-center text-sm font-bold tracking-widest text-white uppercase mt-6 stroke-badge">✦ ${cat.note.toUpperCase()} ✦</p>` : ''}
-      </section>
-    `;
-  }).join('');
-}
-
-function renderWeeklyPromos() {
-  if (!checkPromoDay() || !state.hasClosedPromo) return '';
-
-  const promosSemana = {
-    id: 'promos_semana',
-    title: 'PROMOCIONES DE LA SEMANA',
-    items: [
-      { id: 'wp1', name: 'PROMO CHESSE', desc: '2 ChesseBurg iguales (solo añadir)', price: 15000, image: 'imagenes/chesseBurg.jpg' },
-      { id: 'wp2', name: 'PROMO TRIPLES', desc: '2 Burgers Triples a elección (iguales o distintas)', price: 22000, image: 'imagenes/andesBurg.jpg' }
-    ]
-  };
-
-  return `
-    <section class="mb-14 fade-in">
-      <h3 class="stroke-heading text-3xl sm:text-4xl text-left mb-6">${promosSemana.title}</h3>
-      <div class="flex flex-col border-4 border-black rounded-3xl p-4 bg-black/10 shadow-lg">
-        ${promosSemana.items.map(item => renderItemCard(item, promosSemana.id)).join('')}
-      </div>
-    </section>
-  `;
-}
-
-function renderCartOverlay() {
-  if (!state.isCartOpen && !state.isCheckoutOpen) return '';
-
-  if (state.isCheckoutOpen) return ''; // Hide cart mechanics if checkout is open
-
-  let cartContent = '';
-  let subtotal = 0;
-
-  if (state.cart.length === 0) {
-    cartContent = `
-      <div class="flex flex-col items-center justify-center h-full text-center px-4">
-        <i class="fas fa-shopping-basket text-5xl text-gray-300 mb-4"></i>
-        <h3 class="text-xl font-bold text-textmain mb-2">Tu carrito está vacío</h3>
-        <p class="text-textmuted text-sm">¡Añadí deliciosos lomos y burgers para disfrutar!</p>
-        <button onclick="toggleCart(false)" class="mt-8 bg-black text-white px-6 py-2 rounded-lg font-bold">Volver al Menú</button>
-      </div>
-    `;
-  } else {
-    state.cart.forEach(c => {
-      let totalLine = c.qty * c.price;
-      subtotal += totalLine;
-      cartContent += `
-        <div class="flex items-start justify-between py-4 border-b border-borderlight">
-          <div class="flex-1 pr-3">
-            <h5 class="font-bold text-sm text-textmain leading-tight">${c.name}</h5>
-            ${c.subproduct ? `<p class="text-xs text-brand font-semibold mt-0.5">${c.subproduct}</p>` : ''}
-            <div class="text-xs text-textmuted mt-1">${formatCurrency(c.price)} c/u</div>
-          </div>
-          <div class="flex flex-col items-end">
-            <div class="font-black text-base">${formatCurrency(totalLine)}</div>
-            <div class="flex items-center mt-2 border border-borderlight rounded-md overflow-hidden bg-bgcard">
-              <button onclick="updateCartQty('${c.id}', -1)" class="w-7 h-7 flex items-center justify-center text-textmain hover:bg-gray-100 transition"><i class="fas fa-minus text-xs"></i></button>
-              <span class="w-8 text-center text-sm font-bold">${c.qty}</span>
-              <button onclick="updateCartQty('${c.id}', 1)" class="w-7 h-7 flex items-center justify-center text-textmain hover:bg-gray-100 transition"><i class="fas fa-plus text-xs"></i></button>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    cartContent = `
-      <div class="flex-1 overflow-y-auto px-5 py-2">
-        ${cartContent}
-      </div>
-      <div class="p-5 border-t border-borderlight bg-bgcard">
-        <div class="flex justify-between items-center mb-4">
-          <span class="text-textmuted font-semibold uppercase text-sm tracking-wider">Subtotal</span>
-          <span class="text-2xl font-black text-brand">${formatCurrency(subtotal)}</span>
-        </div>
-        <button onclick="toggleCheckout(true)" class="w-full bg-black hover:bg-brand text-white font-bold py-3 px-4 rounded-xl text-lg transition-colors shadow-lg">
-          Confirmar Pedido
-        </button>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="fixed inset-0 z-50 flex justify-end">
-      <div class="absolute inset-0 bg-black/50 cart-overlay" onclick="toggleCart(false)"></div>
-      <div class="relative w-full max-w-sm h-full bg-bgmain shadow-2xl flex flex-col cart-slide-active overflow-hidden">
-        
-        <div class="p-4 border-b border-borderlight flex items-center justify-between bg-white">
-          <h2 class="font-serif text-xl font-bold">Tu Pedido</h2>
-          <button onclick="toggleCart(false)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-textmain hover:bg-gray-200">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        
-        ${cartContent}
-      </div>
-    </div>
-  `;
-}
-
-function renderCheckoutModal() {
-  if (!state.isCheckoutOpen) return '';
-
-  let subtotal = state.cart.reduce((acc, c) => acc + (c.qty * c.price), 0);
-
-  return `
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleCheckout(false)"></div>
-      <div class="relative bg-bgmain w-[92%] sm:w-full max-w-[400px] rounded-2xl shadow-2xl overflow-hidden fade-in flex flex-col max-h-[90vh]">
-        
-        <div class="bg-black text-white p-4 sm:p-5 flex items-center justify-between">
-          <div>
-            <h2 class="font-serif text-2xl font-bold leading-tight">Detalles del Cliente</h2>
-            <p class="text-brand text-sm font-semibold uppercase tracking-widest mt-1">Paso Final</p>
-          </div>
-          <button onclick="toggleCheckout(false)" class="text-gray-400 hover:text-white transition">
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-        
-        <form onsubmit="submitOrder(event)" class="p-5 flex-1 overflow-y-auto">
-          <div class="mb-4">
-            <h3 class="text-center text-xs font-bold text-brand uppercase tracking-widest mb-3">¿A qué local pedís?</h3>
-            <div class="grid grid-cols-2 gap-2 mb-2">
-              <button type="button" onclick="updateBranch('dorrego')" class="py-2 px-3 rounded-lg border text-xs font-bold transition-all ${state.selectedBranch === 'dorrego' ? 'bg-brand border-brand text-white shadow-md' : 'bg-white border-borderlight text-textmuted'}">
-                ALCORTA DORREGO
-              </button>
-              <button type="button" onclick="updateBranch('godoyCruz')" class="py-2 px-3 rounded-lg border text-xs font-bold transition-all ${state.selectedBranch === 'godoyCruz' ? 'bg-brand border-brand text-white shadow-md' : 'bg-white border-borderlight text-textmuted'}">
-                ALCORTA G. CRUZ
-              </button>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <h3 class="text-center text-xs font-bold text-textmuted uppercase tracking-widest mb-3">Modalidad</h3>
-            <div class="grid grid-cols-2 gap-2 mb-2">
-              <button type="button" onclick="updateOrderType('retiro')" class="py-2 px-3 rounded-lg border text-xs font-bold transition-all ${state.orderType === 'retiro' ? 'bg-black border-black text-white' : 'bg-white border-borderlight text-textmuted'}">
-                RETIRO LOCAL
-              </button>
-              ${state.selectedBranch === 'dorrego' ? `
-                <button type="button" onclick="updateOrderType('delivery')" class="py-2 px-3 rounded-lg border text-xs font-bold transition-all ${state.orderType === 'delivery' ? 'bg-black border-black text-white' : 'bg-white border-borderlight text-textmuted'}">
-                  DELIVERY
-                </button>
-              ` : ''}
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-xs sm:text-sm font-bold text-textmain mb-1.5">👤 Nombre Completo <span class="text-red-500">*</span></label>
-            <input type="text" id="client-name" required placeholder="Ej: Juan Pérez" class="w-full text-sm sm:text-base border border-borderlight rounded-lg px-3 py-2.5 bg-white outline-none focus:border-brand focus:ring-1 focus:ring-brand transition">
-          </div>
-          
-          ${state.orderType === 'delivery' ? `
-          <div class="mb-4">
-            <label class="block text-xs sm:text-sm font-bold text-textmain mb-1.5">📍 Dirección de Envío <span class="text-red-500">*</span></label>
-            <input type="text" id="client-address" required placeholder="Ej: San Martín 1234, Dorrego" class="w-full text-sm sm:text-base border border-borderlight rounded-lg px-3 py-2.5 bg-white outline-none focus:border-brand focus:ring-1 focus:ring-brand transition">
-          </div>
-          <div class="mb-4">
-            <label class="block text-xs sm:text-sm font-bold text-textmain mb-1.5">🛣️ Entre calles <span class="text-red-500">*</span></label>
-            <input type="text" id="client-street-crossing" required placeholder="Ej: Entre Colón y San Martín" class="w-full text-sm sm:text-base border border-borderlight rounded-lg px-3 py-2.5 bg-white outline-none focus:border-brand focus:ring-1 focus:ring-brand transition">
-          </div>
-          ` : ''}
-          
-          <div class="mb-5">
-            <label class="block text-xs sm:text-sm font-bold text-textmain mb-1.5">📝 Notas Adicionales</label>
-            <textarea id="client-notes" rows="2" placeholder="Sin tomate, sin sal, etc..." class="w-full text-sm sm:text-base border border-borderlight rounded-lg px-3 py-2.5 bg-white outline-none focus:border-brand focus:ring-1 focus:ring-brand transition resize-none"></textarea>
-          </div>
-          
-          <div class="border-t border-borderlight pt-5 flex items-center justify-between mb-6">
-            <span class="text-textmuted font-semibold uppercase text-sm tracking-wider">Total a pagar (no incluye envío)</span>
-            <span class="text-2xl font-black text-brand">${formatCurrency(subtotal)}</span>
-          </div>
-          
-          <button type="submit" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3.5 px-4 rounded-xl text-lg flex items-center justify-center gap-3 transition-colors shadow-lg">
-            <i class="fab fa-whatsapp text-2xl"></i> Enviar Pedido vía WhatsApp
-          </button>
-          
-          <button type="button" onclick="toggleCheckout(false)" class="w-full mt-3 text-center text-textmuted font-semibold text-sm hover:text-textmain py-2">
-            Volver al Carrito
-          </button>
-        </form>
-      </div>
-    </div>
-  `;
-}
-
-function renderLocations() {
-  return `
-    <section class="py-16 bg-[#18181b] border-t border-black/50 mt-12">
-      <div class="container mx-auto px-4 max-w-4xl text-center">
-        <h3 class="font-luckiest text-3xl text-white stroke-badge mb-8 rotate-[-0.5deg]">Nuestras Sucursales</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          
-          <div class="bg-black/40 border-2 border-black rounded-2xl p-6 shadow-lg transition hover:border-[#f5d033]">
-            <div class="flex items-center gap-3 mb-2">
-              <i class="fas fa-store text-[#f5d033] text-2xl"></i>
-              <h4 class="text-xl font-luckiest text-white tracking-wide">Sucursal Dorrego</h4>
-            </div>
-            <p class="text-sm font-semibold text-gray-300 mb-4 uppercase">ALEM 300, Dorrego, Mendoza</p>
-            <div class="w-full h-48 rounded-lg overflow-hidden border-2 border-black mb-4 shadow-inner">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3349.9395620677606!2d-68.82997702503863!3d-32.89976616952102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e090049601253%3A0xc2b91fe68685431c!2sALCORTA%20Lomos%20%26%20Burgers!5e0!3m2!1ses-419!2sar!4v1777410237100!5m2!1ses-419!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <a href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A" target="_blank" class="btn-grunge inline-flex items-center justify-center gap-2 w-full text-center">
-              <i class="fas fa-external-link-alt"></i> Abrir en Maps
-            </a>
-          </div>
-
-          <div class="bg-black/40 border-2 border-black rounded-2xl p-6 shadow-lg transition hover:border-[#f5d033]">
-            <div class="flex items-center gap-3 mb-2">
-              <i class="fas fa-store-alt text-[#f5d033] text-2xl"></i>
-              <h4 class="text-xl font-luckiest text-white tracking-wide">Sucursal Godoy Cruz</h4>
-            </div>
-            <p class="text-sm font-semibold text-gray-300 mb-4 uppercase">Figueroa Alcorta 1304, Godoy Cruz, Mendoza</p>
-            <div class="w-full h-48 rounded-lg overflow-hidden border-2 border-black mb-4 shadow-inner">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.4188047733232!2d-68.84627422503628!3d-32.93995057154916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0b08d5d5cb71%3A0xec2ec8803df6040d!2sALCORTA%20Lomos%20%26%20Burgers%20Godoy%20Cruz!5e0!3m2!1ses-419!2sar!4v1777410265034!5m2!1ses-419!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <a href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8" target="_blank" class="btn-grunge inline-flex items-center justify-center gap-2 w-full text-center">
-              <i class="fas fa-external-link-alt"></i> Abrir en Maps
-            </a>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderPromoModal() {
-  if (!state.isPromoModalOpen || !state.currentPromoItem) return '';
-
-  const burgerData = [
-    { name: 'ChesseBurg', img: 'imagenes/chesseBurg.jpg' },
-    { name: 'AndesBurg', img: 'imagenes/andesBurg.jpg' },
-    { name: 'AmericaBurg', img: 'imagenes/americanBurg.jpg' },
-    { name: 'MexiBurg', img: 'imagenes/mexiBurg.jpg' }
-  ];
-  const count = state.tempPromoSelections.length;
-
-  return `
-    <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
-      <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="state.isPromoModalOpen = false; triggerRender();"></div>
-      <div class="relative bg-white w-full max-w-[380px] rounded-3xl shadow-2xl overflow-hidden fade-in flex flex-col">
-        <div class="bg-black text-white p-5 text-center">
-          <h2 class="font-serif text-xl font-bold">${state.currentPromoItem.name}</h2>
-          <p class="text-brand text-xs font-bold uppercase tracking-widest mt-1">Selecciona tus 2 Burgers</p>
-        </div>
-        
-        <div class="p-6">
-          <!-- Slots de selección -->
-          <div class="flex gap-4 mb-6 justify-center">
-            ${[0, 1].map(index => {
-    const selected = state.tempPromoSelections[index];
-    const data = selected ? burgerData.find(b => b.name === selected) : null;
-    return `
-                <div class="w-16 h-16 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center relative overflow-visible bg-gray-50">
-                  ${selected ? `
-                    <img src="${data.img}" class="absolute inset-0 w-full h-full object-cover rounded-xl" />
-                    <div class="absolute inset-0 bg-black/20 rounded-xl"></div>
-                    <button onclick="removePromoBurger(${index})" class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center shadow-lg z-10">
-                      <i class="fas fa-times text-[10px]"></i>
-                    </button>
-                  ` : '<i class="fas fa-plus text-gray-300"></i>'}
-                </div>
-              `;
-  }).join('')}
-          </div>
-
-          <!-- Opciones con Imagen -->
-          <div class="grid grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-1">
-            ${burgerData.map(b => `
-              <button onclick="selectPromoBurger('${b.name}')" ${count >= 2 ? 'disabled' : ''} 
-                class="flex items-center gap-3 p-2 border-2 border-black rounded-2xl hover:border-[#f5d033] transition-all text-left bg-white text-black group ${count >= 2 ? 'opacity-50 grayscale cursor-not-allowed' : 'active:scale-[0.98]'}">
-                <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-black/20">
-                  <img src="${b.img}" class="w-full h-full object-cover" />
-                </div>
-                <div class="flex-1">
-                  <span class="font-bold text-sm text-textmain block">${b.name}</span>
-                  <span class="text-[10px] text-textmuted uppercase font-bold tracking-tighter">Añadir a la promo</span>
-                </div>
-                <i class="fas fa-plus-circle text-black text-lg mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-              </button>
-            `).join('')}
-          </div>
-
-          <button onclick="confirmPromo()" class="w-full mt-6 btn-grunge bg-black text-white py-3.5 rounded-2xl shadow-lg ${count < 2 ? 'opacity-50 grayscale cursor-not-allowed' : ''}">
-            AÑADIR PROMO AL CARRITO
-          </button>
-          
-          <button onclick="state.isPromoModalOpen = false; triggerRender();" class="w-full mt-4 text-[10px] font-black text-textmuted uppercase tracking-widest text-center hover:text-black transition-colors">
-            Cerrar Ventana
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderTodayPromo() {
-  if (!isTodayPromoActive()) return '';
-
-  return `
-    <section class="mb-14 fade-in">
-      <h3 class="stroke-heading text-3xl sm:text-4xl text-left mb-6">PROMOCIÓN DE HOY</h3>
-      
-      <div class="relative rounded-3xl p-6 shadow-2xl overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 border-4 border-black min-h-[160px] bg-black text-white">
-        <!-- Background Image with Blur -->
-        <div class="absolute inset-0 bg-cover bg-center filter blur-[2px] brightness-[0.3]" style="background-image: url('imagenes/promo_today.jpg');"></div>
-        <!-- Dark Overlay -->
-        <div class="absolute inset-0 bg-black/40"></div>
-        
-        <div class="relative z-10 flex-1 text-center md:text-left">
-          <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
-            <span class="bg-[#f5d033] text-black text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-black shadow-sm">SÓLO POR HOY</span>
-          </div>
-          <h4 class="text-xl sm:text-2xl font-black mb-1 uppercase tracking-tight stroke-product">PROMOCIÓN DE AL CHESSE</h4>
-          <p class="text-sm sm:text-base text-gray-300 font-extrabold mb-3 stroke-desc">
-            2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS + <span class="text-[#f5d033] font-black">DOS CHESSE SIMPLES GRATIS (sin papas)</span>
-          </p>
-          <div class="text-3xl font-black stroke-price text-[#f5d033]">${formatCurrency(20000)}</div>
-        </div>
-        <div class="relative z-10 flex-shrink-0 w-full md:w-auto">
-          <button onclick="addTodayPromoToCart()" class="w-full md:w-auto btn-grunge bg-[#f5d033] hover:bg-white text-black border-2 border-black font-luckiest tracking-wider px-8 py-3 rounded-xl shadow-md">
-            AÑADIR AL CARRITO
-          </button>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderPromoPopup() {
-  if (!state.isPromoPopupOpen) {
-    if ((checkPromoDay() || isTodayPromoActive()) && !state.hasClosedPromo) {
-      return `
-        <button onclick="openPromoPopup()" class="fixed bottom-24 right-6 z-40 bg-[#f5d033] text-black border-2 border-black w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
-          <i class="fas fa-percentage text-2xl"></i>
-        </button>
-      `;
-    }
-    return '';
-  }
-
-  if (isTodayPromoActive()) {
-    return `
-      <div class="fixed inset-0 z-[70] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closePromoPopup()"></div>
-        <div class="relative bg-black text-white w-full max-w-[450px] rounded-[2rem] shadow-2xl overflow-hidden fade-in border border-white/10 flex flex-col min-h-[500px]">
-          
-          <!-- Background Image with Blur -->
-          <div class="absolute inset-0 bg-cover bg-center filter blur-[3px] brightness-[0.3]" style="background-image: url('imagenes/promo_today.jpg');"></div>
-          
-          <!-- Dark Overlay for Contrast -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-
-          <!-- Content -->
-          <div class="relative z-10 p-8 flex flex-col h-full justify-between items-center text-center">
-            <div class="absolute top-4 right-4">
-              <button onclick="closePromoPopup()" class="bg-white/10 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand transition-colors">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-
-            <div class="w-full mt-4">
-              <span class="bg-brand/20 text-brand text-xs font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-brand/30 mb-4 inline-block">SÓLO POR HOY</span>
-              <h2 class="font-serif text-3xl font-black tracking-tight text-white mb-2 uppercase">PROMOCIÓN DE AL CHESSE</h2>
-              <div class="w-20 h-1 bg-brand mx-auto my-3"></div>
-            </div>
-            
-            <div class="my-4 space-y-3.5 text-center w-full bg-black/40 backdrop-blur-md p-5 rounded-2xl border border-white/10">
-              <div class="flex flex-col items-center justify-center">
-                <span class="text-base font-bold text-gray-200">2 LOMOS ALCORTA + 2 CUBETAS DE PAPAS</span>
-              </div>
-              <div class="flex flex-col items-center justify-center bg-brand/10 p-2.5 rounded-lg border border-brand/20">
-                <span class="text-base font-extrabold text-brand">DOS CHESSE SIMPLES GRATIS (sin papas)</span>
-              </div>
-            </div>
-
-            <div class="w-full mb-2">
-              <div class="mb-4">
-                <span class="text-gray-400 text-xs font-bold uppercase tracking-widest block mb-1">Precio Especial</span>
-                <span class="text-4xl font-black text-white tracking-tight">${formatCurrency(20000)}</span>
-              </div>
-
-              <button onclick="addTodayPromoToCart(); closePromoPopup();" class="w-full bg-brand text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-orange-600 transition-colors text-lg flex items-center justify-center gap-2 mb-2">
-                <i class="fas fa-shopping-bag"></i> Añadir al Carrito
-              </button>
-              
-              <button onclick="closePromoPopup()" class="w-full text-xs font-black text-gray-400 uppercase tracking-widest text-center hover:text-white transition-colors py-2">
-                Ver Menú Completo
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="fixed inset-0 z-[70] flex items-center justify-center p-4">
-      <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closePromoPopup()"></div>
-      <div class="relative bg-white w-full max-w-[450px] rounded-[2rem] shadow-2xl overflow-hidden fade-in flex flex-col">
-        
-        <div class="absolute top-4 right-4 z-10">
-          <button onclick="closePromoPopup()" class="bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition-colors">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <div class="overflow-hidden flex flex-col">
-          <div class="p-6 pb-4 text-center">
-            <h2 class="font-serif text-3xl font-black text-textmain mb-1">¡PROMOS DE LA SEMANA!</h2>
-            <p class="text-brand font-bold uppercase tracking-widest text-sm">De Martes a Jueves</p>
-          </div>
-            
-          <div class="relative group mt-2">
-            <div id="promo-carousel" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none; -ms-overflow-style: none;">
-              <div class="snap-center shrink-0 w-full px-4 sm:px-8 flex-none flex justify-center items-center">
-                <img src="imagenes/promo1.jpeg" alt="Promo 1" class="h-[55vh] min-h-[300px] max-h-[500px] w-auto max-w-full rounded-2xl shadow-xl border-4 border-white object-contain" />
-              </div>
-              <div class="snap-center shrink-0 w-full px-4 sm:px-8 flex-none flex justify-center items-center">
-                <img src="imagenes/promo2.jpeg" alt="Promo 2" class="h-[55vh] min-h-[300px] max-h-[500px] w-auto max-w-full rounded-2xl shadow-xl border-4 border-white object-contain" />
-              </div>
-            </div>
-            
-            <!-- Controles de navegación para PC y Móvil -->
-            <button onclick="scrollPromo(-1)" class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-black w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity z-10 focus:outline-none">
-              <i class="fas fa-chevron-left text-lg"></i>
-            </button>
-            <button onclick="scrollPromo(1)" class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-black w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity z-10 focus:outline-none">
-              <i class="fas fa-chevron-right text-lg"></i>
-            </button>
-          </div>
-
-          <div class="px-6 pb-6 pt-5 text-center">
-            <button onclick="closePromoPopup()" class="w-full btn-grunge bg-black text-white py-4 rounded-2xl text-lg shadow-xl hover:bg-[#f5d033] hover:text-black">
-              VER PROMOS Y MENÚ
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderApp() {
-  const app = document.getElementById('app');
-  if (!app) return;
-  app.innerHTML = `
-    ${renderNavbar()}
-    
-    <div class="min-h-screen bg-[#121212] py-0 sm:py-8 px-0 sm:px-4">
-      <div class="mx-auto max-w-4xl menu-flyer shadow-2xl relative">
-        <div class="menu-border-left"></div>
-        <div class="menu-border-right"></div>
-        <div class="menu-top-brush"></div>
-        
-        ${renderHero()}
-        <main class="container mx-auto px-4 sm:px-12 py-8 pb-16">
-          ${renderTodayPromo()}
-          ${renderWeeklyPromos()}
-          ${renderCategories()}
-        </main>
-        
-        <div class="menu-bottom-brush"></div>
-      </div>
-      
-      ${renderLocations()}
-    </div>
-    
-    ${renderCartOverlay()}
-    ${renderCheckoutModal()}
-    ${renderPromoModal()}
-    ${renderPromoPopup()}
-  `;
-}
-
-// INITIALIZATION
-window.onload = () => {
-  initPromoPopup();
-  renderApp();
-};
+document.querySelector("#cartTrigger").addEventListener("click", openCart);
+document.querySelector("#floatingCart").addEventListener("click", openCart);
+document.querySelector("#closeCart").addEventListener("click", closeCart);
+cartOverlay.addEventListener("click", closeCart);
+document.querySelector("#continueOrder").addEventListener("click", openCheckout);
+document.querySelector("#closeCheckout").addEventListener("click", closeCheckout);
+checkoutOverlay.addEventListener("click", closeCheckout);
+document.querySelector("#checkoutForm").addEventListener("submit", finishOrder);
+document.querySelector("#closePromo").addEventListener("click", closePromoChooser);
+promoOverlay.addEventListener("click", closePromoChooser);
+document.querySelector("#confirmPromo").addEventListener("click", confirmPromoSelection);
+
+document.querySelectorAll('input[name="branch"], input[name="orderType"]').forEach((input) => {
+  input.addEventListener("change", syncCheckoutOptions);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  if (promoModal.classList.contains("is-open")) closePromoChooser();
+  else if (checkoutModal.classList.contains("is-open")) closeCheckout();
+  else if (cartDrawer.classList.contains("is-open")) closeCart();
+});
+
+renderMenu();
+renderCart();
+syncCheckoutOptions();
