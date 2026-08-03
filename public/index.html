@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALCORTA — Panel de Pedidos</title>
+  <meta name="description" content="ALCORTA Lomo & Burger. Take Away Premium en Mendoza.">
+  <link rel="icon" type="image/x-icon" href="logo.ico?v=1">
+  <link rel="icon" type="image/png" href="logo-32.png?v=1" sizes="32x32">
+  <link rel="icon" type="image/png" href="logo-64.png?v=1" sizes="64x64">
+  <link rel="icon" type="image/svg+xml" href="logo.svg?v=1">
+  <link rel="apple-touch-icon" href="logo-64.png?v=1">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;700&family=Permanent+Marker&family=Playfair+Display:wght@700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="index.css?v=3" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#E65100',
+            bgmain: '#F4F4F5',
+            bgcard: '#FFFFFF',
+            textmain: '#18181B',
+            textmuted: '#52525B',
+            borderlight: '#E4E4E7'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Transiciones suaves */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cart-overlay {
+      backdrop-filter: blur(4px);
+      transition: opacity 0.3s;
+    }
+
+    .cart-sidebar {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .translate-x-full {
+      transform: translateX(100%);
+    }
+
+    .translate-x-0 {
+      transform: translateX(0);
+    }
+
+    /* Scrollbars invisibles o estilizados */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-bgmain text-textmain font-sans antialiased overflow-x-hidden">
+
+  <div id="app"></div>
+
+  <script src="index.js?v=2"></script>
+</body>
+
+</html>
