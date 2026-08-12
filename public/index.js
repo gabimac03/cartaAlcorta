@@ -27,6 +27,7 @@ const burgers = [
   {
     id: "caprichosa",
     name: "Caprichosa",
+    image: "imagenes/caprichosa.png",
     description: "Carne 100 gr, provoleta, panceta, cebolla morada, queso azul y salsa Big Alcorta. Incluye papas.",
     variants: standardBurgerVariants,
   },
@@ -47,12 +48,14 @@ const burgers = [
   {
     id: "argenta",
     name: "Argenta",
+    image: "imagenes/argenta.png",
     description: "Carne 100 gr, cheddar, tomate, lechuga, mayo bacon y panceta. Incluye papas.",
     variants: standardBurgerVariants,
   },
   {
     id: "alterada",
     name: "Alterada",
+    image: "imagenes/alterada.png",
     description: "Carne 100 gr, cheddar, pepinillos, kétchup, cebolla y panceta. Incluye papas.",
     variants: standardBurgerVariants,
   },
