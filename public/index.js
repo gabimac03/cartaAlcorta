@@ -124,8 +124,9 @@ const lomos = [
   {
     id: "lomo-blue",
     name: "Lomo Blue",
-    description: "Pan, carne, salsa de tomate, queso azul y chimichurri argentino. Incluye papas.",
-    variants: [{ label: "Unidad", price: 15000 }],
+    description: "Próximamente.",
+    variants: [{ label: "Próximamente", price: 15000 }],
+    comingSoon: true,
   },
 ];
 
@@ -154,7 +155,7 @@ const promos = [
     description: "Dos lomos especiales a elección + papas fritas.",
     image: "imagenes/lomoAmericano.jpg",
     variants: [{ label: "Promo", price: 29000 }],
-    choice: { title: "Elegí los 2 lomos especiales", options: ["Lomo Americano", "Lomo Criollo", "Lomo Blue"] },
+    choice: { title: "Elegí los 2 lomos especiales", options: ["Lomo Americano", "Lomo Criollo"] },
   },
   {
     id: "promo-lomos-xl",
@@ -365,13 +366,21 @@ function renderProductCard(product) {
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
   const eyebrow = product.eyebrow ? `<span class="photo-label">${product.eyebrow}</span>` : "";
-  const variants = product.variants.length > 1
+  const variants = !product.comingSoon && product.variants.length > 1
     ? `<div class="variant-list" aria-label="Elegir opción de ${product.name}">
         ${product.variants.map((variant, index) => `
           <button class="${index === 0 ? "is-active" : ""}" type="button" data-action="variant" data-index="${index}">${variant.label}</button>
         `).join("")}
       </div>`
     : "";
+  const priceMarkup = product.comingSoon
+    ? '<strong data-role="price">Próximamente</strong>'
+    : `<strong data-role="price">${money(product.variants[0].price)}</strong>`;
+  const actionMarkup = product.comingSoon
+    ? '<button class="add-button" type="button" disabled>Próximamente</button>'
+    : `<button class="add-button" type="button" data-action="add">
+          Agregar al pedido <span>+</span>
+        </button>`;
 
   return `
     <article class="product-card" data-product-id="${product.id}">
@@ -382,13 +391,11 @@ function renderProductCard(product) {
       <div class="product-body">
         <div class="product-heading">
           <h3>${product.name}</h3>
-          <strong data-role="price">${money(product.variants[0].price)}</strong>
+          ${priceMarkup}
         </div>
         <p>${product.description}</p>
         ${variants}
-        <button class="add-button" type="button" data-action="add">
-          Agregar al pedido <span>+</span>
-        </button>
+        ${actionMarkup}
       </div>
     </article>
   `;
