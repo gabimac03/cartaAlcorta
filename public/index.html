@@ -248,6 +248,35 @@
       </button>
     </section>
 
+
+    <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
+    <section class="weekday-promo-modal" id="weekdayPromoModal1" aria-hidden="true" aria-label="Promo martes a jueves 1">
+      <button class="modal-close" data-close-weekday-promo="1" type="button" aria-label="Cerrar">×</button>
+      <p class="kicker">Promos de martes a jueves</p>
+      <img
+        class="weekday-promo-image"
+        src="imagenes/promo-martes-jueves-chesse.png"
+        alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos"
+      />
+      <div class="weekday-promo-actions">
+        <button class="checkout-button" data-next-weekday-promo="2" type="button">Ver otra promo</button>
+        <button class="weekday-promo-dismiss" data-dismiss-weekday-promos type="button">Cerrar</button>
+      </div>
+    </section>
+
+    <section class="weekday-promo-modal" id="weekdayPromoModal2" aria-hidden="true" aria-label="Promo martes a jueves 2">
+      <button class="modal-close" data-close-weekday-promo="2" type="button" aria-label="Cerrar">×</button>
+      <p class="kicker">Promos de martes a jueves</p>
+      <img
+        class="weekday-promo-image"
+        src="imagenes/promo-martes-jueves-triples.png"
+        alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos"
+      />
+      <div class="weekday-promo-actions">
+        <button class="checkout-button" data-close-weekday-promo="2" type="button">Entendido</button>
+      </div>
+    </section>
+
     <script src="index.js"></script>
   </body>
 </html>

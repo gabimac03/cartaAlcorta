@@ -354,6 +354,11 @@ const checkoutModal = document.querySelector("#checkoutModal");
 const checkoutOverlay = document.querySelector("#checkoutOverlay");
 const promoModal = document.querySelector("#promoModal");
 const promoOverlay = document.querySelector("#promoOverlay");
+const weekdayPromoOverlay = document.querySelector("#weekdayPromoOverlay");
+const weekdayPromoModals = [
+  document.querySelector("#weekdayPromoModal1"),
+  document.querySelector("#weekdayPromoModal2"),
+].filter(Boolean);
 
 function renderProductCard(product) {
   const image = product.image
@@ -482,7 +487,9 @@ function renderCart() {
 }
 
 function lockBody() {
-  const open = [cartDrawer, checkoutModal, promoModal].some((element) => element.classList.contains("is-open"));
+  const open = [cartDrawer, checkoutModal, promoModal, ...weekdayPromoModals]
+    .filter(Boolean)
+    .some((element) => element.classList.contains("is-open"));
   document.body.classList.toggle("is-locked", open);
 }
 
@@ -625,7 +632,97 @@ function finishOrder(event) {
   );
 }
 
+function isTuesdayToThursday() {
+  const day = new Date().getDay();
+  return day >= 2 && day <= 4;
+}
+
+function openWeekdayPromo(index = 0) {
+  const modal = weekdayPromoModals[index];
+  if (!modal || !weekdayPromoOverlay) return;
+  weekdayPromoOverlay.hidden = false;
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => {
+    weekdayPromoOverlay.classList.add("is-open");
+    modal.classList.add("is-open");
+    lockBody();
+  });
+}
+
+function closeWeekdayPromo(index, options = {}) {
+  const modal = weekdayPromoModals[index];
+  if (!modal || !weekdayPromoOverlay) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  const hasOtherOpen = weekdayPromoModals.some((item, itemIndex) => itemIndex !== index && item.classList.contains("is-open"));
+  if (!hasOtherOpen) {
+    weekdayPromoOverlay.classList.remove("is-open");
+  }
+  window.setTimeout(() => {
+    modal.hidden = true;
+    if (!hasOtherOpen) {
+      weekdayPromoOverlay.hidden = true;
+    }
+    lockBody();
+    if (options.openNextIndex !== undefined) {
+      openWeekdayPromo(options.openNextIndex);
+    }
+  }, 220);
+}
+
+function dismissWeekdayPromos() {
+  if (weekdayPromoOverlay) {
+    weekdayPromoOverlay.classList.remove("is-open");
+    weekdayPromoOverlay.hidden = true;
+  }
+  weekdayPromoModals.forEach((modal) => {
+    modal.classList.remove("is-open");
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+  });
+  try {
+    sessionStorage.setItem("alcortaWeekdayPromosSeen", "true");
+  } catch (error) {
+    // noop
+  }
+  lockBody();
+}
+
+function maybeOpenWeekdayPromos() {
+  if (!weekdayPromoModals.length || !weekdayPromoOverlay || !isTuesdayToThursday()) return;
+  try {
+    if (sessionStorage.getItem("alcortaWeekdayPromosSeen") === "true") return;
+  } catch (error) {
+    // noop
+  }
+  window.setTimeout(() => openWeekdayPromo(0), 450);
+}
+
 document.addEventListener("click", (event) => {
+  const nextWeekdayPromoButton = event.target.closest("[data-next-weekday-promo]");
+  if (nextWeekdayPromoButton) {
+    const nextIndex = Number(nextWeekdayPromoButton.dataset.nextWeekdayPromo) - 1;
+    closeWeekdayPromo(0, { openNextIndex: nextIndex });
+    return;
+  }
+
+  const closeWeekdayPromoButton = event.target.closest("[data-close-weekday-promo]");
+  if (closeWeekdayPromoButton) {
+    const modalIndex = Number(closeWeekdayPromoButton.dataset.closeWeekdayPromo) - 1;
+    if (modalIndex === 0) closeWeekdayPromo(modalIndex, { openNextIndex: 1 });
+    else {
+      dismissWeekdayPromos();
+    }
+    return;
+  }
+
+  const dismissWeekdayPromosButton = event.target.closest("[data-dismiss-weekday-promos]");
+  if (dismissWeekdayPromosButton) {
+    dismissWeekdayPromos();
+    return;
+  }
+
   const variantButton = event.target.closest('[data-action="variant"]');
   if (variantButton) {
     const card = variantButton.closest(".product-card");
@@ -685,11 +782,19 @@ document.querySelectorAll('input[name="branch"], input[name="orderType"]').forEa
 
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
-  if (promoModal.classList.contains("is-open")) closePromoChooser();
+  const openWeekdayIndex = weekdayPromoModals.findIndex((modal) => modal.classList.contains("is-open"));
+  if (openWeekdayIndex !== -1) {
+    if (openWeekdayIndex === 0) closeWeekdayPromo(0, { openNextIndex: 1 });
+    else dismissWeekdayPromos();
+  }
+  else if (promoModal.classList.contains("is-open")) closePromoChooser();
   else if (checkoutModal.classList.contains("is-open")) closeCheckout();
   else if (cartDrawer.classList.contains("is-open")) closeCart();
 });
 
+weekdayPromoOverlay?.addEventListener("click", dismissWeekdayPromos);
+
 renderMenu();
 renderCart();
 syncCheckoutOptions();
+maybeOpenWeekdayPromos();
