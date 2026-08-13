@@ -15,153 +15,120 @@
     <link rel="apple-touch-icon" href="logo-64.png" />
   </head>
   <body>
-    <header class="mobile-header">
-      <div class="header-top">
-        <a class="brand" href="#inicio" aria-label="ALCORTA, inicio">
-          <span>ALCORTA</span>
-          <small>LOMOS &amp; BURGERS</small>
-        </a>
-        <button class="header-cart" id="cartTrigger" type="button" aria-label="Ver pedido">
-          <span class="header-cart-label">Pedido</span>
-          <b id="headerCartCount">0</b>
-        </button>
-      </div>
-
-      <nav class="quick-nav" aria-label="Categorías rápidas">
-        <a href="#promociones-especiales">Especiales</a>
-        <a href="#promos">Promos</a>
-        <a href="#burgers">Burgers</a>
-        <a href="#lomos">Lomos</a>
-        <a href="#papas">Papas</a>
-        <a href="#extras">Agregados</a>
-        <a href="#bebidas">Bebidas</a>
-        <a href="#alcohol">Cervezas</a>
-      </nav>
+    <header class="app-header">
+      <button class="icon-button menu-button" type="button" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand brand-header" href="#inicio" aria-label="ALCORTA, inicio">
+        <span>ALCORTA</span>
+        <small>BURGERS</small>
+      </a>
+      <button class="icon-button header-cart-icon" id="cartTrigger" type="button" aria-label="Ver pedido">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M8 7V6a4 4 0 1 1 8 0v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M5.5 8.5h13l-.9 10a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8l-.9-10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <b id="headerCartCount">0</b>
+      </button>
     </header>
 
-    <main>
-      <section class="hero-banner" id="inicio">
+    <main class="app-main">
+      <section class="hero-card" id="inicio">
         <div class="hero-copy">
-          <p class="kicker">ALCORTA BURGERS</p>
-          <h1>SIMPLE.<br />REAL.<br />ALCORTA.</h1>
-          <p>Pedí burgers, lomos, papas y promos desde tu celular de forma rápida y clara.</p>
-          <div class="hero-actions-row">
-            <a class="hero-cta" href="#promos">VER PROMOS</a>
-            <div class="hero-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
-          </div>
+          <h1>SIMPLE.<br />REAL.<br /><span>ALCORTA.</span></h1>
+          <p>Ingredientes reales, sabor inolvidable.</p>
+          <a class="hero-cta" href="#promociones-especiales">VER PROMOS</a>
         </div>
         <div class="hero-visual hero-visual-lomo">
           <img src="imagenes/hero-lomo-sinfondo.png" alt="Lomo destacado de Alcorta" />
         </div>
       </section>
 
-      <section class="category-block" aria-label="Accesos rápidos">
-        <p class="category-title">CATEGORÍAS</p>
+      <section class="category-section" aria-label="Categorías principales">
+        <p class="section-mini-title centered">CATEGORÍAS</p>
         <div class="category-shortcuts">
           <a href="#burgers" class="shortcut-card">
             <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M13 27h38" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M16 24c1.5-8 8.5-13 16-13s14.5 5 16 13" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M16 37h32" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M19 44h26" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 64 64" fill="none"><path d="M13 27h38" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 24c1.5-8 8.5-13 16-13s14.5 5 16 13" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 37h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M19 44h26" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
             </span>
-            <span class="shortcut-label">BURGERS</span>
+            <span class="shortcut-label">Burgers</span>
           </a>
           <a href="#lomos" class="shortcut-card">
             <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M10 33c5-10 10-15 22-15s17 5 22 15" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M14 37h36" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M16 43h32" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M21 28c3 5 6 7 11 7s8-2 11-7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 64 64" fill="none"><path d="M10 33c5-10 10-15 22-15s17 5 22 15" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M14 37h36" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 43h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M21 28c3 5 6 7 11 7s8-2 11-7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
             </span>
-            <span class="shortcut-label">LOMOS</span>
+            <span class="shortcut-label">Lomos</span>
           </a>
           <a href="#papas" class="shortcut-card">
             <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M21 16h22l-3 29H24l-3-29Z" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M23 18l-6-8" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M30 18v-9" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M38 18l5-9" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 64 64" fill="none"><path d="M21 16h22l-3 29H24l-3-29Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><path d="M23 18l-6-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M30 18v-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M38 18l5-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
             </span>
-            <span class="shortcut-label">PAPAS</span>
+            <span class="shortcut-label">Papas</span>
           </a>
           <a href="#bebidas" class="shortcut-card">
             <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M24 14h16l-2 34H26l-2-34Z" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M30 22h5" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M39 14l7-8" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 64 64" fill="none"><path d="M24 14h16l-2 34H26l-2-34Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><path d="M30 22h5" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M39 14l7-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
             </span>
-            <span class="shortcut-label">BEBIDAS</span>
+            <span class="shortcut-label">Bebidas</span>
           </a>
           <a href="#promos" class="shortcut-card">
             <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M13 30 31 12l20 20-18 18-20-20Z" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><circle cx="24" cy="24" r="2.7" fill="currentColor"/><path d="M27 37l10-10" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 64 64" fill="none"><path d="M13 30 31 12l20 20-18 18-20-20Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><circle cx="24" cy="24" r="2.7" fill="currentColor"/><path d="M27 37l10-10" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
             </span>
-            <span class="shortcut-label">PROMOS</span>
+            <span class="shortcut-label">Promos</span>
           </a>
         </div>
       </section>
 
-      <section class="content-section" id="promociones-especiales">
-        <div class="section-head">
+      <section class="featured-section" id="promociones-especiales">
+        <div class="section-head section-head-inline">
           <div>
-            <p class="kicker kicker-orange">PROMOCIONES</p>
             <h2>Promociones especiales</h2>
           </div>
+          <a class="section-link" href="#promos">VER TODAS</a>
         </div>
-        <div class="promo-scroller" id="specialPromosGrid"></div>
+        <div class="featured-promo-list" id="specialPromosGrid"></div>
       </section>
 
-      <section class="content-section" id="promos">
-        <div class="section-head">
+      <section class="promo-strip-section" id="promos">
+        <div class="section-head section-head-inline">
           <div>
-            <p class="kicker kicker-orange">PARA COMPARTIR</p>
-            <h2>Promos</h2>
+            <h2>Más promos</h2>
           </div>
         </div>
-        <div class="promo-scroller" id="promosGrid"></div>
+        <div class="promo-strip" id="promosGrid"></div>
       </section>
 
-      <section class="content-section menu-section" id="carta">
-        <div class="section-head compact-head">
-          <div>
-            <p class="kicker">NUESTRA CARTA</p>
-            <h2>Elegí y pedí rápido</h2>
-          </div>
-          <p class="section-help">Todo pensado para que se vea cómodo desde el celular.</p>
-        </div>
-
+      <section class="menu-section" id="carta">
         <div class="menu-groups" id="fullMenu" aria-label="Carta completa"></div>
       </section>
 
-      <section class="content-section locations-section" id="ubicaciones">
-        <div class="section-head compact-head">
+      <section class="locations-section" id="ubicaciones">
+        <div class="section-head section-head-inline">
           <div>
-            <p class="kicker kicker-orange">SUCURSALES</p>
-            <h2>Elegí tu sucursal</h2>
+            <h2>Sucursales</h2>
           </div>
         </div>
-
         <div class="location-grid">
-          <a
-            class="location-card"
-            href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a class="location-card" href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A" target="_blank" rel="noreferrer">
             <span class="location-number">01</span>
             <div>
               <small>Dorrego</small>
               <h3>Alem 300</h3>
-              <p>Abrir en Google Maps ↗</p>
+              <p>Abrir en Google Maps</p>
             </div>
           </a>
-          <a
-            class="location-card"
-            href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a class="location-card" href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8" target="_blank" rel="noreferrer">
             <span class="location-number">02</span>
             <div>
               <small>Godoy Cruz</small>
               <h3>Figueroa Alcorta 1304</h3>
-              <p>Abrir en Google Maps ↗</p>
+              <p>Abrir en Google Maps</p>
             </div>
           </a>
         </div>
       </section>
     </main>
-
     <footer class="site-footer">
       <a class="brand footer-brand" href="#inicio">
         <span>ALCORTA</span>

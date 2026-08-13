@@ -334,27 +334,69 @@ const weekdayPromoOverlay = document.querySelector("#weekdayPromoOverlay");
 function imageUsesCutout(path = "") {
   return /\.png$/i.test(path);
 }
+
+const promoVisualMap = {
+  "promo-burger-triple": ["imagenes/americanBurg.jpg", "imagenes/alterada.png"],
+  "promo-burger-simple": ["imagenes/chesseBurg.jpg", "imagenes/mexiBurg.jpg"],
+  "promo-lomos-especiales": ["imagenes/lomoAmericano.jpg", "imagenes/lomoCriollo.jpeg"],
+  "promo-lomos-clasicos": ["imagenes/lomoAlcorta.jpeg", "imagenes/lomoCompleto.jpg"],
+  "promo-lomos-xl": ["imagenes/lomoAlcorta.jpeg", "imagenes/lomoCompleto.jpg"],
+};
+
+function buildPromoTitle(name) {
+  return name.replace(/(2)/g, "2").replace(/Burgers/i, "Burgers");
+}
+
+function buildPromoHighlight(product) {
+  if (product.id === "promo-burger-triple") return "Las dobles";
+  if (product.id === "promo-burger-simple") return "Más papas";
+  if (product.id.includes("lomos")) return "Con papas";
+  return "Promo especial";
+}
+
+function getPromoImages(product) {
+  return (promoVisualMap[product.id] || [product.image]).filter(Boolean).slice(0, 2);
+}
+
 const weekdayPromoModals = [
   document.querySelector("#weekdayPromoModal1"),
   document.querySelector("#weekdayPromoModal2"),
 ].filter(Boolean);
 
+function renderFeaturedPromoCard(product) {
+  const images = getPromoImages(product);
+  const visual = images.map((path) => {
+    const cutoutClass = imageUsesCutout(path) ? "is-cutout" : "";
+    return `<img class="${cutoutClass}" src="${path}" alt="${product.name}" loading="lazy" />`;
+  }).join("");
+
+  return `
+    <article class="featured-promo-card" data-product-id="${product.id}">
+      <div class="featured-promo-copy">
+        <h3>${product.name}</h3>
+        <p class="promo-highlight">${buildPromoHighlight(product)}</p>
+        <p class="promo-description">${product.description}</p>
+        <button class="promo-action" type="button" data-action="add">PEDIR AHORA</button>
+      </div>
+      <div class="featured-promo-visual ${images.some((path) => imageUsesCutout(path)) ? "is-cutout" : ""}">
+        ${visual}
+        <span class="featured-promo-badge"><span class="value">${money(product.variants[0].price)}</span><span class="label">PROMO</span></span>
+      </div>
+    </article>
+  `;
+}
+
 function renderPromoCard(product) {
-  const cutoutClass = imageUsesCutout(product.image) ? "is-cutout" : "";
   const image = product.image
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
-
   return `
-    <article class="promo-card" data-product-id="${product.id}">
-      <div class="promo-card-image ${cutoutClass}">
-        ${image}
-        ${product.eyebrow ? `<span class="promo-eyebrow">${product.eyebrow}</span>` : ""}
-      </div>
-      <div class="promo-card-body">
+    <article class="promo-mini-card" data-product-id="${product.id}">
+      <div class="promo-mini-media ${imageUsesCutout(product.image) ? "is-cutout" : ""}">${image}</div>
+      <div class="promo-mini-copy">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <div class="promo-card-footer">
+        <div class="promo-mini-footer">
           <strong>${money(product.variants[0].price)}</strong>
           <button type="button" data-action="add">Agregar</button>
         </div>
@@ -377,10 +419,7 @@ function renderMenuItem(product) {
       </div>`
     : "";
 
-  const priceMarkup = product.comingSoon
-    ? "Próximamente"
-    : money(product.variants[0].price);
-
+  const priceMarkup = product.comingSoon ? "Próximamente" : money(product.variants[0].price);
   const actionMarkup = product.comingSoon
     ? '<button class="add-button" type="button" disabled>Próximamente</button>'
     : '<button class="add-button" type="button" data-action="add">Agregar</button>';
@@ -389,12 +428,9 @@ function renderMenuItem(product) {
     <article class="menu-item" data-product-id="${product.id}">
       <div class="menu-item-media ${cutoutClass}">
         ${image}
-        ${product.eyebrow ? `<span class="item-tag">${product.eyebrow}</span>` : ""}
       </div>
       <div class="menu-item-main">
-        <div class="menu-item-top">
-          <h4>${product.name}</h4>
-        </div>
+        <div class="menu-item-top"><h4>${product.name}</h4></div>
         <p class="item-description">${product.description}</p>
         <strong class="item-price" data-role="price">${priceMarkup}</strong>
       </div>
@@ -407,16 +443,16 @@ function renderMenuItem(product) {
 }
 
 function renderMenu() {
-  specialPromosGrid.innerHTML = specialPromos.map(renderPromoCard).join("");
+  specialPromosGrid.innerHTML = specialPromos.map(renderFeaturedPromoCard).join("");
   promosGrid.innerHTML = visiblePromos.map(renderPromoCard).join("");
   fullMenu.innerHTML = menuGroups.map((group) => `
     <section class="menu-group" id="${group.id}">
       <div class="menu-group-title">
-        <span class="icon">${group.icon}</span>
-        <div>
+        <div class="title-main">
+          <span class="icon">${group.icon}</span>
           <h3>${group.label}</h3>
-          <p>${group.description}</p>
         </div>
+        <a class="menu-group-link" href="#inicio">↑</a>
       </div>
       <div class="menu-group-list">
         ${group.items.map(renderMenuItem).join("")}
@@ -474,7 +510,6 @@ function renderCart() {
   document.querySelector("#cartTotal").textContent = money(total);
   document.querySelector("#checkoutTotal").textContent = money(total);
   document.querySelector("#continueOrder").disabled = cart.length === 0;
-  document.querySelector("#stickyOrderButton").disabled = cart.length === 0;
 
   const lines = document.querySelector("#cartLines");
   if (!cart.length) {
