@@ -176,62 +176,104 @@
     <section class="checkout-modal" id="checkoutModal" aria-label="Finalizar pedido" aria-hidden="true">
       <button class="modal-close" id="closeCheckout" type="button" aria-label="Cerrar">×</button>
       <form id="checkoutForm">
-        <p class="kicker">Último paso</p>
-        <h2>¿Dónde lo pedís?</h2>
-
-        <div class="branch-options" aria-label="Elegir sucursal">
-          <label class="is-selected">
-            <input type="radio" name="branch" value="dorrego" checked />
-            <span>Alem 300, Dorrego</span>
-          </label>
-          <label>
-            <input type="radio" name="branch" value="godoyCruz" />
-            <span>F. Alcorta 1304, Godoy Cruz</span>
-          </label>
+        <div class="checkout-header-block">
+          <p class="kicker">Último paso</p>
+          <h2>Finalizá tu pedido</h2>
+          <p class="checkout-subtitle">Elegí la sucursal, la modalidad y completá tus datos para enviarlo por WhatsApp.</p>
         </div>
 
-        <div class="order-options" aria-label="Elegir modalidad">
-          <label class="is-selected">
-            <input type="radio" name="orderType" value="retiro" checked />
-            <span>Retiro en local</span>
-          </label>
-          <label id="deliveryOption">
-            <input type="radio" name="orderType" value="delivery" />
-            <span>Delivery</span>
-          </label>
-        </div>
+        <section class="checkout-panel">
+          <div class="checkout-section-title">
+            <span class="checkout-section-icon">01</span>
+            <div>
+              <strong>Sucursal</strong>
+              <small>Elegí dónde querés hacer el pedido</small>
+            </div>
+          </div>
+          <div class="branch-options" aria-label="Elegir sucursal">
+            <label class="is-selected">
+              <input type="radio" name="branch" value="dorrego" checked />
+              <span class="option-copy">
+                <strong>Alem 300</strong>
+                <small>Dorrego · Delivery y retiro</small>
+              </span>
+            </label>
+            <label>
+              <input type="radio" name="branch" value="godoyCruz" />
+              <span class="option-copy">
+                <strong>F. Alcorta 1304</strong>
+                <small>Godoy Cruz · Solo retiro</small>
+              </span>
+            </label>
+          </div>
+        </section>
 
-        <label class="field">
-          <span>Tu nombre *</span>
-          <input id="customerName" required placeholder="¿A nombre de quién?" />
-        </label>
+        <section class="checkout-panel">
+          <div class="checkout-section-title">
+            <span class="checkout-section-icon">02</span>
+            <div>
+              <strong>Modalidad</strong>
+              <small>Seleccioná cómo lo vas a recibir</small>
+            </div>
+          </div>
+          <div class="order-options" aria-label="Elegir modalidad">
+            <label class="is-selected">
+              <input type="radio" name="orderType" value="retiro" checked />
+              <span class="option-copy">
+                <strong>Retiro en local</strong>
+                <small>Pasás a buscarlo por la sucursal elegida</small>
+              </span>
+            </label>
+            <label id="deliveryOption">
+              <input type="radio" name="orderType" value="delivery" />
+              <span class="option-copy">
+                <strong>Delivery</strong>
+                <small>Disponible solo en Dorrego</small>
+              </span>
+            </label>
+          </div>
+        </section>
 
-        <div class="delivery-fields" id="deliveryFields" hidden>
+        <section class="checkout-panel checkout-panel-fields">
+          <div class="checkout-section-title">
+            <span class="checkout-section-icon">03</span>
+            <div>
+              <strong>Datos del pedido</strong>
+              <small>Completá la información básica</small>
+            </div>
+          </div>
+
           <label class="field">
-            <span>Dirección *</span>
-            <input id="customerAddress" placeholder="Calle, número, barrio" />
+            <span>Tu nombre *</span>
+            <input id="customerName" required placeholder="¿A nombre de quién?" />
           </label>
+
+          <div class="delivery-fields" id="deliveryFields" hidden>
+            <label class="field">
+              <span>Dirección *</span>
+              <input id="customerAddress" placeholder="Calle, número, barrio" />
+            </label>
+            <label class="field">
+              <span>Entre calles *</span>
+              <input id="streetCrossing" placeholder="Ej: San Martín y Belgrano" />
+            </label>
+          </div>
+
           <label class="field">
-            <span>Entre calles *</span>
-            <input id="streetCrossing" placeholder="Ej: San Martín y Belgrano" />
+            <span>Aclaraciones</span>
+            <textarea id="orderNotes" placeholder="Sin cebolla, retirar a las 22:30..." rows="3"></textarea>
           </label>
+        </section>
+
+        <div class="checkout-summary-card">
+          <div class="modal-total">
+            <span>Total estimado</span>
+            <strong id="checkoutTotal">$0</strong>
+          </div>
+          <p>El total final se confirma por WhatsApp según disponibilidad y envío.</p>
         </div>
 
-        <label class="field">
-          <span>Aclaraciones</span>
-          <textarea
-            id="orderNotes"
-            placeholder="Sin cebolla, retirar a las 22:30..."
-            rows="3"
-          ></textarea>
-        </label>
-        <div class="modal-total">
-          <span>Total estimado</span>
-          <strong id="checkoutTotal">$0</strong>
-        </div>
-        <button class="whatsapp-order" id="sendWhatsApp" type="submit">
-          Enviar pedido por WhatsApp
-        </button>
+        <button class="whatsapp-order" id="sendWhatsApp" type="submit">Enviar pedido por WhatsApp</button>
       </form>
     </section>
 
@@ -249,30 +291,42 @@
     </section>
 
     <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
-    <section class="weekday-promo-modal" id="weekdayPromoModal1" aria-hidden="true" aria-label="Promo martes a jueves 1">
-      <button class="modal-close" data-close-weekday-promo="1" type="button" aria-label="Cerrar">×</button>
-      <p class="kicker">Promos de martes a jueves</p>
-      <img
-        class="weekday-promo-image"
-        src="imagenes/promo-martes-jueves-chesse.png"
-        alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos"
-      />
-      <div class="weekday-promo-actions">
-        <button class="checkout-button" data-next-weekday-promo="2" type="button">Ver otra promo</button>
-        <button class="secondary-modal-button" data-dismiss-weekday-promos type="button">Cerrar</button>
+    <section class="weekday-promo-modal weekday-promo-carousel-modal" id="weekdayPromoModal" aria-hidden="true" aria-label="Promos martes a jueves">
+      <button class="modal-close" id="closeWeekdayPromos" type="button" aria-label="Cerrar">×</button>
+      <p class="kicker">Promociones especiales</p>
+      <h2>Martes a Jueves</h2>
+      <div class="weekday-promo-carousel" id="weekdayPromoCarousel">
+        <button class="weekday-carousel-arrow is-prev" id="weekdayPromoPrev" type="button" aria-label="Promo anterior">‹</button>
+        <div class="weekday-promo-track" id="weekdayPromoTrack">
+          <article class="weekday-promo-slide is-active" data-slide="0">
+            <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-chesse.png" alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos" />
+            <div class="weekday-promo-caption">
+              <strong>Promo 1</strong>
+              <p>Dos chesse simples + papas fritas por $17.000.</p>
+            </div>
+          </article>
+          <article class="weekday-promo-slide" data-slide="1">
+            <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-triples.png" alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos" />
+            <div class="weekday-promo-caption">
+              <strong>Promo 2</strong>
+              <p>Dos triples al precio de dos dobles por $24.000.</p>
+              <div class="weekday-promo-note">
+                <span>Válida de martes a jueves</span>
+                <small>Aplica para: Andes, American, Mexi, Chesse, Alterada y Argenta.</small>
+              </div>
+            </div>
+          </article>
+        </div>
+        <button class="weekday-carousel-arrow is-next" id="weekdayPromoNext" type="button" aria-label="Siguiente promo">›</button>
       </div>
-    </section>
-
-    <section class="weekday-promo-modal" id="weekdayPromoModal2" aria-hidden="true" aria-label="Promo martes a jueves 2">
-      <button class="modal-close" data-close-weekday-promo="2" type="button" aria-label="Cerrar">×</button>
-      <p class="kicker">Promos de martes a jueves</p>
-      <img
-        class="weekday-promo-image"
-        src="imagenes/promo-martes-jueves-triples.png"
-        alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos"
-      />
-      <div class="weekday-promo-actions">
-        <button class="checkout-button" data-close-weekday-promo="2" type="button">Entendido</button>
+      <div class="weekday-promo-footer">
+        <div class="weekday-promo-dots" id="weekdayPromoDots">
+          <button class="is-active" type="button" data-weekday-slide="0" aria-label="Ver promo 1"></button>
+          <button type="button" data-weekday-slide="1" aria-label="Ver promo 2"></button>
+        </div>
+        <div class="weekday-promo-actions">
+          <button class="checkout-button" id="weekdayPromoUnderstood" type="button">Entendido</button>
+        </div>
       </div>
     </section>
 

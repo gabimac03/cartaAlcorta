@@ -358,10 +358,27 @@ function getPromoImages(product) {
   return (promoVisualMap[product.id] || [product.image]).filter(Boolean).slice(0, 2);
 }
 
-const weekdayPromoModals = [
-  document.querySelector("#weekdayPromoModal1"),
-  document.querySelector("#weekdayPromoModal2"),
-].filter(Boolean);
+const weekdayPromoModal = document.querySelector("#weekdayPromoModal");
+const weekdayPromoModals = [weekdayPromoModal].filter(Boolean);
+let currentWeekdayPromoSlide = 0;
+
+function renderWeekdayPromoSlide(index) {
+  currentWeekdayPromoSlide = index;
+  document.querySelectorAll(".weekday-promo-slide").forEach((slide, slideIndex) => {
+    slide.classList.toggle("is-active", slideIndex === index);
+  });
+  document.querySelectorAll("[data-weekday-slide]").forEach((dot, dotIndex) => {
+    dot.classList.toggle("is-active", dotIndex === index);
+  });
+}
+
+function moveWeekdayPromoSlide(direction) {
+  const slides = document.querySelectorAll(".weekday-promo-slide");
+  if (!slides.length) return;
+  const total = slides.length;
+  const next = (currentWeekdayPromoSlide + direction + total) % total;
+  renderWeekdayPromoSlide(next);
+}
 
 function renderFeaturedPromoCard(product) {
   const images = getPromoImages(product);
@@ -689,8 +706,9 @@ function isTuesdayToThursday() {
 }
 
 function openWeekdayPromo(index = 0) {
-  const modal = weekdayPromoModals[index];
+  const modal = weekdayPromoModal;
   if (!modal || !weekdayPromoOverlay) return;
+  renderWeekdayPromoSlide(index);
   weekdayPromoOverlay.hidden = false;
   modal.hidden = false;
   modal.setAttribute("aria-hidden", "false");
@@ -701,47 +719,30 @@ function openWeekdayPromo(index = 0) {
   });
 }
 
-function closeWeekdayPromo(index, options = {}) {
-  const modal = weekdayPromoModals[index];
+function closeWeekdayPromo() {
+  const modal = weekdayPromoModal;
   if (!modal || !weekdayPromoOverlay) return;
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
-  const hasOtherOpen = weekdayPromoModals.some((item, itemIndex) => itemIndex !== index && item.classList.contains("is-open"));
-  if (!hasOtherOpen) {
-    weekdayPromoOverlay.classList.remove("is-open");
-  }
+  weekdayPromoOverlay.classList.remove("is-open");
   window.setTimeout(() => {
     modal.hidden = true;
-    if (!hasOtherOpen) {
-      weekdayPromoOverlay.hidden = true;
-    }
+    weekdayPromoOverlay.hidden = true;
     lockBody();
-    if (options.openNextIndex !== undefined) {
-      openWeekdayPromo(options.openNextIndex);
-    }
   }, 220);
 }
 
 function dismissWeekdayPromos() {
-  if (weekdayPromoOverlay) {
-    weekdayPromoOverlay.classList.remove("is-open");
-    weekdayPromoOverlay.hidden = true;
-  }
-  weekdayPromoModals.forEach((modal) => {
-    modal.classList.remove("is-open");
-    modal.hidden = true;
-    modal.setAttribute("aria-hidden", "true");
-  });
+  closeWeekdayPromo();
   try {
     sessionStorage.setItem("alcortaWeekdayPromosSeen", "true");
   } catch (error) {
     // noop
   }
-  lockBody();
 }
 
 function maybeOpenWeekdayPromos() {
-  if (!weekdayPromoModals.length || !weekdayPromoOverlay || !isTuesdayToThursday()) return;
+  if (!weekdayPromoModal || !weekdayPromoOverlay || !isTuesdayToThursday()) return;
   try {
     if (sessionStorage.getItem("alcortaWeekdayPromosSeen") === "true") return;
   } catch (error) {
@@ -751,23 +752,26 @@ function maybeOpenWeekdayPromos() {
 }
 
 document.addEventListener("click", (event) => {
-  const nextWeekdayPromoButton = event.target.closest("[data-next-weekday-promo]");
+  const nextWeekdayPromoButton = event.target.closest("#weekdayPromoNext");
   if (nextWeekdayPromoButton) {
-    const nextIndex = Number(nextWeekdayPromoButton.dataset.nextWeekdayPromo) - 1;
-    closeWeekdayPromo(0, { openNextIndex: nextIndex });
+    moveWeekdayPromoSlide(1);
     return;
   }
 
-  const closeWeekdayPromoButton = event.target.closest("[data-close-weekday-promo]");
+  const prevWeekdayPromoButton = event.target.closest("#weekdayPromoPrev");
+  if (prevWeekdayPromoButton) {
+    moveWeekdayPromoSlide(-1);
+    return;
+  }
+
+  const weekdayPromoDot = event.target.closest("[data-weekday-slide]");
+  if (weekdayPromoDot) {
+    renderWeekdayPromoSlide(Number(weekdayPromoDot.dataset.weekdaySlide));
+    return;
+  }
+
+  const closeWeekdayPromoButton = event.target.closest("#closeWeekdayPromos, #weekdayPromoUnderstood");
   if (closeWeekdayPromoButton) {
-    const modalIndex = Number(closeWeekdayPromoButton.dataset.closeWeekdayPromo) - 1;
-    if (modalIndex === 0) closeWeekdayPromo(modalIndex, { openNextIndex: 1 });
-    else dismissWeekdayPromos();
-    return;
-  }
-
-  const dismissWeekdayPromosButton = event.target.closest("[data-dismiss-weekday-promos]");
-  if (dismissWeekdayPromosButton) {
     dismissWeekdayPromos();
     return;
   }
@@ -844,8 +848,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
   const openWeekdayIndex = weekdayPromoModals.findIndex((modal) => modal.classList.contains("is-open"));
   if (openWeekdayIndex !== -1) {
-    if (openWeekdayIndex === 0) closeWeekdayPromo(0, { openNextIndex: 1 });
-    else dismissWeekdayPromos();
+    dismissWeekdayPromos();
   } else if (promoModal.classList.contains("is-open")) {
     closePromoChooser();
   } else if (checkoutModal.classList.contains("is-open")) {
@@ -856,6 +859,8 @@ document.addEventListener("keydown", (event) => {
 });
 
 weekdayPromoOverlay?.addEventListener("click", dismissWeekdayPromos);
+document.querySelector("#closeWeekdayPromos")?.addEventListener("click", dismissWeekdayPromos);
+document.querySelector("#weekdayPromoUnderstood")?.addEventListener("click", dismissWeekdayPromos);
 
 renderMenu();
 renderCart();
