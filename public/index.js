@@ -236,42 +236,12 @@ const papas = [
 ];
 
 const extras = [
-  {
-    id: "extra-doble-carne",
-    name: "Doble Carne",
-    description: "Agregado de doble carne.",
-    variants: [{ label: "Extra", price: 5000 }],
-  },
-  {
-    id: "extra-medallon",
-    name: "Medallón Extra",
-    description: "Agregá un medallón extra.",
-    variants: [{ label: "Extra", price: 2500 }],
-  },
-  {
-    id: "extra-cheddar",
-    name: "Cheddar x2",
-    description: "Agregado extra de cheddar.",
-    variants: [{ label: "Extra", price: 3000 }],
-  },
-  {
-    id: "extra-panceta",
-    name: "Cheddar y Panceta",
-    description: "Agregado de cheddar y panceta.",
-    variants: [{ label: "Extra", price: 3000 }],
-  },
-  {
-    id: "extra-papas",
-    name: "Convertí tus Papas",
-    description: "Convertí las papas de tu pedido.",
-    variants: [{ label: "Extra", price: 2000 }],
-  },
-  {
-    id: "extra-dip",
-    name: "Dip de Salsas",
-    description: "Dip de salsa adicional.",
-    variants: [{ label: "Extra", price: 500 }],
-  },
+  { id: "extra-doble-carne", name: "Doble Carne", description: "Agregado de doble carne.", variants: [{ label: "Extra", price: 5000 }] },
+  { id: "extra-medallon", name: "Medallón Extra", description: "Agregá un medallón extra.", variants: [{ label: "Extra", price: 2500 }] },
+  { id: "extra-cheddar", name: "Cheddar x2", description: "Agregado extra de cheddar.", variants: [{ label: "Extra", price: 3000 }] },
+  { id: "extra-panceta", name: "Cheddar y Panceta", description: "Agregado de cheddar y panceta.", variants: [{ label: "Extra", price: 3000 }] },
+  { id: "extra-papas", name: "Convertí tus Papas", description: "Convertí las papas de tu pedido.", variants: [{ label: "Extra", price: 2000 }] },
+  { id: "extra-dip", name: "Dip de Salsas", description: "Dip de salsa adicional.", variants: [{ label: "Extra", price: 500 }] },
 ];
 
 const bebidas = [
@@ -333,12 +303,12 @@ const alcohol = [
 ];
 
 const menuGroups = [
-  { id: "burgers", label: "Burgers", description: "Todas llevan papas. Elegí simple, doble o triple según el producto.", items: burgers },
-  { id: "lomos", label: "Lomos", description: "Todos llevan papas.", items: lomos },
-  { id: "papas", label: "Papas", description: "Bandejas para acompañar o compartir.", items: papas },
-  { id: "extras", label: "Agregados", description: "Sumale un extra a tu pedido.", items: extras },
-  { id: "bebidas", label: "Bebidas", description: "Opciones sin alcohol.", items: bebidas },
-  { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", items: alcohol },
+  { id: "burgers", label: "Burgers", description: "Todas llevan papas. Elegí simple, doble o triple según el producto.", icon: "🍔", items: burgers },
+  { id: "lomos", label: "Lomos", description: "Todos llevan papas.", icon: "🥪", items: lomos },
+  { id: "papas", label: "Papas", description: "Bandejas para acompañar o compartir.", icon: "🍟", items: papas },
+  { id: "extras", label: "Agregados", description: "Sumale un extra a tu pedido.", icon: "➕", items: extras },
+  { id: "bebidas", label: "Bebidas", description: "Opciones sin alcohol.", icon: "🥤", items: bebidas },
+  { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", icon: "🍺", items: alcohol },
 ];
 
 const specialPromoIds = ["promo-burger-simple", "promo-burger-triple"];
@@ -349,6 +319,7 @@ const selectedVariants = new Map();
 let cart = [];
 let pendingPromo = null;
 let promoSelections = [];
+
 const specialPromosGrid = document.querySelector("#specialPromosGrid");
 const promosGrid = document.querySelector("#promosGrid");
 const fullMenu = document.querySelector("#fullMenu");
@@ -364,11 +335,34 @@ const weekdayPromoModals = [
   document.querySelector("#weekdayPromoModal2"),
 ].filter(Boolean);
 
-function renderProductCard(product) {
+function renderPromoCard(product) {
   const image = product.image
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
-  const eyebrow = product.eyebrow ? `<span class="photo-label">${product.eyebrow}</span>` : "";
+
+  return `
+    <article class="promo-card" data-product-id="${product.id}">
+      <div class="promo-card-image">
+        ${image}
+        ${product.eyebrow ? `<span class="promo-eyebrow">${product.eyebrow}</span>` : ""}
+      </div>
+      <div class="promo-card-body">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <div class="promo-card-footer">
+          <strong>${money(product.variants[0].price)}</strong>
+          <button type="button" data-action="add">Agregar</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderMenuItem(product) {
+  const image = product.image
+    ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
+    : '<div class="photo-placeholder">ALCORTA</div>';
+
   const variants = !product.comingSoon && product.variants.length > 1
     ? `<div class="variant-list" aria-label="Elegir opción de ${product.name}">
         ${product.variants.map((variant, index) => `
@@ -376,50 +370,50 @@ function renderProductCard(product) {
         `).join("")}
       </div>`
     : "";
+
   const priceMarkup = product.comingSoon
-    ? '<strong data-role="price">Próximamente</strong>'
-    : `<strong data-role="price">${money(product.variants[0].price)}</strong>`;
+    ? "Próximamente"
+    : money(product.variants[0].price);
+
   const actionMarkup = product.comingSoon
     ? '<button class="add-button" type="button" disabled>Próximamente</button>'
-    : `<button class="add-button" type="button" data-action="add">
-          Agregar al pedido <span>+</span>
-        </button>`;
+    : '<button class="add-button" type="button" data-action="add">Agregar</button>';
 
   return `
-    <article class="product-card" data-product-id="${product.id}">
-      <div class="product-photo">
+    <article class="menu-item" data-product-id="${product.id}">
+      <div class="menu-item-media">
         ${image}
-        ${eyebrow}
+        ${product.eyebrow ? `<span class="item-tag">${product.eyebrow}</span>` : ""}
       </div>
-      <div class="product-body">
-        <div class="product-heading">
-          <h3>${product.name}</h3>
-          ${priceMarkup}
+      <div class="menu-item-content">
+        <div class="menu-item-top">
+          <h4>${product.name}</h4>
+          <strong class="item-price" data-role="price">${priceMarkup}</strong>
         </div>
-        <p>${product.description}</p>
+        <p class="item-description">${product.description}</p>
         ${variants}
-        ${actionMarkup}
+        <div class="menu-item-actions">${actionMarkup}</div>
       </div>
     </article>
   `;
 }
 
 function renderMenu() {
-  if (specialPromosGrid) {
-    specialPromosGrid.innerHTML = specialPromos.map(renderProductCard).join("");
-  }
-  promosGrid.innerHTML = visiblePromos.map(renderProductCard).join("");
-  fullMenu.innerHTML = menuGroups.map((group, index) => `
-    <div class="menu-group" id="${group.id}">
-      <div class="group-title">
-        <span>${String(index + 1).padStart(2, "0")}</span>
-        <h2>${group.label}</h2>
-        <p>${group.description}</p>
+  specialPromosGrid.innerHTML = specialPromos.map(renderPromoCard).join("");
+  promosGrid.innerHTML = visiblePromos.map(renderPromoCard).join("");
+  fullMenu.innerHTML = menuGroups.map((group) => `
+    <section class="menu-group" id="${group.id}">
+      <div class="menu-group-title">
+        <span class="icon">${group.icon}</span>
+        <div>
+          <h3>${group.label}</h3>
+          <p>${group.description}</p>
+        </div>
       </div>
-      <div class="product-grid">
-        ${group.items.map(renderProductCard).join("")}
+      <div class="menu-group-list">
+        ${group.items.map(renderMenuItem).join("")}
       </div>
-    </div>
+    </section>
   `).join("");
 }
 
@@ -468,11 +462,11 @@ function renderCart() {
   const total = cartTotal();
   document.querySelector("#headerCartCount").textContent = count;
   document.querySelector("#floatingCartCount").textContent = count;
-  const floatingCartTotal = document.querySelector("#floatingCartTotal");
-  if (floatingCartTotal) floatingCartTotal.textContent = money(total);
+  document.querySelector("#floatingCartTotal").textContent = money(total);
   document.querySelector("#cartTotal").textContent = money(total);
   document.querySelector("#checkoutTotal").textContent = money(total);
   document.querySelector("#continueOrder").disabled = cart.length === 0;
+  document.querySelector("#stickyOrderButton").disabled = cart.length === 0;
 
   const lines = document.querySelector("#cartLines");
   if (!cart.length) {
@@ -480,7 +474,7 @@ function renderCart() {
       <div class="empty-cart">
         <span>01</span>
         <h3>Tu pedido está vacío.</h3>
-        <p>Elegí un favorito y lo preparamos al momento.</p>
+        <p>Elegí un favorito y agregalo al carrito.</p>
       </div>
     `;
     return;
@@ -503,7 +497,6 @@ function renderCart() {
 
 function lockBody() {
   const open = [cartDrawer, checkoutModal, promoModal, ...weekdayPromoModals]
-    .filter(Boolean)
     .some((element) => element.classList.contains("is-open"));
   document.body.classList.toggle("is-locked", open);
 }
@@ -525,7 +518,7 @@ function closeLayer(element, overlay) {
   window.setTimeout(() => {
     overlay.hidden = true;
     lockBody();
-  }, 240);
+  }, 220);
 }
 
 function openCart() {
@@ -538,7 +531,7 @@ function closeCart() {
 
 function openCheckout() {
   closeCart();
-  window.setTimeout(() => openLayer(checkoutModal, checkoutOverlay), 160);
+  window.setTimeout(() => openLayer(checkoutModal, checkoutOverlay), 140);
 }
 
 function closeCheckout() {
@@ -726,9 +719,7 @@ document.addEventListener("click", (event) => {
   if (closeWeekdayPromoButton) {
     const modalIndex = Number(closeWeekdayPromoButton.dataset.closeWeekdayPromo) - 1;
     if (modalIndex === 0) closeWeekdayPromo(modalIndex, { openNextIndex: 1 });
-    else {
-      dismissWeekdayPromos();
-    }
+    else dismissWeekdayPromos();
     return;
   }
 
@@ -740,20 +731,20 @@ document.addEventListener("click", (event) => {
 
   const variantButton = event.target.closest('[data-action="variant"]');
   if (variantButton) {
-    const card = variantButton.closest(".product-card");
-    const product = getProduct(card.dataset.productId);
+    const item = variantButton.closest("[data-product-id]");
+    const product = getProduct(item.dataset.productId);
     const index = Number(variantButton.dataset.index);
     selectedVariants.set(product.id, index);
-    card.querySelectorAll('[data-action="variant"]').forEach((button) => button.classList.remove("is-active"));
+    item.querySelectorAll('[data-action="variant"]').forEach((button) => button.classList.remove("is-active"));
     variantButton.classList.add("is-active");
-    card.querySelector('[data-role="price"]').textContent = money(product.variants[index].price);
+    item.querySelector('[data-role="price"]').textContent = money(product.variants[index].price);
     return;
   }
 
   const addButton = event.target.closest('[data-action="add"]');
   if (addButton) {
-    const card = addButton.closest(".product-card");
-    const product = getProduct(card.dataset.productId);
+    const item = addButton.closest("[data-product-id]");
+    const product = getProduct(item.dataset.productId);
     const index = selectedVariants.get(product.id) ?? 0;
     addToCart(product, product.variants[index]);
     return;
@@ -781,6 +772,13 @@ document.addEventListener("click", (event) => {
 
 document.querySelector("#cartTrigger").addEventListener("click", openCart);
 document.querySelector("#floatingCart").addEventListener("click", openCart);
+document.querySelector("#stickyOrderButton").addEventListener("click", () => {
+  if (!cart.length) {
+    document.querySelector("#carta").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  openCheckout();
+});
 document.querySelector("#closeCart").addEventListener("click", closeCart);
 cartOverlay.addEventListener("click", closeCart);
 document.querySelector("#continueOrder").addEventListener("click", openCheckout);
@@ -801,10 +799,13 @@ document.addEventListener("keydown", (event) => {
   if (openWeekdayIndex !== -1) {
     if (openWeekdayIndex === 0) closeWeekdayPromo(0, { openNextIndex: 1 });
     else dismissWeekdayPromos();
+  } else if (promoModal.classList.contains("is-open")) {
+    closePromoChooser();
+  } else if (checkoutModal.classList.contains("is-open")) {
+    closeCheckout();
+  } else if (cartDrawer.classList.contains("is-open")) {
+    closeCart();
   }
-  else if (promoModal.classList.contains("is-open")) closePromoChooser();
-  else if (checkoutModal.classList.contains("is-open")) closeCheckout();
-  else if (cartDrawer.classList.contains("is-open")) closeCart();
 });
 
 weekdayPromoOverlay?.addEventListener("click", dismissWeekdayPromos);

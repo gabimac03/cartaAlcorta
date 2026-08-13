@@ -7,7 +7,7 @@
       name="description"
       content="Carta online de ALCORTA Lomos & Burgers. Armá tu pedido y envialo por WhatsApp."
     />
-    <meta name="theme-color" content="#0b0b0b" />
+    <meta name="theme-color" content="#090909" />
     <title>ALCORTA | Lomos & Burgers</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="icon" href="logo-32.png" sizes="32x32" />
@@ -15,12 +15,19 @@
     <link rel="apple-touch-icon" href="logo-64.png" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="ALCORTA, inicio">
-        <span>ALCORTA</span>
-        <small>Lomos &amp; Burgers</small>
-      </a>
-      <nav aria-label="Navegación principal">
+    <header class="mobile-header">
+      <div class="header-top">
+        <a class="brand" href="#inicio" aria-label="ALCORTA, inicio">
+          <span>ALCORTA</span>
+          <small>LOMOS &amp; BURGERS</small>
+        </a>
+        <button class="header-cart" id="cartTrigger" type="button" aria-label="Ver pedido">
+          <span class="header-cart-label">Pedido</span>
+          <b id="headerCartCount">0</b>
+        </button>
+      </div>
+
+      <nav class="quick-nav" aria-label="Categorías rápidas">
         <a href="#promociones-especiales">Especiales</a>
         <a href="#promos">Promos</a>
         <a href="#burgers">Burgers</a>
@@ -28,71 +35,89 @@
         <a href="#papas">Papas</a>
         <a href="#extras">Agregados</a>
         <a href="#bebidas">Bebidas</a>
+        <a href="#alcohol">Cervezas</a>
       </nav>
-      <button class="cart-trigger" id="cartTrigger" type="button">
-        <span>Pedido</span>
-        <b id="headerCartCount">0</b>
-      </button>
     </header>
 
     <main>
-      <section class="hero hero-compact" id="inicio">
+      <section class="hero-banner" id="inicio">
         <div class="hero-copy">
-          <p class="kicker">Promo destacada</p>
-          <h1>Lomo Alcorta</h1>
-          <p class="hero-text">
-            Carne, jamón, queso, lechuga, tomate, huevo y mayonesa.
-          </p>
-          <div class="hero-inline-actions">
-            <span class="hero-price">$12.000</span>
-            <a class="button button-primary" href="#carta">Ver la carta</a>
+          <p class="kicker">PROMO DESTACADA</p>
+          <h1>LOMO<br />ALCORTA</h1>
+          <p>Carne, jamón, queso, lechuga, tomate, huevo y mayonesa.</p>
+          <div class="hero-price-box">
+            <strong>$12.000</strong>
+            <span>Con papas</span>
           </div>
-          <div class="hero-location"><i></i>Mendoza · Retiro y delivery</div>
         </div>
-        <div class="hero-food" aria-label="Promo destacada de ALCORTA">
-          <figure class="hero-banner-figure">
-            <img src="imagenes/lomoAlcorta.jpeg" alt="Lomo Alcorta de ALCORTA" />
-          </figure>
-          <span class="hero-stamp">HOY</span>
+        <div class="hero-visual">
+          <img src="imagenes/lomoAlcorta.jpeg" alt="Lomo Alcorta" />
         </div>
       </section>
 
-      <section class="section promos-section promos-section-special" id="promociones-especiales">
-        <div class="section-intro">
-          <p class="kicker">Destacadas</p>
-          <h2>Promociones especiales.</h2>
-          <p>Encontrá acá las promos destacadas de martes a jueves.</p>
-        </div>
-        <div class="product-grid promo-grid" id="specialPromosGrid"></div>
+      <section class="category-shortcuts" aria-label="Accesos rápidos">
+        <a href="#promos" class="shortcut-card shortcut-active">
+          <span class="shortcut-icon">★</span>
+          <span>Promos</span>
+        </a>
+        <a href="#burgers" class="shortcut-card">
+          <span class="shortcut-icon">🍔</span>
+          <span>Burgers</span>
+        </a>
+        <a href="#lomos" class="shortcut-card">
+          <span class="shortcut-icon">🥪</span>
+          <span>Lomos</span>
+        </a>
+        <a href="#papas" class="shortcut-card">
+          <span class="shortcut-icon">🍟</span>
+          <span>Papas</span>
+        </a>
+        <a href="#bebidas" class="shortcut-card">
+          <span class="shortcut-icon">🥤</span>
+          <span>Bebidas</span>
+        </a>
       </section>
 
-      <section class="section promos-section" id="promos">
-        <div class="section-intro">
-          <p class="kicker">Para compartir — o no</p>
-          <h2>Promos que resuelven la noche.</h2>
-        </div>
-        <div class="product-grid promo-grid" id="promosGrid"></div>
-      </section>
-
-      <section class="section menu-intro-section" id="carta">
-        <div class="section-intro menu-intro">
+      <section class="content-section" id="promociones-especiales">
+        <div class="section-head">
           <div>
-            <p class="kicker">Carta completa</p>
-            <h2>Pedí más rápido desde el celular.</h2>
+            <p class="kicker kicker-orange">PROMOCIONES</p>
+            <h2>Promociones especiales</h2>
           </div>
-          <p>
-            Tocá una categoría, elegí el producto y agregalo al pedido.
-          </p>
         </div>
+        <div class="promo-scroller" id="specialPromosGrid"></div>
       </section>
 
-      <section class="full-menu" id="fullMenu" aria-label="Carta completa"></section>
-
-      <section class="locations-section" id="ubicaciones">
-        <div class="location-heading">
-          <p class="kicker">Dos puntos, el mismo fuego</p>
-          <h2>Elegí tu sucursal.</h2>
+      <section class="content-section" id="promos">
+        <div class="section-head">
+          <div>
+            <p class="kicker kicker-orange">PARA COMPARTIR</p>
+            <h2>Promos</h2>
+          </div>
         </div>
+        <div class="promo-scroller" id="promosGrid"></div>
+      </section>
+
+      <section class="content-section menu-section" id="carta">
+        <div class="section-head compact-head">
+          <div>
+            <p class="kicker">NUESTRA CARTA</p>
+            <h2>Elegí y pedí rápido</h2>
+          </div>
+          <p class="section-help">Todo pensado para que se vea cómodo desde el celular.</p>
+        </div>
+
+        <div class="menu-groups" id="fullMenu" aria-label="Carta completa"></div>
+      </section>
+
+      <section class="content-section locations-section" id="ubicaciones">
+        <div class="section-head compact-head">
+          <div>
+            <p class="kicker kicker-orange">SUCURSALES</p>
+            <h2>Elegí tu sucursal</h2>
+          </div>
+        </div>
+
         <div class="location-grid">
           <a
             class="location-card"
@@ -100,7 +125,7 @@
             target="_blank"
             rel="noreferrer"
           >
-            <span>01</span>
+            <span class="location-number">01</span>
             <div>
               <small>Dorrego</small>
               <h3>Alem 300</h3>
@@ -113,7 +138,7 @@
             target="_blank"
             rel="noreferrer"
           >
-            <span>02</span>
+            <span class="location-number">02</span>
             <div>
               <small>Godoy Cruz</small>
               <h3>Figueroa Alcorta 1304</h3>
@@ -124,37 +149,25 @@
       </section>
     </main>
 
-    <footer>
-      <a class="brand" href="#inicio">
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#inicio">
         <span>ALCORTA</span>
-        <small>Lomos &amp; Burgers</small>
+        <small>LOMOS &amp; BURGERS</small>
       </a>
-      <p>Take Away · Mendoza</p>
-      <a
-        href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
-        target="_blank"
-        rel="noreferrer"
-      >
-        WhatsApp · 261 709 4467
-      </a>
+      <p>Mendoza · Retiro y delivery</p>
     </footer>
 
-    <div class="mobile-sticky-actions">
-      <button class="floating-cart" id="floatingCart" type="button">
-        <span class="floating-cart-copy">
+    <div class="sticky-bar">
+      <button class="sticky-cart" id="floatingCart" type="button">
+        <div class="sticky-cart-copy">
           <small>Tu pedido</small>
           <strong id="floatingCartTotal">$0</strong>
-        </span>
+        </div>
         <b id="floatingCartCount">0</b>
       </button>
-      <a
-        class="mobile-whatsapp-cta"
-        href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <button class="sticky-order" id="stickyOrderButton" type="button">
         Pedir por WhatsApp
-      </a>
+      </button>
     </div>
 
     <div class="cart-backdrop" id="cartOverlay" hidden></div>
@@ -180,12 +193,7 @@
     </aside>
 
     <div class="checkout-backdrop" id="checkoutOverlay" hidden></div>
-    <section
-      class="checkout-modal"
-      id="checkoutModal"
-      aria-label="Finalizar pedido"
-      aria-hidden="true"
-    >
+    <section class="checkout-modal" id="checkoutModal" aria-label="Finalizar pedido" aria-hidden="true">
       <button class="modal-close" id="closeCheckout" type="button" aria-label="Cerrar">×</button>
       <form id="checkoutForm">
         <p class="kicker">Último paso</p>
@@ -221,11 +229,11 @@
         <div class="delivery-fields" id="deliveryFields" hidden>
           <label class="field">
             <span>Dirección *</span>
-            <input id="customerAddress" placeholder="Calle, número y localidad" />
+            <input id="customerAddress" placeholder="Calle, número, barrio" />
           </label>
           <label class="field">
             <span>Entre calles *</span>
-            <input id="streetCrossing" placeholder="Ej.: entre Colón y San Martín" />
+            <input id="streetCrossing" placeholder="Ej: San Martín y Belgrano" />
           </label>
         </div>
 
@@ -251,7 +259,7 @@
     <section class="promo-modal" id="promoModal" aria-hidden="true">
       <button class="modal-close" id="closePromo" type="button" aria-label="Cerrar">×</button>
       <p class="kicker">Armá tu promo</p>
-      <h2 id="promoModalTitle">Elegí las 2 burgers</h2>
+      <h2 id="promoModalTitle">Elegí las 2 opciones</h2>
       <p class="promo-help" id="promoModalHelp"></p>
       <div class="promo-selection" id="promoSelection"></div>
       <div class="promo-choice-grid" id="promoChoices"></div>
@@ -259,7 +267,6 @@
         Agregar promo al pedido
       </button>
     </section>
-
 
     <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
     <section class="weekday-promo-modal" id="weekdayPromoModal1" aria-hidden="true" aria-label="Promo martes a jueves 1">
@@ -272,7 +279,7 @@
       />
       <div class="weekday-promo-actions">
         <button class="checkout-button" data-next-weekday-promo="2" type="button">Ver otra promo</button>
-        <button class="weekday-promo-dismiss" data-dismiss-weekday-promos type="button">Cerrar</button>
+        <button class="secondary-modal-button" data-dismiss-weekday-promos type="button">Cerrar</button>
       </div>
     </section>
 
