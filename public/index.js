@@ -330,19 +330,24 @@ const checkoutOverlay = document.querySelector("#checkoutOverlay");
 const promoModal = document.querySelector("#promoModal");
 const promoOverlay = document.querySelector("#promoOverlay");
 const weekdayPromoOverlay = document.querySelector("#weekdayPromoOverlay");
+
+function imageUsesCutout(path = "") {
+  return /\.png$/i.test(path);
+}
 const weekdayPromoModals = [
   document.querySelector("#weekdayPromoModal1"),
   document.querySelector("#weekdayPromoModal2"),
 ].filter(Boolean);
 
 function renderPromoCard(product) {
+  const cutoutClass = imageUsesCutout(product.image) ? "is-cutout" : "";
   const image = product.image
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
 
   return `
     <article class="promo-card" data-product-id="${product.id}">
-      <div class="promo-card-image">
+      <div class="promo-card-image ${cutoutClass}">
         ${image}
         ${product.eyebrow ? `<span class="promo-eyebrow">${product.eyebrow}</span>` : ""}
       </div>
@@ -359,6 +364,7 @@ function renderPromoCard(product) {
 }
 
 function renderMenuItem(product) {
+  const cutoutClass = imageUsesCutout(product.image) ? "is-cutout" : "";
   const image = product.image
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
@@ -381,7 +387,7 @@ function renderMenuItem(product) {
 
   return `
     <article class="menu-item" data-product-id="${product.id}">
-      <div class="menu-item-media">
+      <div class="menu-item-media ${cutoutClass}">
         ${image}
         ${product.eyebrow ? `<span class="item-tag">${product.eyebrow}</span>` : ""}
       </div>
@@ -776,7 +782,11 @@ document.querySelector("#cartTrigger").addEventListener("click", openCart);
 document.querySelector("#floatingCart").addEventListener("click", openCart);
 document.querySelector("#stickyOrderButton").addEventListener("click", () => {
   if (!cart.length) {
-    document.querySelector("#carta").scrollIntoView({ behavior: "smooth", block: "start" });
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBERS.dorrego}?text=${encodeURIComponent("Hola! Quiero hacer un pedido a ALCORTA")}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
     return;
   }
   openCheckout();
