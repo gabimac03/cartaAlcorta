@@ -311,17 +311,38 @@ const menuGroups = [
   { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", icon: "CZ", items: alcohol },
 ];
 
-const specialPromoIds = ["promo-burger-simple", "promo-burger-triple"];
-const specialPromos = promos.filter((promo) => specialPromoIds.includes(promo.id));
-const visiblePromos = promos.filter((promo) => !specialPromoIds.includes(promo.id));
-const products = [...promos, ...menuGroups.flatMap((group) => group.items)];
+const specialPromos = [
+  {
+    id: "special-chesse-simple",
+    eyebrow: "MARTES A JUEVES",
+    name: "2 Chesse simples + papas",
+    description: "Promo especial válida de martes a jueves.",
+    image: "imagenes/promo-especial-chesse-17.png",
+    variants: [{ label: "Promo", price: 17000 }],
+  },
+  {
+    id: "special-dobles-por-triples",
+    eyebrow: "MARTES A JUEVES",
+    name: "2 Triples al precio de 2 Dobles",
+    description: "Elegí entre Andes, American, Mexi, Chesse, Alterada y Argenta.",
+    image: "imagenes/promo-especial-triples-24.png",
+    variants: [{ label: "Promo", price: 24000 }],
+    choice: { title: "Elegí las 2 burgers de la promo", options: ["Andes", "American", "Mexi", "Chesse", "Alterada", "Argenta"] },
+  },
+];
+const lomoPromoIds = ["promo-lomo-alcorta", "promo-lomos-clasicos", "promo-lomos-especiales", "promo-lomos-xl"];
+const burgerPromoIds = ["promo-burger-simple", "promo-burger-doble", "promo-anomalia", "promo-burger-triple", "promo-burger-cuadruple"];
+const lomoPromos = promos.filter((promo) => lomoPromoIds.includes(promo.id));
+const burgerPromos = promos.filter((promo) => burgerPromoIds.includes(promo.id));
+const products = [...specialPromos, ...promos, ...menuGroups.flatMap((group) => group.items)];
 const selectedVariants = new Map();
 let cart = [];
 let pendingPromo = null;
 let promoSelections = [];
 
 const specialPromosGrid = document.querySelector("#specialPromosGrid");
-const promosGrid = document.querySelector("#promosGrid");
+const lomosPromosGrid = document.querySelector("#lomosPromosGrid");
+const burgersPromosGrid = document.querySelector("#burgersPromosGrid");
 const fullMenu = document.querySelector("#fullMenu");
 const cartDrawer = document.querySelector("#cartDrawer");
 const cartOverlay = document.querySelector("#cartOverlay");
@@ -348,10 +369,12 @@ function buildPromoTitle(name) {
 }
 
 function buildPromoHighlight(product) {
-  if (product.id === "promo-burger-triple") return "Las dobles";
-  if (product.id === "promo-burger-simple") return "Más papas";
+  if (product.id === "special-chesse-simple") return "$17.000";
+  if (product.id === "special-dobles-por-triples") return "$24.000";
+  if (product.id === "promo-burger-triple") return "Triples";
+  if (product.id === "promo-burger-simple") return "Simples";
   if (product.id.includes("lomos")) return "Con papas";
-  return "Promo especial";
+  return product.eyebrow || "Promo";
 }
 
 function getPromoImages(product) {
@@ -381,23 +404,18 @@ function moveWeekdayPromoSlide(direction) {
 }
 
 function renderFeaturedPromoCard(product) {
-  const images = getPromoImages(product);
-  const visual = images.map((path) => {
-    const cutoutClass = imageUsesCutout(path) ? "is-cutout" : "";
-    return `<img class="${cutoutClass}" src="${path}" alt="${product.name}" loading="lazy" />`;
-  }).join("");
-
+  const poster = product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />` : "";
   return `
     <article class="featured-promo-card" data-product-id="${product.id}">
+      <div class="featured-promo-visual">
+        ${poster}
+        <span class="featured-promo-badge"><span class="value">${money(product.variants[0].price)}</span><span class="label">PROMO</span></span>
+      </div>
       <div class="featured-promo-copy">
         <h3>${product.name}</h3>
         <p class="promo-highlight">${buildPromoHighlight(product)}</p>
         <p class="promo-description">${product.description}</p>
-        <button class="promo-action" type="button" data-action="add">PEDIR AHORA</button>
-      </div>
-      <div class="featured-promo-visual ${images.some((path) => imageUsesCutout(path)) ? "is-cutout" : ""}">
-        ${visual}
-        <span class="featured-promo-badge"><span class="value">${money(product.variants[0].price)}</span><span class="label">PROMO</span></span>
+        <button class="promo-action" type="button" data-action="add">Pedir ahora</button>
       </div>
     </article>
   `;
@@ -415,7 +433,7 @@ function renderPromoCard(product) {
         <p>${product.description}</p>
         <div class="promo-mini-footer">
           <strong>${money(product.variants[0].price)}</strong>
-          <button type="button" data-action="add">Agregar</button>
+          <button type="button" data-action="add">Pedir</button>
         </div>
       </div>
     </article>
@@ -461,7 +479,8 @@ function renderMenuItem(product) {
 
 function renderMenu() {
   specialPromosGrid.innerHTML = specialPromos.map(renderFeaturedPromoCard).join("");
-  promosGrid.innerHTML = visiblePromos.map(renderPromoCard).join("");
+  lomosPromosGrid.innerHTML = lomoPromos.map(renderPromoCard).join("");
+  burgersPromosGrid.innerHTML = burgerPromos.map(renderPromoCard).join("");
   fullMenu.innerHTML = menuGroups.map((group) => `
     <section class="menu-group" id="${group.id}">
       <div class="menu-group-title">
@@ -790,8 +809,11 @@ document.addEventListener("click", (event) => {
 
   const addButton = event.target.closest('[data-action="add"]');
   if (addButton) {
+    event.preventDefault();
     const item = addButton.closest("[data-product-id]");
+    if (!item) return;
     const product = getProduct(item.dataset.productId);
+    if (!product) return;
     const index = selectedVariants.get(product.id) ?? 0;
     addToCart(product, product.variants[index]);
     return;
@@ -817,6 +839,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
+document.querySelector(".menu-button")?.addEventListener("click", () => { document.querySelector("#carta")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
 document.querySelector("#cartTrigger").addEventListener("click", openCart);
 document.querySelector("#floatingCart").addEventListener("click", openCart);
 document.querySelector("#stickyOrderButton").addEventListener("click", () => {
