@@ -191,7 +191,7 @@ const promos = [
     description: "Dos burgers triples a elección + papas fritas.",
     image: "imagenes/americanBurg.jpg",
     variants: [{ label: "Promo", price: 28000 }],
-    choice: { title: "Elegí las 2 burgers triples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
+    choice: { title: "Elegí las 2 burgers triples", options: ["Mexi", "Andes", "Chesse", "Alterada", "American"] },
   },
   {
     id: "promo-anomalia",
@@ -341,12 +341,15 @@ const menuGroups = [
   { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", items: alcohol },
 ];
 
-const visiblePromos = promos;
-const products = [...visiblePromos, ...menuGroups.flatMap((group) => group.items)];
+const specialPromoIds = ["promo-burger-simple", "promo-burger-triple"];
+const specialPromos = promos.filter((promo) => specialPromoIds.includes(promo.id));
+const visiblePromos = promos.filter((promo) => !specialPromoIds.includes(promo.id));
+const products = [...promos, ...menuGroups.flatMap((group) => group.items)];
 const selectedVariants = new Map();
 let cart = [];
 let pendingPromo = null;
 let promoSelections = [];
+const specialPromosGrid = document.querySelector("#specialPromosGrid");
 const promosGrid = document.querySelector("#promosGrid");
 const fullMenu = document.querySelector("#fullMenu");
 const cartDrawer = document.querySelector("#cartDrawer");
@@ -402,6 +405,9 @@ function renderProductCard(product) {
 }
 
 function renderMenu() {
+  if (specialPromosGrid) {
+    specialPromosGrid.innerHTML = specialPromos.map(renderProductCard).join("");
+  }
   promosGrid.innerHTML = visiblePromos.map(renderProductCard).join("");
   fullMenu.innerHTML = menuGroups.map((group, index) => `
     <div class="menu-group" id="${group.id}">
@@ -462,6 +468,8 @@ function renderCart() {
   const total = cartTotal();
   document.querySelector("#headerCartCount").textContent = count;
   document.querySelector("#floatingCartCount").textContent = count;
+  const floatingCartTotal = document.querySelector("#floatingCartTotal");
+  if (floatingCartTotal) floatingCartTotal.textContent = money(total);
   document.querySelector("#cartTotal").textContent = money(total);
   document.querySelector("#checkoutTotal").textContent = money(total);
   document.querySelector("#continueOrder").disabled = cart.length === 0;

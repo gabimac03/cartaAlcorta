@@ -21,6 +21,7 @@
         <small>Lomos &amp; Burgers</small>
       </a>
       <nav aria-label="Navegación principal">
+        <a href="#promociones-especiales">Especiales</a>
         <a href="#promos">Promos</a>
         <a href="#burgers">Burgers</a>
         <a href="#lomos">Lomos</a>
@@ -35,35 +36,34 @@
     </header>
 
     <main>
-      <section class="hero" id="inicio">
+      <section class="hero hero-compact" id="inicio">
         <div class="hero-copy">
-          <p class="kicker">Hecho al momento · Mendoza</p>
-          <h1>El antojo empieza acá.</h1>
+          <p class="kicker">Promo destacada</p>
+          <h1>Lomo Alcorta</h1>
           <p class="hero-text">
-            Lomos gigantes, smash burgers y promos para compartir.
+            Carne, jamón, queso, lechuga, tomate, huevo y mayonesa.
           </p>
-          <div class="hero-actions">
+          <div class="hero-inline-actions">
+            <span class="hero-price">$12.000</span>
             <a class="button button-primary" href="#carta">Ver la carta</a>
-            <a
-              class="button button-secondary"
-              href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Pedir por WhatsApp
-            </a>
           </div>
           <div class="hero-location"><i></i>Mendoza · Retiro y delivery</div>
         </div>
-        <div class="hero-food" aria-label="Burger y lomo de ALCORTA">
-          <figure class="hero-burger">
-            <img src="imagenes/americanBurg.jpg" alt="AmericaBurg de ALCORTA" />
+        <div class="hero-food" aria-label="Promo destacada de ALCORTA">
+          <figure class="hero-banner-figure">
+            <img src="imagenes/lomoAlcorta.jpeg" alt="Lomo Alcorta de ALCORTA" />
           </figure>
-          <figure class="hero-lomo">
-            <img src="imagenes/lomoAmericano.jpg" alt="Lomo Americano de ALCORTA" />
-          </figure>
-          <span class="hero-stamp">Fuego<br />real</span>
+          <span class="hero-stamp">HOY</span>
         </div>
+      </section>
+
+      <section class="section promos-section promos-section-special" id="promociones-especiales">
+        <div class="section-intro">
+          <p class="kicker">Destacadas</p>
+          <h2>Promociones especiales.</h2>
+          <p>Encontrá acá las promos destacadas de martes a jueves.</p>
+        </div>
+        <div class="product-grid promo-grid" id="specialPromosGrid"></div>
       </section>
 
       <section class="section promos-section" id="promos">
@@ -78,11 +78,10 @@
         <div class="section-intro menu-intro">
           <div>
             <p class="kicker">Carta completa</p>
-            <h2>Elegí tu próximo antojo.</h2>
+            <h2>Pedí más rápido desde el celular.</h2>
           </div>
           <p>
-            Seleccioná el tamaño o sabor, agregalo al pedido y envianos todo por
-            WhatsApp.
+            Tocá una categoría, elegí el producto y agregalo al pedido.
           </p>
         </div>
       </section>
@@ -140,10 +139,23 @@
       </a>
     </footer>
 
-    <button class="floating-cart" id="floatingCart" type="button">
-      <span>Ver pedido</span>
-      <b id="floatingCartCount">0</b>
-    </button>
+    <div class="mobile-sticky-actions">
+      <button class="floating-cart" id="floatingCart" type="button">
+        <span class="floating-cart-copy">
+          <small>Tu pedido</small>
+          <strong id="floatingCartTotal">$0</strong>
+        </span>
+        <b id="floatingCartCount">0</b>
+      </button>
+      <a
+        class="mobile-whatsapp-cta"
+        href="https://wa.me/5492617094467?text=Hola!%20Quiero%20hacer%20un%20pedido%20a%20ALCORTA"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Pedir por WhatsApp
+      </a>
+    </div>
 
     <div class="cart-backdrop" id="cartOverlay" hidden></div>
     <aside class="cart-drawer" id="cartDrawer" aria-label="Tu pedido" aria-hidden="true">
