@@ -317,7 +317,7 @@ const specialPromos = [
     eyebrow: "MARTES A JUEVES",
     name: "2 Chesse simples + papas",
     description: "Promo especial válida de martes a jueves.",
-    image: "imagenes/promo-especial-chesse-17.png",
+    image: "imagenes/promo-martes-jueves-chesse.png",
     variants: [{ label: "Promo", price: 17000 }],
   },
   {
@@ -325,7 +325,7 @@ const specialPromos = [
     eyebrow: "MARTES A JUEVES",
     name: "2 Triples al precio de 2 Dobles",
     description: "Elegí entre Andes, American, Mexi, Chesse, Alterada y Argenta.",
-    image: "imagenes/promo-especial-triples-24.png",
+    image: "imagenes/promo-martes-jueves-triples.png",
     variants: [{ label: "Promo", price: 24000 }],
     choice: { title: "Elegí las 2 burgers de la promo", options: ["Andes", "American", "Mexi", "Chesse", "Alterada", "Argenta"] },
   },
@@ -365,7 +365,7 @@ const promoVisualMap = {
 };
 
 function buildPromoTitle(name) {
-  return name.replace(/(2)/g, "2").replace(/Burgers/i, "Burgers");
+  return name.replace(/\b(2)\b/g, "2").replace(/\bBurgers\b/i, "Burgers");
 }
 
 function buildPromoHighlight(product) {
@@ -882,8 +882,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 weekdayPromoOverlay?.addEventListener("click", dismissWeekdayPromos);
-document.querySelector("#closeWeekdayPromos")?.addEventListener("click", dismissWeekdayPromos);
-document.querySelector("#weekdayPromoUnderstood")?.addEventListener("click", dismissWeekdayPromos);
 
 renderMenu();
 renderCart();

@@ -1233,3 +1233,301 @@ button { cursor: pointer; }
     grid-template-columns: repeat(2, minmax(0,1fr));
   }
 }
+
+/* ===== Ajustes 2026-08-13: modales, imágenes y controles ===== */
+/* Los modales cerrados no deben capturar clicks. Este era el motivo principal
+   por el que varios botones parecían no funcionar. */
+.cart-backdrop,
+.checkout-backdrop,
+.promo-backdrop,
+.weekday-promo-backdrop,
+.cart-drawer,
+.checkout-modal,
+.promo-modal,
+.weekday-promo-modal {
+  pointer-events: none;
+}
+.cart-backdrop.is-open,
+.checkout-backdrop.is-open,
+.promo-backdrop.is-open,
+.weekday-promo-backdrop.is-open,
+.cart-drawer.is-open,
+.checkout-modal.is-open,
+.promo-modal.is-open,
+.weekday-promo-modal.is-open {
+  pointer-events: auto;
+}
+
+/* Promos especiales: poster limpio, sin el marco/recuadro negro flotando
+   de las composiciones anteriores y con la misma proporción visual. */
+.featured-promo-visual {
+  aspect-ratio: 4 / 5;
+  background: #f3eee7;
+}
+.featured-promo-visual img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  display: block;
+}
+.featured-promo-badge {
+  display: none;
+}
+
+/* Base común de todos los modales */
+.cart-drawer,
+.checkout-modal,
+.promo-modal {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 -18px 52px rgba(0,0,0,.24);
+}
+.modal-close,
+.cart-head button {
+  position: relative;
+  z-index: 4;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+}
+.checkout-modal > .modal-close,
+.promo-modal > .modal-close,
+.weekday-promo-modal > .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* Modal de armado de promociones */
+.promo-modal {
+  padding: 20px 16px max(18px, env(safe-area-inset-bottom));
+}
+.promo-modal .kicker {
+  margin: 0 48px 5px 0;
+}
+.promo-modal h2 {
+  margin: 0 48px 5px 0;
+  font-size: clamp(1.55rem, 7vw, 2rem);
+  line-height: .96;
+}
+.promo-help {
+  margin: 6px 0 14px;
+  font-size: .8rem;
+  line-height: 1.4;
+}
+.promo-selection {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.promo-selection > div,
+.promo-selection > button {
+  min-width: 0;
+  min-height: 68px;
+  padding: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+.promo-selection > button strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.promo-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 34dvh;
+  overflow-y: auto;
+  padding: 2px;
+  margin: 0 0 14px;
+}
+.promo-choice-grid button {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.promo-choice-grid button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+/* Checkout: orden visual consistente y cómodo en celular */
+.checkout-modal {
+  overflow: hidden;
+}
+.checkout-modal form {
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 16px max(18px, env(safe-area-inset-bottom));
+  gap: 12px;
+}
+.checkout-header-block {
+  padding: 2px 46px 2px 0;
+}
+.checkout-header-block .kicker {
+  margin: 0 0 5px;
+}
+.checkout-header-block h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 7vw, 2rem);
+  line-height: .96;
+}
+.checkout-subtitle {
+  max-width: 34rem;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+.checkout-panel {
+  min-width: 0;
+  padding: 12px;
+  border-radius: 16px;
+}
+.checkout-section-title > div {
+  min-width: 0;
+}
+.branch-options,
+.order-options {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.branch-options label,
+.order-options label {
+  width: 100%;
+  min-width: 0;
+  min-height: 62px;
+  padding: 11px 10px 11px 40px;
+  cursor: pointer;
+}
+.option-copy {
+  min-width: 0;
+}
+.option-copy strong,
+.option-copy small {
+  overflow-wrap: anywhere;
+}
+.delivery-fields[hidden],
+#deliveryOption[hidden] {
+  display: none !important;
+}
+.field {
+  min-width: 0;
+}
+.field input,
+.field textarea {
+  min-width: 0;
+  font: inherit;
+  outline: none;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255,107,0,.12);
+}
+.checkout-summary-card {
+  min-width: 0;
+}
+.whatsapp-order,
+.checkout-button {
+  cursor: pointer;
+}
+
+/* Popup automático martes a jueves */
+.weekday-promo-carousel-modal {
+  width: min(92vw, 390px);
+  max-height: min(88dvh, 720px);
+  overflow-y: auto;
+  padding: 18px 14px 14px;
+  gap: 10px;
+}
+.weekday-promo-carousel-modal .kicker,
+.weekday-promo-carousel-modal h2 {
+  padding-right: 44px;
+}
+.weekday-promo-carousel-modal .kicker {
+  margin: 0;
+}
+.weekday-promo-carousel-modal h2 {
+  margin: 0;
+  font-size: clamp(1.65rem, 8vw, 2.1rem);
+}
+.weekday-promo-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: none;
+}
+.weekday-carousel-arrow {
+  top: 42%;
+  cursor: pointer;
+}
+.weekday-promo-caption strong,
+.weekday-promo-caption p,
+.weekday-promo-note small {
+  overflow-wrap: anywhere;
+}
+.weekday-promo-actions .checkout-button {
+  min-height: 44px;
+}
+
+/* Cart: evita cortes de textos y botones */
+.cart-line > div:first-child {
+  min-width: 0;
+}
+.cart-line strong,
+.cart-line small {
+  overflow-wrap: anywhere;
+}
+.quantity {
+  flex: none;
+}
+.quantity button {
+  cursor: pointer;
+}
+
+@media (max-width: 359px) {
+  .promo-choice-grid {
+    grid-template-columns: 1fr;
+  }
+  .promo-selection {
+    grid-template-columns: 1fr 1fr;
+  }
+  .checkout-modal form {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .checkout-panel {
+    padding: 10px;
+  }
+  .weekday-promo-carousel-modal {
+    width: 94vw;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (min-width: 600px) {
+  .cart-drawer,
+  .checkout-modal,
+  .promo-modal {
+    left: 50%;
+    width: min(94vw, 480px);
+    max-width: 480px;
+    transform: translate(-50%, 100%);
+    border-radius: 22px 22px 0 0;
+  }
+  .cart-drawer.is-open,
+  .checkout-modal.is-open,
+  .promo-modal.is-open {
+    transform: translate(-50%, 0);
+  }
+}
