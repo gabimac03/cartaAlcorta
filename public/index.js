@@ -303,12 +303,12 @@ const alcohol = [
 ];
 
 const menuGroups = [
-  { id: "burgers", label: "Burgers", description: "Todas llevan papas. Elegí simple, doble o triple según el producto.", icon: "🍔", items: burgers },
-  { id: "lomos", label: "Lomos", description: "Todos llevan papas.", icon: "🥪", items: lomos },
-  { id: "papas", label: "Papas", description: "Bandejas para acompañar o compartir.", icon: "🍟", items: papas },
-  { id: "extras", label: "Agregados", description: "Sumale un extra a tu pedido.", icon: "➕", items: extras },
-  { id: "bebidas", label: "Bebidas", description: "Opciones sin alcohol.", icon: "🥤", items: bebidas },
-  { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", icon: "🍺", items: alcohol },
+  { id: "burgers", label: "Burgers", description: "Todas llevan papas. Elegí simple, doble o triple según el producto.", icon: "BG", items: burgers },
+  { id: "lomos", label: "Lomos", description: "Todos llevan papas.", icon: "LM", items: lomos },
+  { id: "papas", label: "Papas", description: "Bandejas para acompañar o compartir.", icon: "PP", items: papas },
+  { id: "extras", label: "Agregados", description: "Sumale un extra a tu pedido.", icon: "EX", items: extras },
+  { id: "bebidas", label: "Bebidas", description: "Opciones sin alcohol.", icon: "BD", items: bebidas },
+  { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", icon: "CZ", items: alcohol },
 ];
 
 const specialPromoIds = ["promo-burger-simple", "promo-burger-triple"];
@@ -385,12 +385,14 @@ function renderMenuItem(product) {
         ${image}
         ${product.eyebrow ? `<span class="item-tag">${product.eyebrow}</span>` : ""}
       </div>
-      <div class="menu-item-content">
+      <div class="menu-item-main">
         <div class="menu-item-top">
           <h4>${product.name}</h4>
-          <strong class="item-price" data-role="price">${priceMarkup}</strong>
         </div>
         <p class="item-description">${product.description}</p>
+        <strong class="item-price" data-role="price">${priceMarkup}</strong>
+      </div>
+      <div class="menu-item-side">
         ${variants}
         <div class="menu-item-actions">${actionMarkup}</div>
       </div>
