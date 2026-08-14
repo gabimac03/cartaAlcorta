@@ -1,351 +1,384 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Carta online de ALCORTA Lomos & Burgers. Armá tu pedido y envialo por WhatsApp."
-    />
-    <meta name="theme-color" content="#ffffff" />
-    <title>ALCORTA | Lomos & Burgers</title>
-    <link rel="stylesheet" href="index.css" />
-    <link rel="icon" href="logo-32.png" sizes="32x32" />
-    <link rel="icon" href="logo.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="logo-64.png" />
-  </head>
-  <body>
-    <header class="app-header">
-      <button class="icon-button menu-button" type="button" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-      <a class="brand brand-header" href="#inicio" aria-label="ALCORTA, inicio">
-        <span>ALCORTA</span>
-        <small>BURGERS</small>
-      </a>
-      <button class="icon-button header-cart-icon" id="cartTrigger" type="button" aria-label="Ver pedido">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M8 7V6a4 4 0 1 1 8 0v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M5.5 8.5h13l-.9 10a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8l-.9-10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-        </svg>
-        <b id="headerCartCount">0</b>
-      </button>
-    </header>
 
-    <main class="app-main">
-      <section class="hero-card" id="inicio">
-        <div class="hero-copy">
-          <h1>SIMPLE.<br />REAL.<br /><span>ALCORTA.</span></h1>
-          <p>Ingredientes reales, sabor inolvidable.</p>
-          <a class="hero-cta" href="#promociones-especiales">VER PROMOS</a>
-        </div>
-        <div class="hero-visual hero-visual-lomo">
-          <img src="imagenes/hero-lomo-sinfondo.png" alt="Lomo destacado de Alcorta" />
-        </div>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Carta online de ALCORTA Lomos & Burgers. Armá tu pedido y envialo por WhatsApp." />
+  <meta name="theme-color" content="#ffffff" />
+  <title>ALCORTA | Lomos & Burgers</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" href="logo-32.png" sizes="32x32" />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="logo-64.png" />
+</head>
 
-      <section class="category-section" aria-label="Categorías principales">
-        <p class="section-mini-title centered">CATEGORÍAS</p>
-        <div class="category-shortcuts">
-          <a href="#burgers" class="shortcut-card">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M13 27h38" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 24c1.5-8 8.5-13 16-13s14.5 5 16 13" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 37h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M19 44h26" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
-            </span>
-            <span class="shortcut-label">Burgers</span>
-          </a>
-          <a href="#lomos" class="shortcut-card">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M10 33c5-10 10-15 22-15s17 5 22 15" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M14 37h36" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M16 43h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M21 28c3 5 6 7 11 7s8-2 11-7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-            </span>
-            <span class="shortcut-label">Lomos</span>
-          </a>
-          <a href="#papas" class="shortcut-card">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M21 16h22l-3 29H24l-3-29Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><path d="M23 18l-6-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M30 18v-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M38 18l5-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
-            </span>
-            <span class="shortcut-label">Papas</span>
-          </a>
-          <a href="#bebidas" class="shortcut-card">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M24 14h16l-2 34H26l-2-34Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><path d="M30 22h5" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M39 14l7-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
-            </span>
-            <span class="shortcut-label">Bebidas</span>
-          </a>
-          <a href="#promos" class="shortcut-card">
-            <span class="shortcut-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none"><path d="M13 30 31 12l20 20-18 18-20-20Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><circle cx="24" cy="24" r="2.7" fill="currentColor"/><path d="M27 37l10-10" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
-            </span>
-            <span class="shortcut-label">Promos</span>
-          </a>
-        </div>
-      </section>
+<body>
+  <header class="app-header">
+    <button class="icon-button menu-button" type="button" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand brand-header" href="#inicio" aria-label="ALCORTA, inicio">
+      <span>ALCORTA</span>
+      <small>LOMOS & BURGERS</small>
+    </a>
+    <button class="icon-button header-cart-icon" id="cartTrigger" type="button" aria-label="Ver pedido">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M8 7V6a4 4 0 1 1 8 0v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        <path d="M5.5 8.5h13l-.9 10a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8l-.9-10Z" stroke="currentColor"
+          stroke-width="1.8" stroke-linejoin="round" />
+      </svg>
+      <b id="headerCartCount">0</b>
+    </button>
+  </header>
 
-      <section class="featured-section" id="promociones-especiales">
-        <div class="section-head section-head-inline">
-          <div>
-            <h2>Promociones especiales</h2>
-            <p class="section-note">Las promos destacadas de la semana.</p>
-          </div>
-        </div>
-        <div class="featured-promo-list" id="specialPromosGrid"></div>
-      </section>
+  <main class="app-main">
+    <section class="hero-card" id="inicio">
+      <div class="hero-copy">
+        <h1>SIMPLE.<br />REAL.<br /><span>ALCORTA.</span></h1>
+        <p>Ingredientes reales, sabor inolvidable.</p>
+        <a class="hero-cta" href="#promociones-especiales">VER PROMOS</a>
+      </div>
+      <div class="hero-visual hero-visual-lomo">
+        <img src="imagenes/hero-lomo-sinfondo.png" alt="Lomo destacado de Alcorta" />
+      </div>
+    </section>
 
-      <section class="promo-collections-section" id="promos">
-        <div class="section-head section-head-inline">
-          <div>
-            <h2>Promos</h2>
-            <p class="section-note">Elegí promos de lomos o burgers.</p>
-          </div>
-        </div>
+    <section class="category-section" aria-label="Categorías principales">
+      <p class="section-mini-title centered">CATEGORÍAS</p>
+      <div class="category-shortcuts">
+        <a href="#burgers" class="shortcut-card">
+          <span class="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M13 27h38" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M16 24c1.5-8 8.5-13 16-13s14.5 5 16 13" stroke="currentColor" stroke-width="3.4"
+                stroke-linecap="round" />
+              <path d="M16 37h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M19 44h26" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="shortcut-label">Burgers</span>
+        </a>
+        <a href="#lomos" class="shortcut-card">
+          <span class="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M10 33c5-10 10-15 22-15s17 5 22 15" stroke="currentColor" stroke-width="3.4"
+                stroke-linecap="round" />
+              <path d="M14 37h36" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M16 43h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M21 28c3 5 6 7 11 7s8-2 11-7" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="shortcut-label">Lomos</span>
+        </a>
+        <a href="#papas" class="shortcut-card">
+          <span class="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M21 16h22l-3 29H24l-3-29Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" />
+              <path d="M23 18l-6-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M30 18v-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M38 18l5-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="shortcut-label">Papas</span>
+        </a>
+        <a href="#bebidas" class="shortcut-card">
+          <span class="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M24 14h16l-2 34H26l-2-34Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" />
+              <path d="M30 22h5" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+              <path d="M39 14l7-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="shortcut-label">Bebidas</span>
+        </a>
+        <a href="#promos" class="shortcut-card">
+          <span class="shortcut-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M13 30 31 12l20 20-18 18-20-20Z" stroke="currentColor" stroke-width="3.4"
+                stroke-linejoin="round" />
+              <circle cx="24" cy="24" r="2.7" fill="currentColor" />
+              <path d="M27 37l10-10" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="shortcut-label">Promos</span>
+        </a>
+      </div>
+    </section>
 
-        <div class="promo-collection-block" id="promos-lomos">
-          <div class="promo-collection-head">
-            <h3>Promos Lomos</h3>
-            <span>4 opciones</span>
-          </div>
-          <div class="promo-grid" id="lomosPromosGrid"></div>
-        </div>
-
-        <div class="promo-collection-block" id="promos-burgers">
-          <div class="promo-collection-head">
-            <h3>Promos Burgers</h3>
-            <span>5 opciones</span>
-          </div>
-          <div class="promo-grid" id="burgersPromosGrid"></div>
-        </div>
-      </section>
-
-      <section class="menu-section" id="carta">
-        <div class="menu-groups" id="fullMenu" aria-label="Carta completa"></div>
-      </section>
-
-      <section class="locations-section" id="ubicaciones">
-        <div class="section-head section-head-inline">
-          <div>
-            <h2>Sucursales</h2>
-          </div>
-        </div>
-        <div class="location-grid">
-          <a class="location-card" href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A" target="_blank" rel="noreferrer">
-            <span class="location-number">01</span>
-            <div>
-              <small>Dorrego</small>
-              <h3>Alem 300</h3>
-              <p>Abrir en Google Maps</p>
-            </div>
-          </a>
-          <a class="location-card" href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8" target="_blank" rel="noreferrer">
-            <span class="location-number">02</span>
-            <div>
-              <small>Godoy Cruz</small>
-              <h3>Figueroa Alcorta 1304</h3>
-              <p>Abrir en Google Maps</p>
-            </div>
-          </a>
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer">
-      <a class="brand footer-brand" href="#inicio">
-        <span>ALCORTA</span>
-        <small>LOMOS &amp; BURGERS</small>
-      </a>
-      <p>Mendoza · Retiro y delivery</p>
-    </footer>
-
-    <div class="sticky-bar">
-      <button class="sticky-cart" id="floatingCart" type="button">
-        <div class="sticky-cart-copy">
-          <small>Tu pedido</small>
-          <strong id="floatingCartTotal">$0</strong>
-        </div>
-        <b id="floatingCartCount">0</b>
-      </button>
-      <button class="sticky-order" id="stickyOrderButton" type="button">
-        Pedir por WhatsApp
-      </button>
-    </div>
-
-    <div class="cart-backdrop" id="cartOverlay" hidden></div>
-    <aside class="cart-drawer" id="cartDrawer" aria-label="Tu pedido" aria-hidden="true">
-      <div class="cart-head">
+    <section class="featured-section" id="promociones-especiales">
+      <div class="section-head section-head-inline">
         <div>
-          <p class="kicker">ALCORTA</p>
-          <h2>Tu pedido</h2>
+          <h2>Promociones especiales</h2>
+          <p class="section-note">Las promos destacadas de la semana.</p>
         </div>
-        <button id="closeCart" type="button" aria-label="Cerrar pedido">×</button>
       </div>
-      <div class="cart-lines" id="cartLines"></div>
-      <div class="cart-foot">
-        <div class="cart-total">
-          <span>Total</span>
-          <strong id="cartTotal">$0</strong>
-        </div>
-        <button class="checkout-button" id="continueOrder" type="button" disabled>
-          Continuar pedido
-        </button>
-        <small>En el siguiente paso elegís la sucursal y modalidad.</small>
-      </div>
-    </aside>
-
-    <div class="checkout-backdrop" id="checkoutOverlay" hidden></div>
-    <section class="checkout-modal" id="checkoutModal" aria-label="Finalizar pedido" aria-hidden="true">
-      <button class="modal-close" id="closeCheckout" type="button" aria-label="Cerrar">×</button>
-      <form id="checkoutForm">
-        <div class="checkout-header-block">
-          <p class="kicker">Último paso</p>
-          <h2>Finalizá tu pedido</h2>
-          <p class="checkout-subtitle">Elegí la sucursal, la modalidad y completá tus datos para enviarlo por WhatsApp.</p>
-        </div>
-
-        <section class="checkout-panel">
-          <div class="checkout-section-title">
-            <span class="checkout-section-icon">01</span>
-            <div>
-              <strong>Sucursal</strong>
-              <small>Elegí dónde querés hacer el pedido</small>
-            </div>
-          </div>
-          <div class="branch-options" aria-label="Elegir sucursal">
-            <label class="is-selected">
-              <input type="radio" name="branch" value="dorrego" checked />
-              <span class="option-copy">
-                <strong>Alem 300</strong>
-                <small>Dorrego · Delivery y retiro</small>
-              </span>
-            </label>
-            <label>
-              <input type="radio" name="branch" value="godoyCruz" />
-              <span class="option-copy">
-                <strong>F. Alcorta 1304</strong>
-                <small>Godoy Cruz · Solo retiro</small>
-              </span>
-            </label>
-          </div>
-        </section>
-
-        <section class="checkout-panel">
-          <div class="checkout-section-title">
-            <span class="checkout-section-icon">02</span>
-            <div>
-              <strong>Modalidad</strong>
-              <small>Seleccioná cómo lo vas a recibir</small>
-            </div>
-          </div>
-          <div class="order-options" aria-label="Elegir modalidad">
-            <label class="is-selected">
-              <input type="radio" name="orderType" value="retiro" checked />
-              <span class="option-copy">
-                <strong>Retiro en local</strong>
-                <small>Pasás a buscarlo por la sucursal elegida</small>
-              </span>
-            </label>
-            <label id="deliveryOption">
-              <input type="radio" name="orderType" value="delivery" />
-              <span class="option-copy">
-                <strong>Delivery</strong>
-                <small>Disponible solo en Dorrego</small>
-              </span>
-            </label>
-          </div>
-        </section>
-
-        <section class="checkout-panel checkout-panel-fields">
-          <div class="checkout-section-title">
-            <span class="checkout-section-icon">03</span>
-            <div>
-              <strong>Datos del pedido</strong>
-              <small>Completá la información básica</small>
-            </div>
-          </div>
-
-          <label class="field">
-            <span>Tu nombre *</span>
-            <input id="customerName" required placeholder="¿A nombre de quién?" />
-          </label>
-
-          <div class="delivery-fields" id="deliveryFields" hidden>
-            <label class="field">
-              <span>Dirección *</span>
-              <input id="customerAddress" placeholder="Calle, número, barrio" />
-            </label>
-            <label class="field">
-              <span>Entre calles *</span>
-              <input id="streetCrossing" placeholder="Ej: San Martín y Belgrano" />
-            </label>
-          </div>
-
-          <label class="field">
-            <span>Aclaraciones</span>
-            <textarea id="orderNotes" placeholder="Sin cebolla, retirar a las 22:30..." rows="3"></textarea>
-          </label>
-        </section>
-
-        <div class="checkout-summary-card">
-          <div class="modal-total">
-            <span>Total estimado</span>
-            <strong id="checkoutTotal">$0</strong>
-          </div>
-          <p>El total final se confirma por WhatsApp según disponibilidad y envío.</p>
-        </div>
-
-        <button class="whatsapp-order" id="sendWhatsApp" type="submit">Enviar pedido por WhatsApp</button>
-      </form>
+      <div class="featured-promo-list" id="specialPromosGrid"></div>
     </section>
 
-    <div class="promo-backdrop" id="promoOverlay" hidden></div>
-    <section class="promo-modal" id="promoModal" aria-hidden="true">
-      <button class="modal-close" id="closePromo" type="button" aria-label="Cerrar">×</button>
-      <p class="kicker">Armá tu promo</p>
-      <h2 id="promoModalTitle">Elegí las 2 opciones</h2>
-      <p class="promo-help" id="promoModalHelp"></p>
-      <div class="promo-selection" id="promoSelection"></div>
-      <div class="promo-choice-grid" id="promoChoices"></div>
-      <button class="checkout-button" id="confirmPromo" type="button" disabled>
-        Agregar promo al pedido
+    <section class="promo-collections-section" id="promos">
+      <div class="section-head section-head-inline">
+        <div>
+          <h2>Promos</h2>
+          <p class="section-note">Elegí promos de lomos o burgers.</p>
+        </div>
+      </div>
+
+      <div class="promo-collection-block" id="promos-lomos">
+        <div class="promo-collection-head">
+          <h3>Promos Lomos</h3>
+          <span>4 opciones</span>
+        </div>
+        <div class="promo-grid" id="lomosPromosGrid"></div>
+      </div>
+
+      <div class="promo-collection-block" id="promos-burgers">
+        <div class="promo-collection-head">
+          <h3>Promos Burgers</h3>
+          <span>5 opciones</span>
+        </div>
+        <div class="promo-grid" id="burgersPromosGrid"></div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="carta">
+      <div class="menu-groups" id="fullMenu" aria-label="Carta completa"></div>
+    </section>
+
+    <section class="locations-section" id="ubicaciones">
+      <div class="section-head section-head-inline">
+        <div>
+          <h2>Sucursales</h2>
+        </div>
+      </div>
+      <div class="location-grid">
+        <a class="location-card" href="https://maps.app.goo.gl/9TzD1sY451uYh8Q2A" target="_blank" rel="noreferrer">
+          <span class="location-number">01</span>
+          <div>
+            <small>Dorrego</small>
+            <h3>Alem 300</h3>
+            <p>Abrir en Google Maps</p>
+          </div>
+        </a>
+        <a class="location-card" href="https://maps.app.goo.gl/pW6z3mD3J6XfFzQk8" target="_blank" rel="noreferrer">
+          <span class="location-number">02</span>
+          <div>
+            <small>Godoy Cruz</small>
+            <h3>Figueroa Alcorta 1304</h3>
+            <p>Abrir en Google Maps</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#inicio">
+      <span>ALCORTA</span>
+      <small>LOMOS &amp; BURGERS</small>
+    </a>
+    <p>Mendoza · Retiro y delivery</p>
+  </footer>
+
+  <div class="sticky-bar">
+    <button class="sticky-cart" id="floatingCart" type="button">
+      <div class="sticky-cart-copy">
+        <small>Tu pedido</small>
+        <strong id="floatingCartTotal">$0</strong>
+      </div>
+      <b id="floatingCartCount">0</b>
+    </button>
+    <button class="sticky-order" id="stickyOrderButton" type="button">
+      Pedir por WhatsApp
+    </button>
+  </div>
+
+  <div class="cart-backdrop" id="cartOverlay" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Tu pedido" aria-hidden="true">
+    <div class="cart-head">
+      <div>
+        <p class="kicker">ALCORTA</p>
+        <h2>Tu pedido</h2>
+      </div>
+      <button id="closeCart" type="button" aria-label="Cerrar pedido">×</button>
+    </div>
+    <div class="cart-lines" id="cartLines"></div>
+    <div class="cart-foot">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cartTotal">$0</strong>
+      </div>
+      <button class="checkout-button" id="continueOrder" type="button" disabled>
+        Continuar pedido
       </button>
-    </section>
+      <small>En el siguiente paso elegís la sucursal y modalidad.</small>
+    </div>
+  </aside>
 
-    <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
-    <section class="weekday-promo-modal weekday-promo-carousel-modal" id="weekdayPromoModal" aria-hidden="true" aria-label="Promos martes a jueves">
-      <button class="modal-close" id="closeWeekdayPromos" type="button" aria-label="Cerrar">×</button>
-      <p class="kicker">Promociones especiales</p>
-      <h2>Martes a Jueves</h2>
-      <div class="weekday-promo-carousel" id="weekdayPromoCarousel">
-        <button class="weekday-carousel-arrow is-prev" id="weekdayPromoPrev" type="button" aria-label="Promo anterior">‹</button>
-        <div class="weekday-promo-track" id="weekdayPromoTrack">
-          <article class="weekday-promo-slide is-active" data-slide="0">
-            <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-chesse.png" alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos" />
-            <div class="weekday-promo-caption">
-              <strong>Promo 1</strong>
-              <p>Dos chesse simples + papas fritas por $17.000.</p>
-            </div>
-          </article>
-          <article class="weekday-promo-slide" data-slide="1">
-            <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-triples.png" alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos" />
-            <div class="weekday-promo-caption">
-              <strong>Promo 2</strong>
-              <p>Dos triples al precio de dos dobles por $24.000.</p>
-              <div class="weekday-promo-note">
-                <span>Válida de martes a jueves</span>
-                <small>Aplica para: Andes, American, Mexi, Chesse, Alterada y Argenta.</small>
-              </div>
-            </div>
-          </article>
-        </div>
-        <button class="weekday-carousel-arrow is-next" id="weekdayPromoNext" type="button" aria-label="Siguiente promo">›</button>
+  <div class="checkout-backdrop" id="checkoutOverlay" hidden></div>
+  <section class="checkout-modal" id="checkoutModal" aria-label="Finalizar pedido" aria-hidden="true">
+    <button class="modal-close" id="closeCheckout" type="button" aria-label="Cerrar">×</button>
+    <form id="checkoutForm">
+      <div class="checkout-header-block">
+        <p class="kicker">Último paso</p>
+        <h2>Finalizá tu pedido</h2>
+        <p class="checkout-subtitle">Elegí la sucursal, la modalidad y completá tus datos para enviarlo por WhatsApp.
+        </p>
       </div>
-      <div class="weekday-promo-footer">
-        <div class="weekday-promo-dots" id="weekdayPromoDots">
-          <button class="is-active" type="button" data-weekday-slide="0" aria-label="Ver promo 1"></button>
-          <button type="button" data-weekday-slide="1" aria-label="Ver promo 2"></button>
-        </div>
-        <div class="weekday-promo-actions">
-          <button class="checkout-button" id="weekdayPromoUnderstood" type="button">Entendido</button>
-        </div>
-      </div>
-    </section>
 
-    <script src="index.js"></script>
-  </body>
+      <section class="checkout-panel">
+        <div class="checkout-section-title">
+          <span class="checkout-section-icon">01</span>
+          <div>
+            <strong>Sucursal</strong>
+            <small>Elegí dónde querés hacer el pedido</small>
+          </div>
+        </div>
+        <div class="branch-options" aria-label="Elegir sucursal">
+          <label class="is-selected">
+            <input type="radio" name="branch" value="dorrego" checked />
+            <span class="option-copy">
+              <strong>Alem 300</strong>
+              <small>Dorrego · Delivery y retiro</small>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="branch" value="godoyCruz" />
+            <span class="option-copy">
+              <strong>F. Alcorta 1304</strong>
+              <small>Godoy Cruz · Solo retiro</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="checkout-panel">
+        <div class="checkout-section-title">
+          <span class="checkout-section-icon">02</span>
+          <div>
+            <strong>Modalidad</strong>
+            <small>Seleccioná cómo lo vas a recibir</small>
+          </div>
+        </div>
+        <div class="order-options" aria-label="Elegir modalidad">
+          <label class="is-selected">
+            <input type="radio" name="orderType" value="retiro" checked />
+            <span class="option-copy">
+              <strong>Retiro en local</strong>
+              <small>Pasás a buscarlo por la sucursal elegida</small>
+            </span>
+          </label>
+          <label id="deliveryOption">
+            <input type="radio" name="orderType" value="delivery" />
+            <span class="option-copy">
+              <strong>Delivery</strong>
+              <small>Disponible solo en Dorrego</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="checkout-panel checkout-panel-fields">
+        <div class="checkout-section-title">
+          <span class="checkout-section-icon">03</span>
+          <div>
+            <strong>Datos del pedido</strong>
+            <small>Completá la información básica</small>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Tu nombre *</span>
+          <input id="customerName" required placeholder="¿A nombre de quién?" />
+        </label>
+
+        <div class="delivery-fields" id="deliveryFields" hidden>
+          <label class="field">
+            <span>Dirección *</span>
+            <input id="customerAddress" placeholder="Calle, número, barrio" />
+          </label>
+          <label class="field">
+            <span>Entre calles *</span>
+            <input id="streetCrossing" placeholder="Ej: San Martín y Belgrano" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Aclaraciones</span>
+          <textarea id="orderNotes" placeholder="Sin cebolla, retirar a las 22:30..." rows="3"></textarea>
+        </label>
+      </section>
+
+      <div class="checkout-summary-card">
+        <div class="modal-total">
+          <span>Total estimado</span>
+          <strong id="checkoutTotal">$0</strong>
+        </div>
+        <p>El total final se confirma por WhatsApp según disponibilidad y envío.</p>
+      </div>
+
+      <button class="whatsapp-order" id="sendWhatsApp" type="submit">Enviar pedido por WhatsApp</button>
+    </form>
+  </section>
+
+  <div class="promo-backdrop" id="promoOverlay" hidden></div>
+  <section class="promo-modal" id="promoModal" aria-hidden="true">
+    <button class="modal-close" id="closePromo" type="button" aria-label="Cerrar">×</button>
+    <p class="kicker">Armá tu promo</p>
+    <h2 id="promoModalTitle">Elegí las 2 opciones</h2>
+    <p class="promo-help" id="promoModalHelp"></p>
+    <div class="promo-selection" id="promoSelection"></div>
+    <div class="promo-choice-grid" id="promoChoices"></div>
+    <button class="checkout-button" id="confirmPromo" type="button" disabled>
+      Agregar promo al pedido
+    </button>
+  </section>
+
+  <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
+  <section class="weekday-promo-modal weekday-promo-carousel-modal" id="weekdayPromoModal" aria-hidden="true"
+    aria-label="Promos martes a jueves">
+    <button class="modal-close" id="closeWeekdayPromos" type="button" aria-label="Cerrar">×</button>
+    <p class="kicker">Promociones especiales</p>
+    <h2>Martes a Jueves</h2>
+    <div class="weekday-promo-carousel" id="weekdayPromoCarousel">
+      <button class="weekday-carousel-arrow is-prev" id="weekdayPromoPrev" type="button"
+        aria-label="Promo anterior">‹</button>
+      <div class="weekday-promo-track" id="weekdayPromoTrack">
+        <article class="weekday-promo-slide is-active" data-slide="0">
+          <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-chesse.png"
+            alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos" />
+          <div class="weekday-promo-caption">
+            <strong>Promo 1</strong>
+            <p>Dos chesse simples + papas fritas por $17.000.</p>
+          </div>
+        </article>
+        <article class="weekday-promo-slide" data-slide="1">
+          <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-triples.png"
+            alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos" />
+          <div class="weekday-promo-caption">
+            <strong>Promo 2</strong>
+            <p>Dos triples al precio de dos dobles por $24.000.</p>
+            <div class="weekday-promo-note">
+              <span>Válida de martes a jueves</span>
+              <small>Aplica para: Andes, American, Mexi, Chesse, Alterada y Argenta.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+      <button class="weekday-carousel-arrow is-next" id="weekdayPromoNext" type="button"
+        aria-label="Siguiente promo">›</button>
+    </div>
+    <div class="weekday-promo-footer">
+      <div class="weekday-promo-dots" id="weekdayPromoDots">
+        <button class="is-active" type="button" data-weekday-slide="0" aria-label="Ver promo 1"></button>
+        <button type="button" data-weekday-slide="1" aria-label="Ver promo 2"></button>
+      </div>
+      <div class="weekday-promo-actions">
+        <button class="checkout-button" id="weekdayPromoUnderstood" type="button">Entendido</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="index.js"></script>
+</body>
+
 </html>
