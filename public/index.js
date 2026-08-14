@@ -341,6 +341,8 @@ let pendingPromo = null;
 let promoSelections = [];
 
 const specialPromosGrid = document.querySelector("#specialPromosGrid");
+const specialPromosSection = document.querySelector("#promociones-especiales");
+const heroPromosButton = document.querySelector('.hero-cta[href="#promociones-especiales"]');
 const lomosPromosGrid = document.querySelector("#lomosPromosGrid");
 const burgersPromosGrid = document.querySelector("#burgersPromosGrid");
 const fullMenu = document.querySelector("#fullMenu");
@@ -478,7 +480,23 @@ function renderMenuItem(product) {
 }
 
 function renderMenu() {
-  specialPromosGrid.innerHTML = specialPromos.map(renderFeaturedPromoCard).join("");
+  const weekdaySpecialPromosActive = isTuesdayToThursday();
+
+  if (specialPromosSection) {
+    specialPromosSection.hidden = !weekdaySpecialPromosActive;
+    specialPromosSection.setAttribute("aria-hidden", weekdaySpecialPromosActive ? "false" : "true");
+  }
+
+  if (specialPromosGrid) {
+    specialPromosGrid.innerHTML = weekdaySpecialPromosActive
+      ? specialPromos.map(renderFeaturedPromoCard).join("")
+      : "";
+  }
+
+  if (heroPromosButton) {
+    heroPromosButton.href = weekdaySpecialPromosActive ? "#promociones-especiales" : "#promos";
+  }
+
   lomosPromosGrid.innerHTML = lomoPromos.map(renderPromoCard).join("");
   burgersPromosGrid.innerHTML = burgerPromos.map(renderPromoCard).join("");
   fullMenu.innerHTML = menuGroups.map((group) => `
