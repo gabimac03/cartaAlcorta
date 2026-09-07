@@ -21,13 +21,13 @@ const burgers = [
     id: "american",
     name: "American",
     description: "Carne 100 gr, cheddar, cebolla caramelizada, panceta, salsa Chick Fill A y barbacoa. Incluye papas.",
-    image: "imagenes/americanBurg.jpg",
+    image: "productos/AMERICAN.png",
     variants: standardBurgerVariants,
   },
   {
     id: "caprichosa",
     name: "Caprichosa",
-    image: "imagenes/caprichosa.png",
+    image: "productos/CAPRICHOSA.png",
     description: "Carne 100 gr, provoleta, panceta, cebolla morada, queso azul y salsa Big Alcorta. Incluye papas.",
     variants: standardBurgerVariants,
   },
@@ -35,27 +35,27 @@ const burgers = [
     id: "mexi",
     name: "Mexi",
     description: "Carne 100 gr, morrones asados, palta, huevo y mayo de ajo. Incluye papas.",
-    image: "imagenes/mexiBurg.jpg",
+    image: "productos/MEXI.png",
     variants: standardBurgerVariants,
   },
   {
     id: "andes",
     name: "Andes",
     description: "Carne 100 gr, tomate, lechuga, cheddar, huevo y mayo de ajo. Incluye papas.",
-    image: "imagenes/andesBurg.jpg",
+    image: "productos/ANDES.png",
     variants: standardBurgerVariants,
   },
   {
     id: "argenta",
     name: "Argenta",
-    image: "imagenes/argenta.png",
+    image: "productos/ARGENTA.png",
     description: "Carne 100 gr, cheddar, tomate, lechuga, mayo bacon y panceta. Incluye papas.",
     variants: standardBurgerVariants,
   },
   {
     id: "alterada",
     name: "Alterada",
-    image: "imagenes/alterada.png",
+    image: "productos/ALTERADA.png",
     description: "Carne 100 gr, cheddar, pepinillos, kétchup, cebolla y panceta. Incluye papas.",
     variants: standardBurgerVariants,
   },
@@ -63,7 +63,7 @@ const burgers = [
     id: "chesse",
     name: "Chesse",
     description: "Carne 100 gr, cheddar, cebolla y kétchup. Incluye papas.",
-    image: "imagenes/chesseBurg.jpg",
+    image: "productos/CHESSE.png",
     variants: [
       { label: "Simple", price: 11000 },
       { label: "Doble", price: 13000 },
@@ -74,6 +74,7 @@ const burgers = [
     id: "anomalia",
     name: "Anomalía",
     description: "Carne de lomo 150 gr, cheddar, salsa Chick Fill A, cebolla caramelizada y cheddar. Incluye papas.",
+    image: "productos/ANOMALIA.png",
     variants: [{ label: "Unidad", price: 15000 }],
   },
 ];
@@ -83,42 +84,42 @@ const lomos = [
     id: "lomo-alcorta",
     name: "Lomo Alcorta",
     description: "Pan, carne, tomate, lechuga y mayo Alcorta. Incluye papas.",
-    image: "imagenes/lomoAlcorta.jpeg",
+    image: "productos/lomo-alcorta.jpeg",
     variants: [{ label: "Unidad", price: 12000 }],
   },
   {
     id: "lomo-completo",
     name: "Lomo Completo",
     description: "Pan, carne, lechuga, tomate, huevo, jamón, queso y mayo Alcorta. Incluye papas.",
-    image: "imagenes/lomoCompleto.jpg",
+    image: "productos/lomo-completo.jpeg",
     variants: [{ label: "Unidad", price: 14000 }],
   },
   {
     id: "lomo-alcorta-xl",
     name: "Lomo Alcorta XL",
     description: "Pan, carne XL, tomate, lechuga y mayo Alcorta. Incluye papas.",
-    image: "imagenes/lomoAlcorta.jpeg",
+    image: "productos/lomo-alcorta-xl.jpeg",
     variants: [{ label: "Unidad", price: 17000 }],
   },
   {
     id: "lomo-completo-xl",
     name: "Lomo Completo XL",
     description: "Pan, carne XL, lechuga, tomate, huevo, jamón, queso y mayo Alcorta. Incluye papas.",
-    image: "imagenes/lomoCompleto.jpg",
+    image: "productos/completo xl.png",
     variants: [{ label: "Unidad", price: 18000 }],
   },
   {
     id: "lomo-americano",
     name: "Lomo Americano",
     description: "Pan, carne, cheddar, cebolla caramelizada, panceta y salsa Chick Fill A. Incluye papas.",
-    image: "imagenes/lomoAmericano.jpg",
+    image: "productos/lomo-americano.jpeg",
     variants: [{ label: "Unidad", price: 16000 }],
   },
   {
     id: "lomo-criollo",
     name: "Lomo Criollo",
     description: "Pan, carne, provoleta, salteado de morrones, mayo de ajo y salsa criolla. Incluye papas.",
-    image: "imagenes/lomoCriollo.jpeg",
+    image: "productos/lomo-criollo.jpeg",
     variants: [{ label: "Unidad", price: 16000 }],
   },
   {
@@ -136,7 +137,7 @@ const promos = [
     eyebrow: "LOMOS",
     name: "2 Lomos Alcorta",
     description: "Dos Lomos Alcorta + papas fritas.",
-    image: "imagenes/lomoAlcorta.jpeg",
+    image: "productos/promo-lomos-alcorta.jpeg",
     variants: [{ label: "Promo", price: 22000 }],
   },
   {
@@ -144,7 +145,7 @@ const promos = [
     eyebrow: "LOMOS · CLÁSICOS",
     name: "2 Lomos Clásicos",
     description: "Dos lomos clásicos a elección + papas fritas.",
-    image: "imagenes/lomoCompleto.jpg",
+    image: "productos/promocion clasicos.png",
     variants: [{ label: "Promo", price: 26000 }],
     choice: { title: "Elegí los 2 lomos clásicos", options: ["Lomo Alcorta", "Lomo Completo"] },
   },
@@ -153,7 +154,7 @@ const promos = [
     eyebrow: "LOMOS · ESPECIALES",
     name: "2 Lomos Especiales",
     description: "Dos lomos especiales a elección + papas fritas.",
-    image: "imagenes/lomoAmericano.jpg",
+    image: "productos/especiales-lomos.jpeg",
     variants: [{ label: "Promo", price: 29000 }],
     choice: { title: "Elegí los 2 lomos especiales", options: ["Lomo Americano", "Lomo Criollo"] },
   },
@@ -162,7 +163,7 @@ const promos = [
     eyebrow: "LOMOS · XL",
     name: "2 Lomos XL",
     description: "Dos lomos XL a elección + papas fritas.",
-    image: "imagenes/lomoAlcorta.jpeg",
+    image: "productos/PROMOCION XL.png",
     variants: [{ label: "Promo", price: 33000 }],
     choice: { title: "Elegí los 2 lomos XL", options: ["Lomo Alcorta XL", "Lomo Completo XL"] },
   },
@@ -171,7 +172,7 @@ const promos = [
     eyebrow: "BURGERS",
     name: "2 Burgers Simples",
     description: "Dos burgers simples a elección + papas fritas.",
-    image: "imagenes/chesseBurg.jpg",
+    image: "productos/promo-burgers-simples.png",
     variants: [{ label: "Promo", price: 21000 }],
     choice: { title: "Elegí las 2 burgers simples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
@@ -180,7 +181,7 @@ const promos = [
     eyebrow: "BURGERS",
     name: "2 Burgers Dobles",
     description: "Dos burgers dobles a elección + papas fritas.",
-    image: "imagenes/andesBurg.jpg",
+    image: "productos/promocion-burgers-dobles.png",
     variants: [{ label: "Promo", price: 24000 }],
     choice: { title: "Elegí las 2 burgers dobles", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
@@ -189,7 +190,7 @@ const promos = [
     eyebrow: "BURGERS",
     name: "2 Burgers Triples",
     description: "Dos burgers triples a elección + papas fritas.",
-    image: "imagenes/americanBurg.jpg",
+    image: "productos/promo-burgers-triples.png",
     variants: [{ label: "Promo", price: 28000 }],
     choice: { title: "Elegí las 2 burgers triples", options: ["Mexi", "Andes", "Chesse", "Alterada", "American"] },
   },
@@ -198,6 +199,7 @@ const promos = [
     eyebrow: "BURGERS",
     name: "2 Burgers Anomalía",
     description: "Dos burgers Anomalía + papas fritas.",
+    image: "productos/promocion anomalia.png",
     variants: [{ label: "Promo", price: 29000 }],
   },
   {
@@ -205,7 +207,7 @@ const promos = [
     eyebrow: "BURGERS",
     name: "2 Burgers Cuádruples",
     description: "Dos burgers cuádruples a elección + papas fritas.",
-    image: "imagenes/americanBurg.jpg",
+    image: "productos/promocion-burgers-cuadruples.png",
     variants: [{ label: "Promo", price: 32000 }],
     choice: { title: "Elegí las 2 burgers cuádruples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
@@ -358,12 +360,17 @@ function imageUsesCutout(path = "") {
   return /\.png$/i.test(path);
 }
 
+function getProductImage(product, variantIndex = 0) {
+  const variant = product?.variants?.[variantIndex];
+  return (variant && product?.variantImages?.[variant.label]) || product?.image || "";
+}
+
 const promoVisualMap = {
-  "promo-burger-triple": ["imagenes/americanBurg.jpg", "imagenes/alterada.png"],
-  "promo-burger-simple": ["imagenes/chesseBurg.jpg", "imagenes/mexiBurg.jpg"],
-  "promo-lomos-especiales": ["imagenes/lomoAmericano.jpg", "imagenes/lomoCriollo.jpeg"],
-  "promo-lomos-clasicos": ["imagenes/lomoAlcorta.jpeg", "imagenes/lomoCompleto.jpg"],
-  "promo-lomos-xl": ["imagenes/lomoAlcorta.jpeg", "imagenes/lomoCompleto.jpg"],
+  "promo-burger-triple": ["productos/promo-burgers-triples.png"],
+  "promo-burger-simple": ["productos/promo-burgers-simples.png"],
+  "promo-lomos-especiales": ["productos/especiales-lomos.jpeg"],
+  "promo-lomos-clasicos": ["productos/promocion clasicos.png"],
+  "promo-lomos-xl": ["productos/PROMOCION XL.png"],
 };
 
 function buildPromoTitle(name) {
@@ -443,9 +450,10 @@ function renderPromoCard(product) {
 }
 
 function renderMenuItem(product) {
-  const cutoutClass = imageUsesCutout(product.image) ? "is-cutout" : "";
-  const image = product.image
-    ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
+  const initialImage = getProductImage(product, 0);
+  const cutoutClass = imageUsesCutout(initialImage) ? "is-cutout" : "";
+  const image = initialImage
+    ? `<img src="${initialImage}" alt="${product.name}" loading="lazy" data-role="product-image" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
 
   const variants = !product.comingSoon && product.variants.length > 1
@@ -822,6 +830,13 @@ document.addEventListener("click", (event) => {
     item.querySelectorAll('[data-action="variant"]').forEach((button) => button.classList.remove("is-active"));
     variantButton.classList.add("is-active");
     item.querySelector('[data-role="price"]').textContent = money(product.variants[index].price);
+    const image = item.querySelector('[data-role="product-image"]');
+    const nextImage = getProductImage(product, index);
+    if (image && nextImage) {
+      image.src = nextImage;
+      image.alt = `${product.name} ${product.variants[index].label}`;
+      item.querySelector('.menu-item-media')?.classList.toggle('is-cutout', imageUsesCutout(nextImage));
+    }
     return;
   }
 
