@@ -2183,3 +2183,559 @@ body::selection{background:var(--alcorta-orange);color:#fff}
   color: #d8d8da !important;
   border-color: rgba(255,255,255,.10) !important;
 }
+
+/* =========================================================
+   MOBILE UX PASS — Alcorta 2026
+   Desktop/tablet design remains untouched. Mobile gets a
+   dedicated app-like layout instead of compressed desktop.
+   ========================================================= */
+@media (max-width: 640px) {
+  :root {
+    --mobile-gutter: 10px;
+  }
+
+  html {
+    scroll-padding-top: 72px !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Header */
+  .app-header {
+    height: 62px !important;
+    padding: 0 12px !important;
+    background: rgba(8,8,9,.92) !important;
+    border-bottom: 1px solid rgba(255,255,255,.075) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+  }
+
+  .brand span {
+    font-size: 1.9rem !important;
+    line-height: .9 !important;
+  }
+
+  .brand small {
+    font-size: .54rem !important;
+    letter-spacing: .12em !important;
+  }
+
+  .menu-button {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 13px !important;
+    background: #171719 !important;
+    border: 1px solid rgba(255,255,255,.09) !important;
+  }
+
+  .app-main {
+    width: 100% !important;
+    padding: 10px var(--mobile-gutter) 118px !important;
+    gap: 0 !important;
+  }
+
+  /* Hero: compact and product-first */
+  .hero-card {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 22px 16px 12px !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    gap: 6px !important;
+  }
+
+  .hero-copy {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 3 !important;
+  }
+
+  .hero-kicker {
+    margin-bottom: 10px !important;
+    font-size: .58rem !important;
+    letter-spacing: .16em !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.65rem, 13.5vw, 4rem) !important;
+    line-height: .84 !important;
+    letter-spacing: -.045em !important;
+  }
+
+  .hero-copy p {
+    max-width: 31rem !important;
+    margin-top: 13px !important;
+    margin-bottom: 0 !important;
+    font-size: .82rem !important;
+    line-height: 1.45 !important;
+    color: #aaa9ad !important;
+  }
+
+  .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-top: 16px !important;
+  }
+
+  .hero-cta {
+    min-height: 44px !important;
+    padding: 0 10px !important;
+    border-radius: 12px !important;
+    font-size: .68rem !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-visual {
+    order: 2 !important;
+    min-height: 205px !important;
+    height: 205px !important;
+    margin-top: 2px !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+
+  .hero-image-ring,
+  .hero-stamp {
+    display: none !important;
+  }
+
+  .hero-visual img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center 58% !important;
+    transform: none !important;
+    filter: none !important;
+    border-radius: 18px !important;
+  }
+
+  /* Category navigation */
+  .category-section {
+    margin-top: 18px !important;
+  }
+
+  .centered,
+  .section-mini-title {
+    margin: 0 0 9px 2px !important;
+    font-size: .61rem !important;
+    letter-spacing: .16em !important;
+  }
+
+  .category-shortcuts {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overscroll-behavior-inline: contain !important;
+    scroll-snap-type: x proximity !important;
+    padding: 1px 1px 8px !important;
+  }
+
+  .shortcut-card {
+    flex: 0 0 116px !important;
+    min-width: 116px !important;
+    min-height: 60px !important;
+    padding: 9px 10px !important;
+    gap: 8px !important;
+    border-radius: 15px !important;
+    scroll-snap-align: start !important;
+  }
+
+  .shortcut-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+  }
+
+  .shortcut-icon svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  .shortcut-label {
+    font-size: .72rem !important;
+  }
+
+  /* Section rhythm */
+  .featured-section,
+  .promo-collections-section,
+  .menu-section,
+  .locations-section {
+    margin-top: 38px !important;
+  }
+
+  .section-head {
+    margin-bottom: 12px !important;
+  }
+
+  .section-head h2 {
+    font-size: 1.62rem !important;
+    line-height: 1 !important;
+  }
+
+  .section-note {
+    margin-top: 5px !important;
+    font-size: .73rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .promo-collection-head {
+    padding-bottom: 10px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .promo-collection-head h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Featured promo */
+  .featured-promo-card {
+    border-radius: 20px !important;
+  }
+
+  .featured-promo-visual {
+    aspect-ratio: 16 / 10 !important;
+    min-height: 0 !important;
+  }
+
+  .featured-promo-copy {
+    padding: 17px !important;
+  }
+
+  .featured-promo-copy h3 {
+    font-size: 1.35rem !important;
+  }
+
+  /* Promo cards: full-width image, clean copy */
+  .promo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .promo-mini-card {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    border-radius: 19px !important;
+  }
+
+  .promo-mini-media,
+  .promo-mini-media.is-cutout {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 0 !important;
+  }
+
+  .promo-mini-media img,
+  .promo-mini-media.is-cutout img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    padding: 0 !important;
+  }
+
+  .promo-mini-copy {
+    padding: 13px 14px 14px !important;
+  }
+
+  .promo-mini-copy h3 {
+    font-size: 1rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .promo-mini-copy p {
+    margin-top: 6px !important;
+    min-height: 0 !important;
+    font-size: .7rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .promo-mini-footer {
+    margin-top: 11px !important;
+    padding-top: 11px !important;
+  }
+
+  .promo-mini-footer strong {
+    font-size: 1.13rem !important;
+  }
+
+  .promo-mini-footer button {
+    min-height: 38px !important;
+    padding: 0 16px !important;
+    border-radius: 11px !important;
+  }
+
+  /* Menu groups */
+  .menu-groups {
+    gap: 38px !important;
+  }
+
+  .menu-group {
+    gap: 0 !important;
+    scroll-margin-top: 74px !important;
+  }
+
+  .menu-group-title {
+    margin-bottom: 10px !important;
+    padding: 0 2px 10px !important;
+  }
+
+  .menu-group-title .icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 11px !important;
+  }
+
+  .menu-group-title h3 {
+    font-size: 1.42rem !important;
+  }
+
+  .menu-group-list {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Product card: dedicated mobile composition */
+  .menu-item {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "media"
+      "main"
+      "side" !important;
+    min-height: 0 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .menu-item:hover {
+    transform: none !important;
+  }
+
+  .menu-item-media,
+  .menu-item-media.is-cutout {
+    grid-area: media !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 0 !important;
+  }
+
+  .menu-item-media img,
+  .menu-item-media.is-cutout img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    padding: 0 !important;
+  }
+
+  .menu-item-main {
+    grid-area: main !important;
+    padding: 14px 14px 8px !important;
+    display: block !important;
+  }
+
+  .menu-item-top h4 {
+    font-size: 1.08rem !important;
+    line-height: 1.05 !important;
+    letter-spacing: -.015em !important;
+  }
+
+  .item-description {
+    display: block !important;
+    margin-top: 7px !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    font-size: .73rem !important;
+    line-height: 1.44 !important;
+    color: #a2a2a7 !important;
+  }
+
+  .item-price {
+    display: block !important;
+    margin-top: 9px !important;
+    font-size: 1.2rem !important;
+    line-height: 1 !important;
+  }
+
+  .menu-item-side {
+    grid-area: side !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 6px 14px 14px !important;
+    align-self: end !important;
+  }
+
+  .variant-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .variant-list button {
+    min-width: 0 !important;
+    min-height: 40px !important;
+    padding: 7px 4px !important;
+    border-radius: 11px !important;
+    font-size: .64rem !important;
+    line-height: 1 !important;
+  }
+
+  .variant-list button.is-active,
+  .variant-list button.is-selected {
+    transform: none !important;
+    box-shadow: 0 6px 16px rgba(255,106,0,.18) !important;
+  }
+
+  .menu-item-actions {
+    width: 100% !important;
+  }
+
+  .add-button {
+    width: 100% !important;
+    min-height: 43px !important;
+    border-radius: 12px !important;
+    font-size: .7rem !important;
+    letter-spacing: .04em !important;
+  }
+
+  /* Locations */
+  .location-grid {
+    gap: 10px !important;
+  }
+
+  .location-card {
+    min-height: 0 !important;
+    padding: 17px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Sticky checkout — thumb friendly */
+  .sticky-bar {
+    left: var(--mobile-gutter) !important;
+    right: var(--mobile-gutter) !important;
+    bottom: max(8px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    transform: none !important;
+    padding: 6px !important;
+    gap: 6px !important;
+    border-radius: 17px !important;
+  }
+
+  .sticky-cart,
+  .sticky-order {
+    min-height: 48px !important;
+    border-radius: 12px !important;
+  }
+
+  .sticky-cart {
+    padding-inline: 11px !important;
+  }
+
+  .sticky-cart-copy small {
+    font-size: .56rem !important;
+  }
+
+  .sticky-cart-copy strong {
+    font-size: .78rem !important;
+  }
+
+  .sticky-order {
+    padding-inline: 12px !important;
+    font-size: .7rem !important;
+  }
+
+  /* Cart becomes a clean mobile sheet */
+  .cart-drawer {
+    width: min(100%, 440px) !important;
+    max-width: 100vw !important;
+  }
+
+  /* Checkout modal: centered and usable on short phones */
+  .checkout-backdrop,
+  .promo-overlay,
+  .weekday-promo-overlay {
+    padding: 8px !important;
+  }
+
+  .checkout-modal {
+    width: calc(100vw - 16px) !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 16px) !important;
+    border-radius: 20px !important;
+  }
+
+  .checkout-modal form {
+    max-height: calc(100dvh - 16px) !important;
+    padding: 18px 12px 16px !important;
+  }
+
+  .checkout-modal > .modal-close {
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  .checkout-header-block {
+    padding-right: 42px !important;
+  }
+
+  .checkout-header-block h2 {
+    font-size: clamp(1.9rem, 9vw, 2.7rem) !important;
+    line-height: .92 !important;
+  }
+
+  .checkout-panel {
+    padding: 12px !important;
+    border-radius: 16px !important;
+  }
+
+  .branch-options label,
+  .order-options label {
+    min-height: 62px !important;
+    padding: 11px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .checkout-modal input,
+  .checkout-modal textarea,
+  .checkout-modal select {
+    min-height: 44px !important;
+    font-size: 16px !important; /* prevents iOS auto-zoom */
+  }
+
+  .site-footer {
+    padding-bottom: 112px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .hero-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-visual {
+    height: 185px !important;
+    min-height: 185px !important;
+  }
+
+  .variant-list button {
+    font-size: .59rem !important;
+  }
+
+  .sticky-order {
+    font-size: .64rem !important;
+  }
+}
