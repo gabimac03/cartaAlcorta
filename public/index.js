@@ -316,19 +316,20 @@ const menuGroups = [
 const specialPromos = [
   {
     id: "special-chesse-simple",
-    eyebrow: "SOLO HOY · 18/09",
+    eyebrow: "MARTES A JUEVES",
     name: "2 Chesse simples + papas",
-    description: "Promo especial válida solo hoy 18/09/2026.",
-    image: "imagenes/promo-18-09-2026-chesse-simples.jpg",
+    description: "Promo especial válida de martes a jueves.",
+    image: "imagenes/promo-martes-jueves-chesse.png",
     variants: [{ label: "Promo", price: 17000 }],
   },
   {
     id: "special-dobles-por-triples",
-    eyebrow: "SOLO HOY · 18/09",
-    name: "2 Chesse dobles + papas",
-    description: "Promo especial válida solo hoy 18/09/2026.",
-    image: "imagenes/promo-18-09-2026-chesse-dobles.jpg",
-    variants: [{ label: "Promo", price: 20000 }],
+    eyebrow: "MARTES A JUEVES",
+    name: "2 Triples al precio de 2 Dobles",
+    description: "Elegí entre Andes, American, Mexi, Chesse, Alterada y Argenta.",
+    image: "imagenes/promo-martes-jueves-triples.png",
+    variants: [{ label: "Promo", price: 24000 }],
+    choice: { title: "Elegí las 2 burgers de la promo", options: ["Andes", "American", "Mexi", "Chesse", "Alterada", "Argenta"] },
   },
 ];
 const lomoPromoIds = ["promo-lomo-alcorta", "promo-lomos-clasicos", "promo-lomos-especiales", "promo-lomos-xl"];
@@ -378,7 +379,7 @@ function buildPromoTitle(name) {
 
 function buildPromoHighlight(product) {
   if (product.id === "special-chesse-simple") return "$17.000";
-  if (product.id === "special-dobles-por-triples") return "$20.000";
+  if (product.id === "special-dobles-por-triples") return "$24.000";
   if (product.id === "promo-burger-triple") return "Triples";
   if (product.id === "promo-burger-simple") return "Simples";
   if (product.id.includes("lomos")) return "Con papas";
@@ -487,7 +488,7 @@ function renderMenuItem(product) {
 }
 
 function renderMenu() {
-  const weekdaySpecialPromosActive = isSpecialPromoDay();
+  const weekdaySpecialPromosActive = isTuesdayToThursday();
 
   if (specialPromosSection) {
     specialPromosSection.hidden = !weekdaySpecialPromosActive;
@@ -744,9 +745,9 @@ function finishOrder(event) {
   );
 }
 
-function isSpecialPromoDay() {
-  const today = new Date();
-  return today.getFullYear() === 2026 && today.getMonth() === 8 && today.getDate() === 18;
+function isTuesdayToThursday() {
+  const day = new Date().getDay();
+  return day >= 2 && day <= 4;
 }
 
 function openWeekdayPromo(index = 0) {
@@ -786,7 +787,7 @@ function dismissWeekdayPromos() {
 }
 
 function maybeOpenWeekdayPromos() {
-  if (!weekdayPromoModal || !weekdayPromoOverlay || !isSpecialPromoDay()) return;
+  if (!weekdayPromoModal || !weekdayPromoOverlay || !isTuesdayToThursday()) return;
   try {
     if (sessionStorage.getItem("alcortaWeekdayPromosSeen") === "true") return;
   } catch (error) {
