@@ -192,7 +192,7 @@ const promos = [
     description: "Dos burgers triples a elección + papas fritas.",
     image: "productos/promo-burgers-triples.png",
     variants: [{ label: "Promo", price: 28000 }],
-    choice: { title: "Elegí las 2 burgers triples", options: ["Mexi", "Andes", "Chesse", "Alterada", "American"] },
+    choice: { title: "Elegí las 2 burgers triples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
   {
     id: "promo-anomalia",
