@@ -3012,7 +3012,7 @@ body {
   position: relative;
 }
 .location-photo::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,.25)); }
-.location-photo-dorrego { background-image: url("imagenes/local-dorrego.jpg"); }
+.location-photo-dorrego { background-image: url("imagenes/local-dorrego.webp"); }
 .location-photo-godoy { background-image: url("imagenes/local-godoy-cruz.jpg"); }
 .location-copy {
   display: flex;
@@ -3072,11 +3072,11 @@ body {
   color:#111;
   font-size:1.35rem;
 }
-.visual-lomos { background-image:url("productos/lomo-completo.jpeg"); }
-.visual-burgers { background-image:url("productos/AMERICAN.png"); }
-.visual-promos { background-image:url("productos/promo-burgers-triples.png"); }
+.visual-lomos { background-image:url("productos/lomo-completo.webp"); }
+.visual-burgers { background-image:url("productos/AMERICAN.webp"); }
+.visual-promos { background-image:url("productos/promo-burgers-triples.webp"); }
 .visual-bebidas { background-image:url("imagenes/coca-15.jpg"); }
-.visual-extras { background-image:url("imagenes/papasAmericanas.jpeg"); }
+.visual-extras { background-image:url("imagenes/papasAmericanas.webp"); }
 
 .featured-section,
 .promo-collections-section,
@@ -3704,5 +3704,66 @@ button, a, input, textarea, select { touch-action: manipulation; }
   .promo-modal,
   .weekday-promo-modal {
     max-height: 96dvh !important;
+  }
+}
+\n\n/* =========================================================
+   ALCORTA · fix navegación horizontal de categorías mobile
+   ========================================================= */
+@media (max-width: 640px) {
+  .carta-intro {
+    overflow: hidden !important;
+  }
+
+  .carta-intro .visual-shortcuts {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    grid-template-columns: none !important;
+    width: calc(100% + 10px) !important;
+    max-width: none !important;
+    margin-right: -10px !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain !important;
+    scroll-snap-type: x proximity !important;
+    touch-action: pan-x pan-y !important;
+    padding: 1px 14px 10px 1px !important;
+    scrollbar-width: none !important;
+  }
+
+  .carta-intro .visual-shortcuts::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .carta-intro .visual-shortcut {
+    flex: 0 0 148px !important;
+    width: 148px !important;
+    min-width: 148px !important;
+    min-height: 132px !important;
+    grid-column: auto !important;
+    scroll-snap-align: start !important;
+    padding: 10px !important;
+  }
+
+  .carta-intro .visual-shortcut .shortcut-label {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: .82rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .carta-intro .visual-promos {
+    flex-basis: 164px !important;
+    width: 164px !important;
+    min-width: 164px !important;
+    min-height: 132px !important;
+  }
+
+  .carta-intro .visual-promos .shortcut-label {
+    font-size: .78rem !important;
   }
 }
