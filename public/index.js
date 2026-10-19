@@ -49,7 +49,7 @@ const burgers = [
     id: "argenta",
     name: "Argenta",
     image: "productos/ARGENTA.png",
-    description: "Carne 100 gr, cheddar, tomate, lechuga, mayo bacon y panceta. Incluye papas.",
+    description: "Carne 100 gr, queso Tybo, tomate, lechuga, mayo bacon y panceta. Incluye papas.",
     variants: standardBurgerVariants,
   },
   {
@@ -355,6 +355,8 @@ const checkoutOverlay = document.querySelector("#checkoutOverlay");
 const promoModal = document.querySelector("#promoModal");
 const promoOverlay = document.querySelector("#promoOverlay");
 const weekdayPromoOverlay = document.querySelector("#weekdayPromoOverlay");
+const branchOrderModal = document.querySelector("#branchOrderModal");
+const branchOrderOverlay = document.querySelector("#branchOrderOverlay");
 
 function imageUsesCutout(path = "") {
   return /\.png$/i.test(path);
@@ -413,7 +415,7 @@ function moveWeekdayPromoSlide(direction) {
 }
 
 function renderFeaturedPromoCard(product) {
-  const poster = product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />` : "";
+  const poster = product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async" />` : "";
   return `
     <article class="featured-promo-card" data-product-id="${product.id}">
       <div class="featured-promo-visual">
@@ -432,7 +434,7 @@ function renderFeaturedPromoCard(product) {
 
 function renderPromoCard(product) {
   const image = product.image
-    ? `<img src="${product.image}" alt="${product.name}" loading="lazy" />`
+    ? `<img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
   return `
     <article class="promo-mini-card" data-product-id="${product.id}">
@@ -453,7 +455,7 @@ function renderMenuItem(product) {
   const initialImage = getProductImage(product, 0);
   const cutoutClass = imageUsesCutout(initialImage) ? "is-cutout" : "";
   const image = initialImage
-    ? `<img src="${initialImage}" alt="${product.name}" loading="lazy" data-role="product-image" />`
+    ? `<img src="${initialImage}" alt="${product.name}" loading="lazy" decoding="async" data-role="product-image" />`
     : '<div class="photo-placeholder">ALCORTA</div>';
 
   const variants = !product.comingSoon && product.variants.length > 1
@@ -601,7 +603,8 @@ function renderCart() {
 }
 
 function lockBody() {
-  const open = [cartDrawer, checkoutModal, promoModal, ...weekdayPromoModals]
+  const open = [cartDrawer, checkoutModal, promoModal, branchOrderModal, ...weekdayPromoModals]
+    .filter(Boolean)
     .some((element) => element.classList.contains("is-open"));
   document.body.classList.toggle("is-locked", open);
 }
@@ -680,6 +683,30 @@ function confirmPromoSelection() {
   const label = promoSelections.join(" + ");
   addLine(pendingPromo, pendingPromo.variants[0], label);
   closePromoChooser();
+}
+
+function openBranchOrderModal() {
+  if (!branchOrderModal || !branchOrderOverlay) return;
+  openLayer(branchOrderModal, branchOrderOverlay);
+}
+
+function closeBranchOrderModal() {
+  if (!branchOrderModal || !branchOrderOverlay) return;
+  closeLayer(branchOrderModal, branchOrderOverlay);
+}
+
+function openBranchWhatsApp(branchId) {
+  const phone = WHATSAPP_NUMBERS[branchId];
+  if (!phone) return;
+  const message = `Hola! Quiero hacer un pedido a ALCORTA - ${BRANCHES[branchId]}`;
+  closeBranchOrderModal();
+  window.setTimeout(() => {
+    window.open(
+      `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  }, 120);
 }
 
 function syncCheckoutOptions() {
@@ -873,15 +900,24 @@ document.addEventListener("click", (event) => {
 });
 
 document.querySelector(".menu-button")?.addEventListener("click", () => { document.querySelector("#carta")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+document.querySelectorAll(".js-branch-whatsapp").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    openBranchOrderModal();
+  });
+});
+
+document.querySelector("#closeBranchOrder")?.addEventListener("click", closeBranchOrderModal);
+branchOrderOverlay?.addEventListener("click", closeBranchOrderModal);
+document.querySelectorAll("[data-branch-order]").forEach((button) => {
+  button.addEventListener("click", () => openBranchWhatsApp(button.dataset.branchOrder));
+});
+
 document.querySelector("#cartTrigger").addEventListener("click", openCart);
 document.querySelector("#floatingCart").addEventListener("click", openCart);
 document.querySelector("#stickyOrderButton").addEventListener("click", () => {
   if (!cart.length) {
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBERS.dorrego}?text=${encodeURIComponent("Hola! Quiero hacer un pedido a ALCORTA")}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    openBranchOrderModal();
     return;
   }
   openCheckout();
@@ -905,6 +941,8 @@ document.addEventListener("keydown", (event) => {
   const openWeekdayIndex = weekdayPromoModals.findIndex((modal) => modal.classList.contains("is-open"));
   if (openWeekdayIndex !== -1) {
     dismissWeekdayPromos();
+  } else if (branchOrderModal?.classList.contains("is-open")) {
+    closeBranchOrderModal();
   } else if (promoModal.classList.contains("is-open")) {
     closePromoChooser();
   } else if (checkoutModal.classList.contains("is-open")) {

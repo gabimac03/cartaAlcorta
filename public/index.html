@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="Carta online de ALCORTA Lomos & Burgers. Armá tu pedido y envialo por WhatsApp." />
   <meta name="theme-color" content="#0b0b0c" />
   <title>ALCORTA | Lomos & Burgers</title>
@@ -18,15 +18,15 @@
 
 <body>
   <header class="app-header">
-    <button class="icon-button menu-button" type="button" aria-label="Abrir menú">
+    <button class="icon-button menu-button" type="button" aria-label="Ir a la carta">
       <span></span><span></span><span></span>
     </button>
     <a class="brand brand-header" href="#inicio" aria-label="ALCORTA, inicio">
       <span>ALCORTA</span>
-      <small>LOMOS & BURGERS</small>
+      <small>LOMOS &amp; BURGERS</small>
     </a>
     <nav class="desktop-nav" aria-label="Navegación principal">
-      <a href="#burgers">Burgers</a><a href="#lomos">Lomos</a><a href="#promos">Promos</a><a href="#ubicaciones">Sucursales</a>
+      <a href="#info">Info</a><a href="#ubicaciones">Sucursales</a><a href="#carta">Carta</a>
     </nav>
     <button class="icon-button header-cart-icon" id="cartTrigger" type="button" aria-label="Ver pedido">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -39,86 +39,91 @@
   </header>
 
   <main class="app-main">
-    <section class="hero-card" id="inicio">
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <div class="hero-kicker"><span></span> LOMOS &amp; BURGERS · MENDOZA</div>
-        <h1>Sabor real.<br /><span>Hecho Alcorta.</span></h1>
-        <p>Lomos, burgers y promos preparados para disfrutar sin vueltas. Elegí, armá tu pedido y envialo directo por WhatsApp.</p>
-        <div class="hero-actions">
-          <a class="hero-cta" href="#promociones-especiales">VER PROMOS</a>
-          <a class="hero-cta hero-cta-secondary" href="#burgers">VER CARTA</a>
-        </div>
-        <div class="hero-points" aria-label="Beneficios">
-          <span>Pedido simple</span><span>Retiro o delivery</span><span>2 sucursales</span>
+    <section class="profile-hero" id="inicio" aria-label="Presentación de Alcorta">
+      <div class="profile-cover">
+        <img src="productos/portada-lomos.png" alt="Lomos de Alcorta" fetchpriority="high" decoding="async" />
+        <div class="profile-cover-shade"></div>
+        <div class="cover-brand" aria-hidden="true">
+          <strong>ALCORTA</strong>
+          <span>LOMOS &amp; BURGERS</span>
         </div>
       </div>
-      <div class="hero-visual hero-visual-lomo">
-        <div class="hero-image-ring" aria-hidden="true"></div>
-        <img src="imagenes/hero-lomo-sinfondo.png" alt="Lomos destacados de Alcorta" />
-        <div class="hero-stamp"><strong>ALCORTA</strong><small>LOMOS &amp; BURGERS</small></div>
+
+      <div class="profile-summary" id="info">
+        <div class="profile-avatar-wrap">
+          <img class="profile-avatar" src="logo-512.png" alt="Logo de Alcorta Lomos & Burgers" decoding="async" />
+        </div>
+        <h1>ALCORTA</h1>
+        <p class="profile-subtitle">LOMOS &amp; BURGERS · MENDOZA</p>
+        <p class="profile-description">Elegí tu sucursal, mirá la carta y armá tu pedido directo por WhatsApp.</p>
+
+        <div class="social-links" aria-label="Redes sociales de Alcorta">
+          <a class="social-link" href="https://www.instagram.com/alcorta_mza/" target="_blank" rel="noreferrer">
+            <span class="social-icon">IG</span><small>Instagram</small>
+          </a>
+          <a class="social-link js-branch-whatsapp" href="#" aria-haspopup="dialog" aria-controls="branchOrderModal">
+            <span class="social-icon">WA</span><small>WhatsApp</small>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="category-section" aria-label="Categorías principales">
-      <p class="section-mini-title centered">CATEGORÍAS</p>
-      <div class="category-shortcuts">
-        <a href="#burgers" class="shortcut-card">
-          <span class="shortcut-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M13 27h38" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M16 24c1.5-8 8.5-13 16-13s14.5 5 16 13" stroke="currentColor" stroke-width="3.4"
-                stroke-linecap="round" />
-              <path d="M16 37h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M19 44h26" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="shortcut-label">Burgers</span>
+    <section class="info-strip hours-strip" aria-labelledby="hoursTitle">
+      <div class="info-strip-icon" aria-hidden="true">◷</div>
+      <div class="info-strip-copy">
+        <h2 id="hoursTitle">HORARIOS</h2>
+        <p>Martes a Domingos · 20:30 a 00:30 hs</p>
+      </div>
+      <a class="info-strip-action js-branch-whatsapp" href="#" aria-haspopup="dialog" aria-controls="branchOrderModal">PEDIR</a>
+    </section>
+
+    <section class="locations-section profile-locations" id="ubicaciones">
+      <div class="landing-section-title">
+        <span aria-hidden="true">●</span>
+        <h2>NUESTRAS <strong>SUCURSALES</strong></h2>
+      </div>
+      <div class="location-grid">
+        <a class="location-card" href="https://www.google.com/maps/place/ALCORTA+Lomos+%26+Burgers/@-32.8998016,-68.830039,17z/data=!3m1!4b1!4m6!3m5!1s0x967e090049601253:0xc2b91fe68685431c!8m2!3d-32.8998061!4d-68.8274641!16s%2Fg%2F11ys00cqh6?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer">
+          <div class="location-photo location-photo-dorrego" aria-hidden="true"></div>
+          <div class="location-copy">
+            <small>DORREGO</small>
+            <h3>Alem 300</h3>
+            <p>Mendoza</p>
+            <span class="maps-button">VER EN MAPS</span>
+          </div>
         </a>
-        <a href="#lomos" class="shortcut-card">
-          <span class="shortcut-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M10 33c5-10 10-15 22-15s17 5 22 15" stroke="currentColor" stroke-width="3.4"
-                stroke-linecap="round" />
-              <path d="M14 37h36" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M16 43h32" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M21 28c3 5 6 7 11 7s8-2 11-7" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="shortcut-label">Lomos</span>
+        <a class="location-card" href="https://www.google.com/maps/place/ALCORTA+Lomos+%26+Burgers+Godoy+Cruz,+Figueroa+Alcorta,+Godoy+Cruz,+Mendoza/@-32.8998016,-68.830039,17z/data=!4m5!3m4!1s0x967e0b08d5d5cb71:0xec2ec8803df6040d!8m2!3d-32.9399551!4d-68.8436993?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer">
+          <div class="location-photo location-photo-godoy" aria-hidden="true"></div>
+          <div class="location-copy">
+            <small>GODOY CRUZ</small>
+            <h3>Figueroa Alcorta 1304</h3>
+            <p>Godoy Cruz · Mendoza</p>
+            <span class="maps-button">VER EN MAPS</span>
+          </div>
         </a>
-        <a href="#papas" class="shortcut-card">
-          <span class="shortcut-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M21 16h22l-3 29H24l-3-29Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" />
-              <path d="M23 18l-6-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M30 18v-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M38 18l5-9" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="shortcut-label">Papas</span>
+      </div>
+    </section>
+
+    <section class="carta-intro" id="carta">
+      <div class="landing-section-title carta-title">
+        <span aria-hidden="true">☰</span>
+        <h2>NUESTRA <strong>CARTA</strong></h2>
+      </div>
+      <div class="category-shortcuts visual-shortcuts" aria-label="Categorías principales">
+        <a href="#lomos" class="shortcut-card visual-shortcut visual-lomos">
+          <span class="shortcut-label">LOMOS</span><b>›</b>
         </a>
-        <a href="#bebidas" class="shortcut-card">
-          <span class="shortcut-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M24 14h16l-2 34H26l-2-34Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" />
-              <path d="M30 22h5" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-              <path d="M39 14l7-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="shortcut-label">Bebidas</span>
+        <a href="#burgers" class="shortcut-card visual-shortcut visual-burgers">
+          <span class="shortcut-label">BURGERS</span><b>›</b>
         </a>
-        <a href="#promos" class="shortcut-card">
-          <span class="shortcut-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M13 30 31 12l20 20-18 18-20-20Z" stroke="currentColor" stroke-width="3.4"
-                stroke-linejoin="round" />
-              <circle cx="24" cy="24" r="2.7" fill="currentColor" />
-              <path d="M27 37l10-10" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="shortcut-label">Promos</span>
+        <a href="#promos" class="shortcut-card visual-shortcut visual-promos">
+          <span class="shortcut-label">PROMOCIONES</span><b>›</b>
+        </a>
+        <a href="#bebidas" class="shortcut-card visual-shortcut visual-bebidas">
+          <span class="shortcut-label">BEBIDAS</span><b>›</b>
+        </a>
+        <a href="#extras" class="shortcut-card visual-shortcut visual-extras">
+          <span class="shortcut-label">EXTRAS</span><b>›</b>
         </a>
       </div>
     </section>
@@ -127,7 +132,7 @@
       <div class="section-head section-head-inline">
         <div>
           <h2>Promociones especiales</h2>
-          <p class="section-note">Las promos destacadas de la semana.</p>
+          <p class="section-note">Disponibles de martes a jueves.</p>
         </div>
       </div>
       <div class="featured-promo-list" id="specialPromosGrid"></div>
@@ -158,34 +163,8 @@
       </div>
     </section>
 
-    <section class="menu-section" id="carta">
+    <section class="menu-section full-menu-section">
       <div class="menu-groups" id="fullMenu" aria-label="Carta completa"></div>
-    </section>
-
-    <section class="locations-section" id="ubicaciones">
-      <div class="section-head section-head-inline">
-        <div>
-          <h2>Sucursales</h2>
-        </div>
-      </div>
-      <div class="location-grid">
-        <a class="location-card" href="https://www.google.com/maps/place/ALCORTA+Lomos+%26+Burgers/@-32.8998016,-68.830039,17z/data=!3m1!4b1!4m6!3m5!1s0x967e090049601253:0xc2b91fe68685431c!8m2!3d-32.8998061!4d-68.8274641!16s%2Fg%2F11ys00cqh6?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer">
-          <span class="location-number">01</span>
-          <div>
-            <small>Dorrego</small>
-            <h3>Alem 300</h3>
-            <p>Abrir en Google Maps</p>
-          </div>
-        </a>
-        <a class="location-card" href="https://www.google.com/maps/place/ALCORTA+Lomos+%26+Burgers+Godoy+Cruz,+Figueroa+Alcorta,+Godoy+Cruz,+Mendoza/@-32.8998016,-68.830039,17z/data=!4m5!3m4!1s0x967e0b08d5d5cb71:0xec2ec8803df6040d!8m2!3d-32.9399551!4d-68.8436993?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer">
-          <span class="location-number">02</span>
-          <div>
-            <small>Godoy Cruz</small>
-            <h3>Figueroa Alcorta 1304</h3>
-            <p>Abrir en Google Maps</p>
-          </div>
-        </a>
-      </div>
     </section>
   </main>
   <footer class="site-footer">
@@ -208,6 +187,26 @@
       Pedir por WhatsApp
     </button>
   </div>
+
+  <div class="branch-order-backdrop" id="branchOrderOverlay" hidden></div>
+  <section class="branch-order-modal" id="branchOrderModal" aria-label="Elegir sucursal para pedir" aria-hidden="true">
+    <button class="modal-close" id="closeBranchOrder" type="button" aria-label="Cerrar">×</button>
+    <p class="kicker">PEDIR POR WHATSAPP</p>
+    <h2>¿En qué sucursal querés pedir?</h2>
+    <p class="branch-order-help">Elegí el local y te abrimos el WhatsApp correspondiente.</p>
+    <div class="branch-order-options">
+      <button type="button" data-branch-order="dorrego">
+        <span class="branch-order-number">01</span>
+        <span class="branch-order-copy"><strong>Dorrego</strong><small>Alem 300</small></span>
+        <span class="branch-order-arrow">›</span>
+      </button>
+      <button type="button" data-branch-order="godoyCruz">
+        <span class="branch-order-number">02</span>
+        <span class="branch-order-copy"><strong>Godoy Cruz</strong><small>Figueroa Alcorta 1304</small></span>
+        <span class="branch-order-arrow">›</span>
+      </button>
+    </div>
+  </section>
 
   <div class="cart-backdrop" id="cartOverlay" hidden></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Tu pedido" aria-hidden="true">
