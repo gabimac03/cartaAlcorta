@@ -3767,3 +3767,93 @@ button, a, input, textarea, select { touch-action: manipulation; }
     font-size: .78rem !important;
   }
 }
+
+/* =========================================================
+   ALCORTA · fix definitivo scroll horizontal categorías
+   ========================================================= */
+@media (max-width: 640px) {
+  .carta-intro {
+    overflow: visible !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .carta-intro .landing-section-title {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .carta-intro .visual-shortcuts {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 2px 20px 12px !important;
+    gap: 8px !important;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x proximity !important;
+    scroll-padding-left: 20px !important;
+    overscroll-behavior-x: contain !important;
+    touch-action: pan-x pan-y !important;
+    scrollbar-width: none !important;
+    cursor: grab;
+  }
+
+  .carta-intro .visual-shortcuts::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .carta-intro .visual-shortcut {
+    flex: 0 0 148px !important;
+    width: 148px !important;
+    min-width: 148px !important;
+    max-width: 148px !important;
+    min-height: 132px !important;
+    scroll-snap-align: start !important;
+  }
+
+  .carta-intro .visual-promos {
+    flex-basis: 170px !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
+  }
+
+  .carta-intro .visual-shortcut .shortcut-label {
+    display: block !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+  }
+}
+
+
+/* =========================================================
+   ALCORTA · scroll horizontal libre y continuo
+   Sin saltos ni snap entre tarjetas
+   ========================================================= */
+@media (max-width: 640px) {
+  .carta-intro .visual-shortcuts {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: none !important;
+    scroll-behavior: auto !important;
+    scroll-padding: 0 !important;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: auto !important;
+    cursor: auto !important;
+  }
+
+  .carta-intro .visual-shortcut,
+  .carta-intro .visual-promos {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+}
