@@ -3857,3 +3857,107 @@ button, a, input, textarea, select { touch-action: manipulation; }
     scroll-snap-stop: normal !important;
   }
 }
+
+/* =========================================================
+   FIX MOBILE · carrito siempre dentro del viewport
+   2026-10-19
+   ========================================================= */
+@media (max-width: 640px) {
+  .cart-drawer {
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: min(88dvh, 720px) !important;
+    margin: 0 !important;
+    padding: 0 0 env(safe-area-inset-bottom) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 22px 22px 0 0 !important;
+    transform: translate3d(0, 100%, 0) !important;
+    will-change: transform;
+  }
+
+  .cart-drawer.is-open {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .cart-head {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    padding: 14px 14px 10px !important;
+    background: #111113 !important;
+    border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  }
+
+  .cart-head h2 {
+    font-size: clamp(1.55rem, 8vw, 2rem) !important;
+    line-height: 1 !important;
+  }
+
+  .cart-lines {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 10px 12px !important;
+  }
+
+  .cart-line {
+    width: 100% !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .cart-line > div:first-child {
+    min-width: 0 !important;
+  }
+
+  .cart-line strong,
+  .cart-line small {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .quantity {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  .cart-foot {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    padding: 12px 14px max(12px, env(safe-area-inset-bottom)) !important;
+    background: #111113 !important;
+    border-top: 1px solid rgba(255,255,255,.10) !important;
+  }
+
+  .cart-foot .checkout-button {
+    min-height: 48px !important;
+  }
+
+  /* En pantallas muy bajas, conservamos cabecera y acción y scrollea solo la lista. */
+  @media (max-height: 600px) {
+    .cart-drawer {
+      max-height: 94dvh !important;
+    }
+    .cart-head {
+      padding-top: 10px !important;
+      padding-bottom: 8px !important;
+    }
+    .cart-foot {
+      padding-top: 9px !important;
+    }
+  }
+}
