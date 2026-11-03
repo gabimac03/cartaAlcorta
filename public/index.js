@@ -87,14 +87,14 @@ const lomos = [
     name: "Lomo Alcorta",
     description: "Pan, carne, tomate, lechuga y mayo Alcorta. Incluye papas.",
     image: "productos/lomo-alcorta.webp",
-    variants: [{ label: "Unidad", price: 17000 }],
+    variants: [{ label: "Unidad", price: 14000 }],
   },
   {
     id: "lomo-completo",
     name: "Lomo Completo",
     description: "Pan, carne, lechuga, tomate, huevo, jamón, queso y mayo Alcorta. Incluye papas.",
     image: "productos/lomo-completo.webp",
-    variants: [{ label: "Unidad", price: 14000 }],
+    variants: [{ label: "Unidad", price: 16000 }],
   },
   {
     id: "lomo-alcorta-xl",
@@ -115,14 +115,14 @@ const lomos = [
     name: "Lomo Americano",
     description: "Pan, carne, cheddar, cebolla caramelizada, panceta y salsa Chick Fill A. Incluye papas.",
     image: "productos/lomo-americano.webp",
-    variants: [{ label: "Unidad", price: 16000 }],
+    variants: [{ label: "Unidad", price: 17000 }],
   },
   {
     id: "lomo-criollo",
     name: "Lomo Criollo",
     description: "Pan, carne, provoleta, salteado de morrones, mayo de ajo y salsa criolla. Incluye papas.",
     image: "productos/lomo-criollo.webp",
-    variants: [{ label: "Unidad", price: 16000 }],
+    variants: [{ label: "Unidad", price: 17000 }],
   },
   {
     id: "lomo-blue",
@@ -140,7 +140,7 @@ const promos = [
     name: "2 Lomos Alcorta",
     description: "Dos Lomos Alcorta + papas fritas.",
     image: "productos/promo-lomos-alcorta.webp",
-    variants: [{ label: "Promo", price: 30000 }],
+    variants: [{ label: "Promo", price: 26000 }],
   },
   {
     id: "promo-lomos-clasicos",
@@ -148,7 +148,7 @@ const promos = [
     name: "2 Lomos Clásicos",
     description: "Dos lomos clásicos a elección + papas fritas.",
     image: "productos/promocion clasicos.webp",
-    variants: [{ label: "Promo", price: 26000 }],
+    variants: [{ label: "Promo", price: 28000 }],
     choice: { title: "Elegí los 2 lomos clásicos", options: ["Lomo Alcorta", "Lomo Completo"] },
   },
   {
@@ -175,7 +175,7 @@ const promos = [
     name: "2 Burgers Simples",
     description: "Dos burgers simples a elección + papas fritas.",
     image: "productos/promo-burgers-simples.webp",
-    variants: [{ label: "Promo", price: 26000 }],
+    variants: [{ label: "Promo", price: 24000 }],
     choice: { title: "Elegí las 2 burgers simples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
   {
@@ -184,7 +184,7 @@ const promos = [
     name: "2 Burgers Dobles",
     description: "Dos burgers dobles a elección + papas fritas.",
     image: "productos/promocion-burgers-dobles.webp",
-    variants: [{ label: "Promo", price: 24000 }],
+    variants: [{ label: "Promo", price: 26000 }],
     choice: { title: "Elegí las 2 burgers dobles", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
   {
@@ -193,7 +193,7 @@ const promos = [
     name: "2 Burgers Triples",
     description: "Dos burgers triples a elección + papas fritas.",
     image: "productos/promo-burgers-triples.webp",
-    variants: [{ label: "Promo", price: 28000 }],
+    variants: [{ label: "Promo", price: 30000 }],
     choice: { title: "Elegí las 2 burgers triples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
   {
@@ -228,14 +228,14 @@ const papas = [
     name: "Papas Gramajo",
     description: "Bandeja de papas + huevo + cebolla de verdeo.",
     image: "imagenes/papasGramajo.webp",
-    variants: [{ label: "Bandeja", price: 7500 }],
+    variants: [{ label: "Bandeja", price: 7000 }],
   },
   {
     id: "papas-americanas",
     name: "Papas Americanas",
     description: "Bandeja de papas + cheddar + panceta.",
     image: "imagenes/papasAmericanas.webp",
-    variants: [{ label: "Bandeja", price: 7000 }],
+    variants: [{ label: "Bandeja", price: 7500 }],
   },
 ];
 
