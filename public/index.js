@@ -552,6 +552,14 @@ function cartTotal() {
   return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
+function checkoutTotalForBranch(branchId) {
+  const total = cartTotal();
+  if (branchId === "sanMartin" && isSanMartinDiscountActive()) {
+    return Math.round(total * 0.90);
+  }
+  return total;
+}
+
 function cartCount() {
   return cart.reduce((sum, item) => sum + item.quantity, 0);
 }
@@ -563,7 +571,8 @@ function renderCart() {
   document.querySelector("#floatingCartCount").textContent = count;
   document.querySelector("#floatingCartTotal").textContent = money(total);
   document.querySelector("#cartTotal").textContent = money(total);
-  document.querySelector("#checkoutTotal").textContent = money(total);
+  const selectedBranch = document.querySelector('input[name="branch"]:checked')?.value || "dorrego";
+  document.querySelector("#checkoutTotal").textContent = money(checkoutTotalForBranch(selectedBranch));
   document.querySelector("#continueOrder").disabled = cart.length === 0;
 
   const lines = document.querySelector("#cartLines");
@@ -719,6 +728,8 @@ function syncCheckoutOptions() {
     const input = label.querySelector("input");
     label.classList.toggle("is-selected", input.checked);
   });
+
+  document.querySelector("#checkoutTotal").textContent = money(checkoutTotalForBranch(branch));
 }
 
 function finishOrder(event) {
@@ -750,7 +761,10 @@ function finishOrder(event) {
     "",
     lines,
     "",
-    `Total estimado: ${money(cartTotal())}`,
+    branchId === "sanMartin" && isSanMartinDiscountActive()
+      ? `10% OFF San Martín Sur aplicado`
+      : "",
+    `Total estimado: ${money(checkoutTotalForBranch(branchId))}`,
     `Sucursal: ${BRANCHES[branchId]}`,
     `Modalidad: ${orderType === "delivery" ? "Delivery" : "Retiro en local"}`,
     `Nombre: ${customerName}`,
