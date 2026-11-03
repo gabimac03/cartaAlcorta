@@ -3963,3 +3963,133 @@ button, a, input, textarea, select { touch-action: manipulation; }
 }
 
 .location-photo-sanmartin { background-image: url("imagenes/local-san-martin-sur.webp"); }
+
+
+/* =========================================================
+   CHECKOUT MOBILE · opciones de sucursal y modalidad
+   2026-11-03
+   ========================================================= */
+.branch-options,
+.order-options {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+.branch-options label,
+.order-options label {
+  display: grid !important;
+  grid-template-columns: 24px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 88px !important;
+  padding: 18px 18px 18px 20px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: rgba(255,255,255,.02) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.branch-options label.is-selected,
+.order-options label.is-selected {
+  border: 2px solid var(--orange) !important;
+  background: rgba(255,106,0,.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,106,0,.16) !important;
+}
+
+.branch-options label input[type="radio"],
+.order-options label input[type="radio"] {
+  appearance: auto !important;
+  -webkit-appearance: radio !important;
+  position: static !important;
+  inset: auto !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  accent-color: var(--orange) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+.branch-options .option-copy,
+.order-options .option-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.branch-options .option-copy strong,
+.order-options .option-copy strong {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.15 !important;
+  color: #fff !important;
+  overflow-wrap: anywhere !important;
+}
+
+.branch-options .option-copy small,
+.order-options .option-copy small {
+  display: block !important;
+  margin: 0 !important;
+  font-size: .94rem !important;
+  line-height: 1.32 !important;
+  color: rgba(255,255,255,.68) !important;
+  overflow-wrap: anywhere !important;
+}
+
+.checkout-panel {
+  overflow: hidden !important;
+}
+
+@media (max-width: 640px) {
+  .checkout-modal {
+    width: calc(100vw - 18px) !important;
+    max-width: calc(100vw - 18px) !important;
+    margin: 9px !important;
+    border-radius: 24px !important;
+  }
+
+  .checkout-panel {
+    padding: 16px !important;
+    border-radius: 22px !important;
+  }
+
+  .branch-options,
+  .order-options {
+    gap: 12px !important;
+  }
+
+  .branch-options label,
+  .order-options label {
+    grid-template-columns: 22px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    min-height: 80px !important;
+    padding: 15px 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .branch-options label input[type="radio"],
+  .order-options label input[type="radio"] {
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  .branch-options .option-copy strong,
+  .order-options .option-copy strong {
+    font-size: 1rem !important;
+  }
+
+  .branch-options .option-copy small,
+  .order-options .option-copy small {
+    font-size: .88rem !important;
+    line-height: 1.28 !important;
+  }
+}
