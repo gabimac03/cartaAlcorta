@@ -10,7 +10,14 @@ const BRANCHES = {
   sanMartin: "Av. San Martín Sur 274, Godoy Cruz",
 };
 
-const money = (value) => `$${Number(value).toLocaleString("es-AR")}`;
+const money = (value) => `${Number(value).toLocaleString("es-AR")}`;
+
+function isSanMartinDiscountActive() {
+  const now = new Date();
+  const start = new Date(2026, 10, 3, 0, 0, 0);
+  const end = new Date(2026, 10, 5, 23, 59, 59);
+  return now >= start && now <= end;
+}
 
 const standardBurgerVariants = [
   { label: "Simple", price: 13500 },
@@ -682,7 +689,10 @@ function closeBranchOrderModal() {
 function openBranchWhatsApp(branchId) {
   const phone = WHATSAPP_NUMBERS[branchId];
   if (!phone) return;
-  const message = `Hola! Quiero hacer un pedido a ALCORTA - ${BRANCHES[branchId]}`;
+  const promoText = branchId === "sanMartin" && isSanMartinDiscountActive()
+    ? " - Promo 10% OFF válida del 3 al 5 de noviembre"
+    : "";
+  const message = `Hola! Quiero hacer un pedido a ALCORTA - ${BRANCHES[branchId]}${promoText}`;
   closeBranchOrderModal();
   window.setTimeout(() => {
     window.open(
