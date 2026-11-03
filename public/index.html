@@ -101,6 +101,15 @@
             <span class="maps-button">VER EN MAPS</span>
           </div>
         </a>
+        <a class="location-card" href="https://www.google.com/maps/search/?api=1&query=Av.%20San%20Mart%C3%ADn%20Sur%20274%2C%20Godoy%20Cruz%2C%20Mendoza" target="_blank" rel="noreferrer">
+          <div class="location-photo location-photo-sanmartin" aria-hidden="true"></div>
+          <div class="location-copy">
+            <small>GODOY CRUZ</small>
+            <h3>Av. San Martín Sur 274</h3>
+            <p>Godoy Cruz · Mendoza · Solo retiro</p>
+            <span class="maps-button">VER EN MAPS</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -126,16 +135,6 @@
           <span class="shortcut-label">EXTRAS</span><b>›</b>
         </a>
       </div>
-    </section>
-
-    <section class="featured-section" id="promociones-especiales">
-      <div class="section-head section-head-inline">
-        <div>
-          <h2>Promociones especiales</h2>
-          <p class="section-note">Disponibles de martes a jueves.</p>
-        </div>
-      </div>
-      <div class="featured-promo-list" id="specialPromosGrid"></div>
     </section>
 
     <section class="promo-collections-section" id="promos">
@@ -202,7 +201,12 @@
       </button>
       <button type="button" data-branch-order="godoyCruz">
         <span class="branch-order-number">02</span>
-        <span class="branch-order-copy"><strong>Godoy Cruz</strong><small>Figueroa Alcorta 1304</small></span>
+        <span class="branch-order-copy"><strong>Godoy Cruz</strong><small>Figueroa Alcorta 1304 · Solo retiro</small></span>
+        <span class="branch-order-arrow">›</span>
+      </button>
+      <button type="button" data-branch-order="sanMartin">
+        <span class="branch-order-number">03</span>
+        <span class="branch-order-copy"><strong>San Martín Sur</strong><small>Av. San Martín Sur 274 · Solo retiro</small></span>
         <span class="branch-order-arrow">›</span>
       </button>
     </div>
@@ -261,6 +265,13 @@
             <input type="radio" name="branch" value="godoyCruz" />
             <span class="option-copy">
               <strong>F. Alcorta 1304</strong>
+              <small>Godoy Cruz · Solo retiro</small>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="branch" value="sanMartin" />
+            <span class="option-copy">
+              <strong>San Martín Sur 274</strong>
               <small>Godoy Cruz · Solo retiro</small>
             </span>
           </label>
@@ -347,51 +358,6 @@
     <button class="checkout-button" id="confirmPromo" type="button" disabled>
       Agregar promo al pedido
     </button>
-  </section>
-
-  <div class="weekday-promo-backdrop" id="weekdayPromoOverlay" hidden></div>
-  <section class="weekday-promo-modal weekday-promo-carousel-modal" id="weekdayPromoModal" aria-hidden="true"
-    aria-label="Promos martes a jueves">
-    <button class="modal-close" id="closeWeekdayPromos" type="button" aria-label="Cerrar">×</button>
-    <p class="kicker">Promociones especiales</p>
-    <h2>Martes a Jueves</h2>
-    <div class="weekday-promo-carousel" id="weekdayPromoCarousel">
-      <button class="weekday-carousel-arrow is-prev" id="weekdayPromoPrev" type="button"
-        aria-label="Promo anterior">‹</button>
-      <div class="weekday-promo-track" id="weekdayPromoTrack">
-        <article class="weekday-promo-slide is-active" data-slide="0">
-          <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-chesse.webp"
-            alt="Promo Dos Chesse Simples más papas fritas por 17.000 pesos" />
-          <div class="weekday-promo-caption">
-            <strong>Promo 1</strong>
-            <p>Dos chesse simples + papas fritas por $17.000.</p>
-          </div>
-        </article>
-        <article class="weekday-promo-slide" data-slide="1">
-          <img class="weekday-promo-image" src="imagenes/promo-martes-jueves-triples.webp"
-            alt="Promo Dos Triples al precio de Dos Dobles por 24.000 pesos" />
-          <div class="weekday-promo-caption">
-            <strong>Promo 2</strong>
-            <p>Dos triples al precio de dos dobles por $24.000.</p>
-            <div class="weekday-promo-note">
-              <span>Válida de martes a jueves</span>
-              <small>Aplica para: Andes, American, Mexi, Chesse, Alterada y Argenta.</small>
-            </div>
-          </div>
-        </article>
-      </div>
-      <button class="weekday-carousel-arrow is-next" id="weekdayPromoNext" type="button"
-        aria-label="Siguiente promo">›</button>
-    </div>
-    <div class="weekday-promo-footer">
-      <div class="weekday-promo-dots" id="weekdayPromoDots">
-        <button class="is-active" type="button" data-weekday-slide="0" aria-label="Ver promo 1"></button>
-        <button type="button" data-weekday-slide="1" aria-label="Ver promo 2"></button>
-      </div>
-      <div class="weekday-promo-actions">
-        <button class="checkout-button" id="weekdayPromoUnderstood" type="button">Entendido</button>
-      </div>
-    </div>
   </section>
 
   <script src="index.js"></script>
