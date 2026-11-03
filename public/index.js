@@ -1,19 +1,21 @@
 const WHATSAPP_NUMBERS = {
   dorrego: "5492617094467",
   godoyCruz: "5492617094474",
+  sanMartin: "5492615605148",
 };
 
 const BRANCHES = {
   dorrego: "Alem 300, Dorrego",
   godoyCruz: "Figueroa Alcorta 1304, Godoy Cruz",
+  sanMartin: "Av. San Martín Sur 274, Godoy Cruz",
 };
 
 const money = (value) => `$${Number(value).toLocaleString("es-AR")}`;
 
 const standardBurgerVariants = [
   { label: "Simple", price: 13500 },
-  { label: "Doble", price: 14000 },
-  { label: "Triple", price: 15500 },
+  { label: "Doble", price: 14500 },
+  { label: "Triple", price: 16500 },
 ];
 
 const burgers = [
@@ -65,9 +67,9 @@ const burgers = [
     description: "Carne 100 gr, cheddar, cebolla y kétchup. Incluye papas.",
     image: "productos/CHESSE.webp",
     variants: [
-      { label: "Simple", price: 11000 },
+      { label: "Simple", price: 12000 },
       { label: "Doble", price: 13000 },
-      { label: "Triple", price: 14500 },
+      { label: "Triple", price: 14000 },
     ],
   },
   {
@@ -85,7 +87,7 @@ const lomos = [
     name: "Lomo Alcorta",
     description: "Pan, carne, tomate, lechuga y mayo Alcorta. Incluye papas.",
     image: "productos/lomo-alcorta.webp",
-    variants: [{ label: "Unidad", price: 12000 }],
+    variants: [{ label: "Unidad", price: 17000 }],
   },
   {
     id: "lomo-completo",
@@ -106,7 +108,7 @@ const lomos = [
     name: "Lomo Completo XL",
     description: "Pan, carne XL, lechuga, tomate, huevo, jamón, queso y mayo Alcorta. Incluye papas.",
     image: "productos/completo xl.webp",
-    variants: [{ label: "Unidad", price: 18000 }],
+    variants: [{ label: "Unidad", price: 19000 }],
   },
   {
     id: "lomo-americano",
@@ -138,7 +140,7 @@ const promos = [
     name: "2 Lomos Alcorta",
     description: "Dos Lomos Alcorta + papas fritas.",
     image: "productos/promo-lomos-alcorta.webp",
-    variants: [{ label: "Promo", price: 22000 }],
+    variants: [{ label: "Promo", price: 30000 }],
   },
   {
     id: "promo-lomos-clasicos",
@@ -155,7 +157,7 @@ const promos = [
     name: "2 Lomos Especiales",
     description: "Dos lomos especiales a elección + papas fritas.",
     image: "productos/especiales-lomos.webp",
-    variants: [{ label: "Promo", price: 29000 }],
+    variants: [{ label: "Promo", price: 31000 }],
     choice: { title: "Elegí los 2 lomos especiales", options: ["Lomo Americano", "Lomo Criollo"] },
   },
   {
@@ -164,7 +166,7 @@ const promos = [
     name: "2 Lomos XL",
     description: "Dos lomos XL a elección + papas fritas.",
     image: "productos/PROMOCION XL.webp",
-    variants: [{ label: "Promo", price: 33000 }],
+    variants: [{ label: "Promo", price: 36000 }],
     choice: { title: "Elegí los 2 lomos XL", options: ["Lomo Alcorta XL", "Lomo Completo XL"] },
   },
   {
@@ -173,7 +175,7 @@ const promos = [
     name: "2 Burgers Simples",
     description: "Dos burgers simples a elección + papas fritas.",
     image: "productos/promo-burgers-simples.webp",
-    variants: [{ label: "Promo", price: 21000 }],
+    variants: [{ label: "Promo", price: 26000 }],
     choice: { title: "Elegí las 2 burgers simples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
   {
@@ -200,7 +202,7 @@ const promos = [
     name: "2 Burgers Anomalía",
     description: "Dos burgers Anomalía + papas fritas.",
     image: "productos/promocion anomalia.webp",
-    variants: [{ label: "Promo", price: 29000 }],
+    variants: [{ label: "Promo", price: 27000 }],
   },
   {
     id: "promo-burger-cuadruple",
@@ -208,7 +210,7 @@ const promos = [
     name: "2 Burgers Cuádruples",
     description: "Dos burgers cuádruples a elección + papas fritas.",
     image: "productos/promocion-burgers-cuadruples.webp",
-    variants: [{ label: "Promo", price: 32000 }],
+    variants: [{ label: "Promo", price: 35000 }],
     choice: { title: "Elegí las 2 burgers cuádruples", options: ["American", "Caprichosa", "Mexi", "Andes", "Argenta", "Alterada", "Chesse"] },
   },
 ];
@@ -219,14 +221,14 @@ const papas = [
     name: "Papas Clásicas",
     description: "Bandeja de papas clásicas.",
     image: "imagenes/papasClasicas.webp",
-    variants: [{ label: "Bandeja", price: 5500 }],
+    variants: [{ label: "Bandeja", price: 6000 }],
   },
   {
     id: "papas-gramajo",
     name: "Papas Gramajo",
     description: "Bandeja de papas + huevo + cebolla de verdeo.",
     image: "imagenes/papasGramajo.webp",
-    variants: [{ label: "Bandeja", price: 6500 }],
+    variants: [{ label: "Bandeja", price: 7500 }],
   },
   {
     id: "papas-americanas",
@@ -241,7 +243,7 @@ const extras = [
   { id: "extra-doble-carne", name: "Doble Carne", description: "Agregado de doble carne.", variants: [{ label: "Extra", price: 5000 }] },
   { id: "extra-medallon", name: "Medallón Extra", description: "Agregá un medallón extra.", variants: [{ label: "Extra", price: 2500 }] },
   { id: "extra-cheddar", name: "Cheddar x2", description: "Agregado extra de cheddar.", variants: [{ label: "Extra", price: 3000 }] },
-  { id: "extra-panceta", name: "Cheddar y Panceta", description: "Agregado de cheddar y panceta.", variants: [{ label: "Extra", price: 3000 }] },
+  { id: "extra-panceta", name: "Cheddar y Panceta", description: "Agregado de cheddar y panceta.", variants: [{ label: "Extra", price: 4000 }] },
   { id: "extra-papas", name: "Convertí tus Papas", description: "Convertí las papas de tu pedido.", variants: [{ label: "Extra", price: 2000 }] },
   { id: "extra-dip", name: "Dip de Salsas", description: "Dip de salsa adicional.", variants: [{ label: "Extra", price: 500 }] },
 ];
@@ -253,10 +255,10 @@ const bebidas = [
     description: "Elegí tu sabor disponible.",
     image: "imagenes/coca-500.jpg",
     variants: [
-      { label: "Coca-Cola", price: 3000 },
-      { label: "Coca-Cola Zero", price: 3000 },
-      { label: "Sprite", price: 3000 },
-      { label: "Fanta", price: 3000 },
+      { label: "Coca-Cola", price: 3500 },
+      { label: "Coca-Cola Zero", price: 3500 },
+      { label: "Sprite", price: 3500 },
+      { label: "Fanta", price: 3500 },
     ],
   },
   {
@@ -276,8 +278,8 @@ const bebidas = [
     description: "Elegí entre los sabores disponibles.",
     image: "imagenes/manzana-500.jpg",
     variants: [
-      { label: "Manzana", price: 3000 },
-      { label: "Pomelo", price: 3000 },
+      { label: "Manzana", price: 3500 },
+      { label: "Pomelo", price: 3500 },
     ],
   },
 ];
@@ -289,10 +291,10 @@ const alcohol = [
     description: "Elegí entre las variedades disponibles.",
     image: "imagenes/ipa-475.jpg",
     variants: [
-      { label: "IPA", price: 3000 },
-      { label: "Rubia", price: 3000 },
-      { label: "Roja", price: 3000 },
-      { label: "Negra", price: 3000 },
+      { label: "IPA", price: 3500 },
+      { label: "Rubia", price: 3500 },
+      { label: "Roja", price: 3500 },
+      { label: "Negra", price: 3500 },
     ],
   },
   {
@@ -300,7 +302,7 @@ const alcohol = [
     name: "Latón 710 ml",
     description: "Cerveza rubia bien fría.",
     image: "imagenes/rubia-710.jpg",
-    variants: [{ label: "Rubia", price: 4000 }],
+    variants: [{ label: "Rubia", price: 4500 }],
   },
 ];
 
@@ -313,25 +315,7 @@ const menuGroups = [
   { id: "alcohol", label: "Cervezas", description: "Latas y latones bien fríos.", icon: "CZ", items: alcohol },
 ];
 
-const specialPromos = [
-  {
-    id: "special-chesse-simple",
-    eyebrow: "MARTES A JUEVES",
-    name: "2 Chesse simples + papas",
-    description: "Promo especial válida de martes a jueves.",
-    image: "imagenes/promo-martes-jueves-chesse.webp",
-    variants: [{ label: "Promo", price: 17000 }],
-  },
-  {
-    id: "special-dobles-por-triples",
-    eyebrow: "MARTES A JUEVES",
-    name: "2 Triples al precio de 2 Dobles",
-    description: "Elegí entre Andes, American, Mexi, Chesse, Alterada y Argenta.",
-    image: "imagenes/promo-martes-jueves-triples.webp",
-    variants: [{ label: "Promo", price: 24000 }],
-    choice: { title: "Elegí las 2 burgers de la promo", options: ["Andes", "American", "Mexi", "Chesse", "Alterada", "Argenta"] },
-  },
-];
+const specialPromos = [];
 const lomoPromoIds = ["promo-lomo-alcorta", "promo-lomos-clasicos", "promo-lomos-especiales", "promo-lomos-xl"];
 const burgerPromoIds = ["promo-burger-simple", "promo-burger-doble", "promo-anomalia", "promo-burger-triple", "promo-burger-cuadruple"];
 const lomoPromos = promos.filter((promo) => lomoPromoIds.includes(promo.id));
@@ -712,7 +696,7 @@ function openBranchWhatsApp(branchId) {
 function syncCheckoutOptions() {
   const branch = document.querySelector('input[name="branch"]:checked').value;
   const deliveryOption = document.querySelector("#deliveryOption");
-  if (branch === "godoyCruz") {
+  if (branch !== "dorrego") {
     deliveryOption.hidden = true;
     document.querySelector('input[name="orderType"][value="retiro"]').checked = true;
   } else {
