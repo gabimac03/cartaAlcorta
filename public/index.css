@@ -3961,3 +3961,5 @@ button, a, input, textarea, select { touch-action: manipulation; }
     }
   }
 }
+
+.location-photo-sanmartin { background-image: url("imagenes/local-san-martin-sur.webp"); }
