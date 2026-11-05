@@ -762,7 +762,7 @@ function finishOrder(event) {
     lines,
     "",
     branchId === "sanMartin" && isSanMartinDiscountActive()
-      ? `10% OFF San Martín Sur aplicado`
+      ? `10% OFF San Martín 274 aplicado`
       : "",
     `Total estimado: ${money(checkoutTotalForBranch(branchId))}`,
     `Sucursal: ${BRANCHES[branchId]}`,
