@@ -7,7 +7,7 @@ const WHATSAPP_NUMBERS = {
 const BRANCHES = {
   dorrego: "Alem 300, Dorrego",
   godoyCruz: "Figueroa Alcorta 1304, Godoy Cruz",
-  sanMartin: "Av. San Martín Sur 274, Godoy Cruz",
+  sanMartin: "San Martín 274, Godoy Cruz",
 };
 
 const money = (value) => `${Number(value).toLocaleString("es-AR")}`;
